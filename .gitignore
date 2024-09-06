@@ -1,3 +1,4 @@
 *.exe
+*.obj
 resultEnv.json
 sim_dump.json
