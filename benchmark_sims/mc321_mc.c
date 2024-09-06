@@ -64,9 +64,9 @@ double	absorb;     /* weighted deposited in a step due to absorption */
 short   photon_status;  /* flag = ALIVE=1 or DEAD=0 */
 
 /* other variables */
-double	Csph[101];  /* spherical   photon concentration CC[ir=0..100] */
-double	Ccyl[101];  /* cylindrical photon concentration CC[ir=0..100] */
-double	Cpla[101];  /* planar      photon concentration CC[ir=0..100] */
+double	Csph[241];  /* spherical   photon concentration CC[ir=0..100] */
+double	Ccyl[241];  /* cylindrical photon concentration CC[ir=0..100] */
+double	Cpla[241];  /* planar      photon concentration CC[ir=0..100] */
 double	Fsph;       /* fluence in spherical shell */
 double	Fcyl;       /* fluence in cylindrical shell */
 double	Fpla;       /* fluence in planar shell */
@@ -95,13 +95,13 @@ FILE*	target;     /* point to output file */
    Input the number of photons
 *****/
 
-mua         = 1.0;     /* cm^-1 */
-mus         = 0.0;  /* cm^-1 */
-g           = 0.90;  
-nt          = 1.33;
-Nphotons    = 10000; /* set number of photons in simulation */
-radial_size = 3.0;   /* cm, total range over which bins extend */
-NR          = 100;	 /* set number of bins.  */
+mua         = 0.37;     /* cm^-1 */
+mus         = 23.88889;  /* cm^-1 */
+g           = 0.9;  
+nt          = 1.36;
+Nphotons    = 1e6; /* set number of photons in simulation */
+radial_size = 2.0;   /* cm, total range over which bins extend */
+NR          = 240;	 /* set number of bins.  */
    /* IF NR IS ALTERED, THEN USER MUST ALSO ALTER THE ARRAY DECLARATION TO A SIZE = NR + 1. */
 dr          = radial_size/NR;  /* cm */
 albedo      = mus/(mus + mua);
@@ -253,7 +253,7 @@ while (i_photon < Nphotons);
 /**** SAVE
    Convert data to relative fluence rate [cm^-2] and save to file called "mcmin321.out".
 *****/
-target = fopen("mc321.out", "w");
+target = fopen("mc321_out.txt", "w");
 
 /* print header */
 fprintf(target, "number of photons = %f\n", Nphotons);
