@@ -11,7 +11,7 @@ double mu_s = 23.88889;			/* Scattering Coefficient in 1/cm */
 double g = 0.9;				/* Scattering Anisotropy -1<=g<=1 */
 double n = 1.36;				/* Index of refraction of medium */
 double microns_per_bin = 8.3333333333e-07;/* Thickness of one bin layer */
-long   i, photons = 100000;
+long   i, photons = 1e6;
 double x,y,z,u,v,w,weight;
 double rs, rd, bit, albedo, crit_angle, bins_per_mfp, heat[BINS];
 
