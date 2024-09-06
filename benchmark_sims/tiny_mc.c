@@ -4,7 +4,7 @@ char   t2[80] = "1 W Point Source Heating in Infinite Isotropic Scattering Mediu
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define SHELL_MAX  240
+#define SHELL_MAX  241
 
 double mu_a = 0.37;			   /* Absorption Coefficient in 1/cm !!non-zero!! */
 double mu_s = 23.88889;			   /* Reduced Scattering Coefficient in 1/cm */

@@ -4,7 +4,7 @@ char   t2[80] = "1 W/cm^2 Uniform Illumination of Semi-Infinite Medium";
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define BINS 240
+#define BINS 241
 
 double mu_a = 0.37;			/* Absorption Coefficient in 1/cm */
 double mu_s = 23.88889;			/* Scattering Coefficient in 1/cm */
