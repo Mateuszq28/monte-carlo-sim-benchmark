@@ -1,4 +1,6 @@
-time elapsed: 0.2789 seconds
+time elapsed: 0.2609 seconds
+
+=================================
 
 sim results:
 
@@ -113,6 +115,8 @@ Photons    =    10000
   4950         0.07540
  extra         0.02347
 
+
+=================================
 
 code that generated this simulation:
 
