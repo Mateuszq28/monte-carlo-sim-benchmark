@@ -4,6 +4,8 @@ import time
 # choose sim
 sim_names_list = ["tiny", "small", "mc321"]
 sim_name = sim_names_list[0]
+dirs = ["benchmark_sims", "original"]
+rel_scritpt_dir = dirs[1]
 
 # filenames
 sim_exe = "{}_mc.exe".format(sim_name)
@@ -11,30 +13,26 @@ sim_out = "{}_out.txt".format(sim_name)
 sim_c = "{}_mc.c".format(sim_name)
 sim_log = "{}_log.txt".format(sim_name)
 
-# open script location
+# absolute paths
 self_path = os.path.dirname(os.path.abspath(__file__))
-rel_scritpt_dir = "benchmark_sims"
-# rel_scritpt_dir = "original"
-abs_script = os.path.join(self_path, rel_scritpt_dir)
-os.system("cd {}".format(abs_script))
+abs_script_dir = os.path.join(self_path, rel_scritpt_dir)
+path_sim_exe = os.path.join(abs_script_dir, sim_exe)
+path_sim_out = os.path.join(abs_script_dir, sim_out)
+path_sim_c = os.path.join(abs_script_dir, sim_c)
+path_sim_log = os.path.join(abs_script_dir, sim_log)
 
 # do simulation
 start_time = time.time()
 if sim_name != "mc321":
-    os.system("{} > {}".format(sim_exe, sim_out))
+    os.system("{} > {}".format(path_sim_exe, path_sim_out))
 else:
-    os.system(sim_exe)
+    os.system(path_sim_exe)
 end_time = time.time()
 
 # print time
 exec_time = end_time - start_time
 time_text = "time elapsed: {0:.4f} seconds".format(exec_time)
 print(time_text)
-
-# sim out files - with paths to use in python
-path_sim_out = os.path.join(rel_scritpt_dir, sim_out)
-path_sim_c = os.path.join(rel_scritpt_dir, sim_c)
-path_sim_log = os.path.join(rel_scritpt_dir, sim_log)
 
 # save simulation log
 f = open(path_sim_log, "w")
