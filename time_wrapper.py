@@ -3,7 +3,7 @@ import time
 
 # choose sim
 sim_names_list = ["tiny", "small", "mc321"]
-sim_name = sim_names_list[0]
+sim_name = sim_names_list[2]
 dirs = ["benchmark_sims", "original"]
 rel_scritpt_dir = dirs[1]
 
@@ -26,7 +26,7 @@ start_time = time.time()
 if sim_name != "mc321":
     os.system("{} > {}".format(path_sim_exe, path_sim_out))
 else:
-    os.system(path_sim_exe)
+    os.system("cd {} && {}".format(abs_script_dir, sim_exe))
 end_time = time.time()
 
 # print time
@@ -38,11 +38,15 @@ print(time_text)
 f = open(path_sim_log, "w")
 f.write(time_text)
 f.write("\n\n")
+f.write("=================================")
+f.write("\n\n")
 f.write("sim results:")
 f.write("\n\n")
 with open(path_sim_out, "r") as f_out:
     f_out_text = f_out.read()
     f.write(f_out_text)
+f.write("\n\n")
+f.write("=================================")
 f.write("\n\n")
 f.write("code that generated this simulation:")
 f.write("\n\n")
