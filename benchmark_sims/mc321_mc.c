@@ -28,7 +28,7 @@
 #define	LIGHTSPEED	2.997925E10 /* in vacuo speed of light [cm/s] */
 #define ALIVE       1   		/* if photon not yet terminated */
 #define DEAD        0    		/* if photon is to be terminated */
-#define THRESHOLD   0.01		/* used in roulette */
+#define THRESHOLD   1.0E-4		/* used in roulette */
 #define CHANCE      0.1  		/* used in roulette */
 #define COS90D      1.0E-6
      /* If cos(theta) <= COS90D, theta >= PI/2 - 1e-6 rad. */
@@ -253,6 +253,7 @@ while (i_photon < Nphotons);
 /**** SAVE
    Convert data to relative fluence rate [cm^-2] and save to file called "mcmin321.out".
 *****/
+// target = fopen("mc321.out", "w");
 target = fopen("mc321_out.txt", "w");
 
 /* print header */

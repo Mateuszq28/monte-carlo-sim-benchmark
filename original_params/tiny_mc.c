@@ -4,12 +4,12 @@ char   t2[80] = "1 W Point Source Heating in Infinite Isotropic Scattering Mediu
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define SHELL_MAX  241
+#define SHELL_MAX  101
 
-double mu_a = 0.37;			   /* Absorption Coefficient in 1/cm !!non-zero!! */
-double mu_s = 23.88889;			   /* Reduced Scattering Coefficient in 1/cm */
-double microns_per_shell = 83.3333333; /*  8.(3)e-7   Thickness of spherical shells in microns */
-long   i, shell, photons = 1e6;
+double mu_a = 2;			   /* Absorption Coefficient in 1/cm !!non-zero!! */
+double mu_s = 20;			   /* Reduced Scattering Coefficient in 1/cm */
+double microns_per_shell = 50; /* Thickness of spherical shells in microns */
+long   i, shell, photons = 10000;
 double x, y, z, u, v, w, weight;
 double albedo, shells_per_mfp, xi1, xi2, t, heat[SHELL_MAX];
 
@@ -55,7 +55,7 @@ int main ()
 	printf("Photons    = %8ld\n\n Radius         Heat\n[microns]     [W/cm^3]\n",photons);
 	t = 4*3.14159*pow(microns_per_shell,3)*photons/1e12;
 	for (i=0;i<SHELL_MAX-1;i++)
-		printf("%6.0f    %12.5e\n",i*microns_per_shell, heat[i]/t/(i*i+i+1.0/3.0));
+		printf("%6.0f    %12.5f\n",i*microns_per_shell, heat[i]/t/(i*i+i+1.0/3.0));
 	printf(" extra    %12.5f\n",heat[SHELL_MAX-1]/photons);
 	return 0;
 }
