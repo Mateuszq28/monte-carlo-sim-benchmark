@@ -331,8 +331,8 @@ def main():
     file = open("mc321_p_out.txt", 'w')
 
     # --- print header ---
-    file.write("number of photons = %f\n", Nphotons)
-    file.write("bin size = %5.5f [cm] \n", dr)
+    file.write(f"number of photons = {Nphotons}\n")
+    file.write(f"bin size = {dr:5.5f} [cm] \n")
     file.write("last row is overflow. Ignore.\n")
 
     # --- print column titles ---
@@ -348,7 +348,7 @@ def main():
         Fcyl = Ccyl[ir]/Nphotons/shellvolume/mua
         shellvolume = dr # per cm2 area of plane
         Fpla =Cpla[ir]/Nphotons/shellvolume/mua
-        file.write("%5.5f \t %4.3e \t %4.3e \t %4.3e \n", r, Fsph, Fcyl, Fpla)
+        file.write(f"{r:5.5f} \t {Fsph:4.3e} \t {Fcyl:4.3e} \t {Fpla:4.3e} \n")
 
     file.close()
 
