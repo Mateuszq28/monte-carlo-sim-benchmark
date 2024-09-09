@@ -4,6 +4,7 @@ import os
 import time
 
 # choose sim
+sims_that_saves_output_itself = ["mc321_p", "mc321"]
 sim_names_list = ["mc321_p"]
 sim_name = sim_names_list[0]
 dirs = ["benchmark_sims", "original_params"]
@@ -25,7 +26,7 @@ path_sim_log = os.path.join(abs_script_dir, sim_log)
 
 # do simulation
 start_time = time.time()
-if sim_name != "mc321":
+if sim_name not in sims_that_saves_output_itself:
     os.system("python {} > {}".format(path_sim_exe, path_sim_out))
 else:
     os.system("cd {} && python {}".format(abs_script_dir, sim_exe))
