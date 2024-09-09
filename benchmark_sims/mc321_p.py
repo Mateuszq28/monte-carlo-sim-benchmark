@@ -16,14 +16,6 @@ ONE_MINUS_COSZERO = 1.0E-12
 
 SIGN = lambda x: 1 if x >= 0 else -1
 
-# Initializes the seed for the random number generator
-def InitRandomGen():
-    return RandomGen(0, 1, None)
-
-# Calls for a random number from the random number generator.
-def RandomNum():
-    return RandomGen(1, 0, None)
-
 
 
 # SUBROUTINES
@@ -56,8 +48,13 @@ MSEED = 161803398
 MZ = 0
 FAC = 1.0E-9
 
+i1 = None
+i2 = None
+ma = [None for _ in range(56)] # ma[0] is not used
 def RandomGen(Type, Seed, Status):
-    ma = [None for _ in range(56)] # ma[0] is not used
+    global i1
+    global i2
+    global ma
     if (Type == 0): # set seed
         Seed = -Seed if Seed < 0 else Seed
         mj = MSEED - Seed
@@ -104,6 +101,16 @@ def RandomGen(Type, Seed, Status):
     else:
         print("Wrong parameter to RandomGen().")
     return 0
+
+
+# Initializes the seed for the random number generator
+def InitRandomGen():
+    RandomGen(0, 1, None)
+
+
+# Calls for a random number from the random number generator.
+def RandomNum():
+    return RandomGen(1, 0, None)
 
 
 
@@ -238,21 +245,21 @@ def main():
             
             # --- spherical ---
             r = math.sqrt(x*x + y*y + z*z) # current spherical radial position
-            ir = r/dr # ir = index to spatial bin
+            ir = int(r/dr) # ir = index to spatial bin
             if (ir >= NR): # last bin is for overflow
                 ir = NR
             Csph[ir] += absorb # DROP absorbed weight into bin
             
             # --- cylindrical ---
             r = math.sqrt(x*x + y*y) # current cylindrical radial position
-            ir = r/dr # ir = index to spatial bin
+            ir = int(r/dr) # ir = index to spatial bin
             if (ir >= NR): # last bin is for overflow
                 ir = NR
             Ccyl[ir] += absorb # DROP absorbed weight into bin
             
             # --- planar ---
             r = abs(z) # current planar radial position
-            ir = r/dr # ir = index to spatial bin
+            ir = int(r/dr) # ir = index to spatial bin
             if (ir >= NR): # last bin is for overflow
                 ir = NR
             Cpla[ir] += absorb # DROP absorbed weight into bin
