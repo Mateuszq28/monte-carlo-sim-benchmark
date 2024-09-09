@@ -10,9 +10,9 @@ dirs = ["benchmark_sims", "original_params"]
 rel_scritpt_dir = dirs[0]
 
 # filenames
-sim_exe = "{}_mc.py".format(sim_name)
+sim_exe = "{}.py".format(sim_name)
 sim_out = "{}_out.txt".format(sim_name)
-sim_c = "{}_mc.py".format(sim_name)
+sim_c = "{}.py".format(sim_name)
 sim_log = "{}_log.txt".format(sim_name)
 
 # absolute paths
