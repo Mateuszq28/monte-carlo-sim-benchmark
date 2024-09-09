@@ -1,0 +1,487 @@
+time elapsed: 0.3167 seconds
+
+=================================
+
+sim results:
+
+number of photons = 10000.000000
+bin size = 0.03000 [cm] 
+last row is overflow. Ignore.
+r [cm] 	 Fsph [1/cm2] 	 Fcyl [1/cm2] 	 Fpla [1/cm2]
+0.01500 	 3.431e+02 	 1.570e+01 	 3.983e+00 
+0.04500 	 3.773e+01 	 5.093e+00 	 2.667e+00 
+0.07500 	 1.363e+01 	 2.985e+00 	 2.033e+00 
+0.10500 	 6.761e+00 	 1.758e+00 	 1.803e+00 
+0.13500 	 3.551e+00 	 1.265e+00 	 1.563e+00 
+0.16500 	 2.553e+00 	 1.032e+00 	 1.430e+00 
+0.19500 	 1.744e+00 	 8.597e-01 	 1.247e+00 
+0.22500 	 1.284e+00 	 6.767e-01 	 1.090e+00 
+0.25500 	 9.831e-01 	 6.179e-01 	 1.057e+00 
+0.28500 	 6.629e-01 	 4.989e-01 	 8.700e-01 
+0.31500 	 6.603e-01 	 4.362e-01 	 8.067e-01 
+0.34500 	 4.301e-01 	 3.429e-01 	 8.367e-01 
+0.37500 	 3.490e-01 	 3.084e-01 	 7.567e-01 
+0.40500 	 3.380e-01 	 3.091e-01 	 6.467e-01 
+0.43500 	 2.579e-01 	 2.622e-01 	 6.533e-01 
+0.46500 	 2.503e-01 	 2.362e-01 	 5.300e-01 
+0.49500 	 2.024e-01 	 2.133e-01 	 5.500e-01 
+0.52500 	 1.665e-01 	 1.920e-01 	 5.700e-01 
+0.55500 	 1.343e-01 	 1.663e-01 	 5.233e-01 
+0.58500 	 1.225e-01 	 1.578e-01 	 4.567e-01 
+0.61500 	 1.283e-01 	 1.518e-01 	 4.367e-01 
+0.64500 	 1.046e-01 	 1.357e-01 	 4.000e-01 
+0.67500 	 8.151e-02 	 1.045e-01 	 4.300e-01 
+0.70500 	 8.379e-02 	 1.129e-01 	 3.600e-01 
+0.73500 	 7.513e-02 	 8.661e-02 	 3.233e-01 
+0.76500 	 6.436e-02 	 9.362e-02 	 3.200e-01 
+0.79500 	 5.162e-02 	 9.743e-02 	 2.833e-01 
+0.82500 	 6.080e-02 	 7.652e-02 	 3.033e-01 
+0.85500 	 4.463e-02 	 7.322e-02 	 2.533e-01 
+0.88500 	 3.895e-02 	 6.534e-02 	 2.900e-01 
+0.91500 	 3.897e-02 	 5.914e-02 	 2.667e-01 
+0.94500 	 3.149e-02 	 5.277e-02 	 2.167e-01 
+0.97500 	 2.986e-02 	 5.496e-02 	 2.600e-01 
+1.00500 	 2.915e-02 	 5.543e-02 	 2.633e-01 
+1.03500 	 2.823e-02 	 5.177e-02 	 2.267e-01 
+1.06500 	 2.432e-02 	 4.234e-02 	 2.833e-01 
+1.09500 	 2.013e-02 	 4.312e-02 	 1.733e-01 
+1.12500 	 1.886e-02 	 4.291e-02 	 1.600e-01 
+1.15500 	 1.690e-02 	 3.950e-02 	 1.700e-01 
+1.18500 	 1.757e-02 	 3.984e-02 	 1.667e-01 
+1.21500 	 1.941e-02 	 3.275e-02 	 1.267e-01 
+1.24500 	 1.626e-02 	 3.025e-02 	 1.400e-01 
+1.27500 	 1.420e-02 	 2.871e-02 	 1.500e-01 
+1.30500 	 1.137e-02 	 2.480e-02 	 1.200e-01 
+1.33500 	 1.042e-02 	 2.265e-02 	 1.267e-01 
+1.36500 	 1.110e-02 	 2.565e-02 	 1.300e-01 
+1.39500 	 1.036e-02 	 2.358e-02 	 1.467e-01 
+1.42500 	 8.230e-03 	 2.010e-02 	 7.667e-02 
+1.45500 	 1.053e-02 	 2.297e-02 	 1.333e-01 
+1.48500 	 6.375e-03 	 2.036e-02 	 1.233e-01 
+1.51500 	 7.743e-03 	 2.136e-02 	 1.000e-01 
+1.54500 	 7.890e-03 	 1.614e-02 	 9.667e-02 
+1.57500 	 6.416e-03 	 1.752e-02 	 1.200e-01 
+1.60500 	 7.105e-03 	 1.520e-02 	 8.333e-02 
+1.63500 	 5.358e-03 	 1.622e-02 	 8.000e-02 
+1.66500 	 5.454e-03 	 1.593e-02 	 8.000e-02 
+1.69500 	 5.447e-03 	 1.064e-02 	 5.333e-02 
+1.72500 	 5.527e-03 	 1.199e-02 	 6.333e-02 
+1.75500 	 4.909e-03 	 1.149e-02 	 8.667e-02 
+1.78500 	 5.078e-03 	 1.367e-02 	 8.000e-02 
+1.81500 	 4.429e-03 	 1.023e-02 	 6.000e-02 
+1.84500 	 3.429e-03 	 1.093e-02 	 5.667e-02 
+1.87500 	 3.395e-03 	 9.054e-03 	 5.333e-02 
+1.90500 	 2.778e-03 	 8.633e-03 	 3.667e-02 
+1.93500 	 3.259e-03 	 9.048e-03 	 5.333e-02 
+1.96500 	 2.885e-03 	 8.639e-03 	 4.667e-02 
+1.99500 	 3.132e-03 	 6.116e-03 	 6.667e-02 
+2.02500 	 1.876e-03 	 6.288e-03 	 3.333e-02 
+2.05500 	 2.387e-03 	 7.745e-03 	 4.667e-02 
+2.08500 	 2.624e-03 	 5.852e-03 	 2.667e-02 
+2.11500 	 2.253e-03 	 5.518e-03 	 4.667e-02 
+2.14500 	 1.499e-03 	 6.183e-03 	 3.000e-02 
+2.17500 	 2.075e-03 	 3.659e-03 	 4.667e-02 
+2.20500 	 1.855e-03 	 3.609e-03 	 3.000e-02 
+2.23500 	 1.593e-03 	 5.459e-03 	 4.000e-02 
+2.26500 	 1.293e-03 	 5.387e-03 	 5.333e-02 
+2.29500 	 1.561e-03 	 4.161e-03 	 2.667e-02 
+2.32500 	 1.816e-03 	 4.564e-03 	 4.667e-02 
+2.35500 	 1.244e-03 	 3.154e-03 	 2.000e-02 
+2.38500 	 1.586e-03 	 4.004e-03 	 2.000e-02 
+2.41500 	 1.319e-03 	 3.075e-03 	 3.000e-02 
+2.44500 	 1.731e-03 	 4.123e-03 	 3.667e-02 
+2.47500 	 1.126e-03 	 4.073e-03 	 2.333e-02 
+2.50500 	 1.057e-03 	 3.389e-03 	 3.667e-02 
+2.53500 	 8.255e-04 	 2.930e-03 	 3.333e-02 
+2.56500 	 1.008e-03 	 2.896e-03 	 1.667e-02 
+2.59500 	 7.878e-04 	 1.227e-03 	 2.667e-02 
+2.62500 	 5.004e-04 	 2.223e-03 	 2.000e-02 
+2.65500 	 4.139e-04 	 2.997e-03 	 2.000e-02 
+2.68500 	 5.887e-04 	 3.161e-03 	 1.667e-02 
+2.71500 	 1.080e-03 	 2.931e-03 	 2.000e-02 
+2.74500 	 5.985e-04 	 1.739e-03 	 1.000e-02 
+2.77500 	 6.200e-04 	 1.721e-03 	 3.333e-03 
+2.80500 	 6.743e-04 	 1.324e-03 	 2.000e-02 
+2.83500 	 4.951e-04 	 2.620e-03 	 2.000e-02 
+2.86500 	 4.847e-04 	 1.481e-03 	 1.333e-02 
+2.89500 	 3.798e-04 	 7.330e-04 	 6.667e-03 
+2.92500 	 4.341e-04 	 1.632e-03 	 3.000e-02 
+2.95500 	 2.430e-04 	 1.975e-03 	 1.667e-02 
+2.98500 	 3.870e-04 	 1.422e-03 	 1.000e-02 
+3.01500 	 1.444e-02 	 5.349e-02 	 3.067e-01 
+
+
+=================================
+
+code that generated this simulation:
+
+
+/********************************************
+ *  mc321.c    , in ANSI Standard C programing language
+ *
+ *  Monte Carlo simulation yielding spherical, cylindrical, and planar 
+ *    responses to an isotropic point source in an infinite homogeneous 
+ *    medium with no boundaries. This program is a minimal Monte Carlo 
+ *    program scoring photon distributions in spherical, cylindrical, 
+ *    and planar shells.
+ *
+ *  by Steven L. Jacques based on prior collaborative work 
+ *    with Lihong Wang, Scott Prahl, and Marleen Keijzer.
+ *    partially funded by the NIH (R29-HL45045, 1991-1997) and  
+ *    the DOE (DE-FG05-91ER617226, DE-FG03-95ER61971, 1991-1999).
+ *
+ *  A published report illustrates use of the program:
+ *    S. L. Jacques: "Light distributions from point, line, and plane 
+ *    sources for photochemical reactions and fluorescence in turbid 
+ *    biological tissues," Photochem. Photobiol. 67:23-32, 1998. 
+ *
+ *  Trivial fixes to remove warnings SAP, 11/2017
+ **********/
+
+#include <math.h>
+#include <stdio.h>
+
+#define	PI          3.1415926
+#define	LIGHTSPEED	2.997925E10 /* in vacuo speed of light [cm/s] */
+#define ALIVE       1   		/* if photon not yet terminated */
+#define DEAD        0    		/* if photon is to be terminated */
+#define THRESHOLD   0.01		/* used in roulette */
+#define CHANCE      0.1  		/* used in roulette */
+#define COS90D      1.0E-6
+     /* If cos(theta) <= COS90D, theta >= PI/2 - 1e-6 rad. */
+#define ONE_MINUS_COSZERO 1.0E-12
+     /* If 1-cos(theta) <= ONE_MINUS_COSZERO, fabs(theta) <= 1e-6 rad. */
+     /* If 1+cos(theta) <= ONE_MINUS_COSZERO, fabs(PI-theta) <= 1e-6 rad. */
+#define SIGN(x)           ((x)>=0 ? 1:-1)
+#define InitRandomGen    (double) RandomGen(0, 1, NULL)
+     /* Initializes the seed for the random number generator. */     
+#define RandomNum        (double) RandomGen(1, 0, NULL)
+     /* Calls for a random number from the randum number generator. */
+
+/* DECLARE FUNCTION */
+double RandomGen(char Type, long Seed, long *Status);  
+     /* Random number generator */
+
+
+int main() {
+
+/* Propagation parameters */
+double	x, y, z;    /* photon position */
+double	ux, uy, uz; /* photon trajectory as cosines */
+double  uxx, uyy, uzz;	/* temporary values used during SPIN */
+double	s;          /* step sizes. s = -log(RND)/mus [cm] */
+double	costheta;   /* cos(theta) */
+double  sintheta;   /* sin(theta) */
+double	cospsi;     /* cos(psi) */
+double  sinpsi;     /* sin(psi) */
+double	psi;        /* azimuthal angle */
+double	i_photon;   /* current photon */
+double	W;          /* photon weight */
+double	absorb;     /* weighted deposited in a step due to absorption */
+short   photon_status;  /* flag = ALIVE=1 or DEAD=0 */
+
+/* other variables */
+double	Csph[101];  /* spherical   photon concentration CC[ir=0..100] */
+double	Ccyl[101];  /* cylindrical photon concentration CC[ir=0..100] */
+double	Cpla[101];  /* planar      photon concentration CC[ir=0..100] */
+double	Fsph;       /* fluence in spherical shell */
+double	Fcyl;       /* fluence in cylindrical shell */
+double	Fpla;       /* fluence in planar shell */
+double	mua;        /* absorption coefficient [cm^-1] */
+double	mus;        /* scattering coefficient [cm^-1] */
+double	g;          /* anisotropy [-] */
+double	albedo;     /* albedo of tissue */
+double	nt;         /* tissue index of refraction */
+double	Nphotons;   /* number of photons in simulation */
+short	NR;         /* number of radial positions */
+double	radial_size;  /* maximum radial size */
+double	r;          /* radial position */
+double  dr;         /* radial bin size */
+short	ir;         /* index to radial position */
+double  shellvolume;  /* volume of shell at radial position r */
+
+/* dummy variables */
+double  rnd;        /* assigned random value 0-1 */
+double	temp;    /* dummy variables */
+FILE*	target;     /* point to output file */
+
+
+/**** INPUT
+   Input the optical properties
+   Input the bin and array sizes 
+   Input the number of photons
+*****/
+
+mua         = 1.0;     /* cm^-1 */
+mus         = 0.0;  /* cm^-1 */
+g           = 0.90;  
+nt          = 1.33;
+Nphotons    = 10000; /* set number of photons in simulation */
+radial_size = 3.0;   /* cm, total range over which bins extend */
+NR          = 100;	 /* set number of bins.  */
+   /* IF NR IS ALTERED, THEN USER MUST ALSO ALTER THE ARRAY DECLARATION TO A SIZE = NR + 1. */
+dr          = radial_size/NR;  /* cm */
+albedo      = mus/(mus + mua);
+
+
+/**** INITIALIZATIONS 
+*****/
+i_photon = 0;
+InitRandomGen;
+for (ir=0; ir<=NR; ir++) {
+   Csph[ir] = 0;
+   Ccyl[ir] = 0;
+   Cpla[ir] = 0;
+   }
+   
+/**** RUN
+   Launch N photons, initializing each one before progation.
+*****/
+do {
+
+
+/**** LAUNCH 
+   Initialize photon position and trajectory.
+   Implements an isotropic point source.
+*****/
+i_photon += 1;	/* increment photon count */
+W = 1.0;                    /* set photon weight to one */
+photon_status = ALIVE;      /* Launch an ALIVE photon */
+
+x = 0;                      /* Set photon position to origin. */
+y = 0;
+z = 0;
+
+/* Randomly set photon trajectory to yield an isotropic source. */
+costheta = 2.0*RandomNum - 1.0;   
+sintheta = sqrt(1.0 - costheta*costheta);	/* sintheta is always positive */
+psi = 2.0*PI*RandomNum;
+ux = sintheta*cos(psi);
+uy = sintheta*sin(psi);
+uz = costheta;
+
+
+/* HOP_DROP_SPIN_CHECK
+   Propagate one photon until it dies as determined by ROULETTE.
+*******/
+do {
+
+
+/**** HOP
+   Take step to new position
+   s = stepsize
+   ux, uy, uz are cosines of current photon trajectory
+*****/
+  while ((rnd = RandomNum) <= 0.0);   /* yields 0 < rnd <= 1 */
+  s = -log(rnd)/(mua + mus);          /* Step size.  Note: log() is base e */
+  x += s * ux;                        /* Update positions. */
+  y += s * uy;
+  z += s * uz;
+
+
+/**** DROP
+   Drop photon weight (W) into local bin.
+*****/
+   absorb = W*(1 - albedo);      /* photon weight absorbed at this step */
+   W -= absorb;                  /* decrement WEIGHT by amount absorbed */
+   
+   /* spherical */
+   r = sqrt(x*x + y*y + z*z);    /* current spherical radial position */
+   ir = (short)(r/dr);           /* ir = index to spatial bin */
+   if (ir >= NR) ir = NR;        /* last bin is for overflow */
+   Csph[ir] += absorb;           /* DROP absorbed weight into bin */
+   
+   /* cylindrical */
+   r = sqrt(x*x + y*y);          /* current cylindrical radial position */
+   ir = (short)(r/dr);           /* ir = index to spatial bin */
+   if (ir >= NR) ir = NR;        /* last bin is for overflow */
+   Ccyl[ir] += absorb;           /* DROP absorbed weight into bin */
+   
+   /* planar */
+   r = fabs(z);                  /* current planar radial position */
+   ir = (short)(r/dr);           /* ir = index to spatial bin */
+   if (ir >= NR) ir = NR;        /* last bin is for overflow */
+   Cpla[ir] += absorb;           /* DROP absorbed weight into bin */
+   
+
+/**** SPIN 
+   Scatter photon into new trajectory defined by theta and psi.
+   Theta is specified by cos(theta), which is determined 
+   based on the Henyey-Greenstein scattering function.
+   Convert theta and psi into cosines ux, uy, uz. 
+*****/
+  /* Sample for costheta */
+  rnd = RandomNum;
+     if (g == 0.0)
+        costheta = 2.0*rnd - 1.0;
+     else {
+        double temp = (1.0 - g*g)/(1.0 - g + 2*g*rnd);
+        costheta = (1.0 + g*g - temp*temp)/(2.0*g);
+        }
+  sintheta = sqrt(1.0 - costheta*costheta); /* sqrt() is faster than sin(). */
+
+  /* Sample psi. */
+  psi = 2.0*PI*RandomNum;
+  cospsi = cos(psi);
+  if (psi < PI)
+    sinpsi = sqrt(1.0 - cospsi*cospsi);     /* sqrt() is faster than sin(). */
+  else
+    sinpsi = -sqrt(1.0 - cospsi*cospsi);
+
+  /* New trajectory. */
+  if (1 - fabs(uz) <= ONE_MINUS_COSZERO) {      /* close to perpendicular. */
+    uxx = sintheta * cospsi;
+    uyy = sintheta * sinpsi;
+    uzz = costheta * SIGN(uz);   /* SIGN() is faster than division. */
+    } 
+  else {					/* usually use this option */
+    temp = sqrt(1.0 - uz * uz);
+    uxx = sintheta * (ux * uz * cospsi - uy * sinpsi) / temp + ux * costheta;
+    uyy = sintheta * (uy * uz * cospsi + ux * sinpsi) / temp + uy * costheta;
+    uzz = -sintheta * cospsi * temp + uz * costheta;
+    }
+    
+  /* Update trajectory */
+  ux = uxx;
+  uy = uyy;
+  uz = uzz;
+
+
+/**** CHECK ROULETTE 
+   If photon weight below THRESHOLD, then terminate photon using Roulette technique.
+   Photon has CHANCE probability of having its weight increased by factor of 1/CHANCE,
+   and 1-CHANCE probability of terminating.
+*****/
+if (W < THRESHOLD) {
+   if (RandomNum <= CHANCE)
+      W /= CHANCE;
+   else photon_status = DEAD;
+   }
+
+
+} /* end STEP_CHECK_HOP_SPIN */
+while (photon_status == ALIVE);
+
+  /* If photon dead, then launch new photon. */
+} /* end RUN */
+while (i_photon < Nphotons);
+
+
+/**** SAVE
+   Convert data to relative fluence rate [cm^-2] and save to file called "mcmin321.out".
+*****/
+// target = fopen("mc321.out", "w");
+target = fopen("mc321_out.txt", "w");
+
+/* print header */
+fprintf(target, "number of photons = %f\n", Nphotons);
+fprintf(target, "bin size = %5.5f [cm] \n", dr);
+fprintf(target, "last row is overflow. Ignore.\n");
+
+/* print column titles */
+fprintf(target, "r [cm] \t Fsph [1/cm2] \t Fcyl [1/cm2] \t Fpla [1/cm2]\n");
+
+/* print data:  radial position, fluence rates for 3D, 2D, 1D geometries */
+for (ir=0; ir<=NR; ir++) {
+  	/* r = sqrt(1.0/3 - (ir+1) + (ir+1)*(ir+1))*dr; */
+  	r = (ir + 0.5)*dr;
+  	shellvolume = 4.0*PI*r*r*dr; /* per spherical shell */
+    Fsph = Csph[ir]/Nphotons/shellvolume/mua;
+  	shellvolume = 2.0*PI*r*dr;   /* per cm length of cylinder */
+    Fcyl = Ccyl[ir]/Nphotons/shellvolume/mua;
+  	shellvolume = dr;            /* per cm2 area of plane */
+    Fpla =Cpla[ir]/Nphotons/shellvolume/mua;
+  	fprintf(target, "%5.5f \t %4.3e \t %4.3e \t %4.3e \n", r, Fsph, Fcyl, Fpla);
+  	}
+
+fclose(target);
+
+
+} /* end of main */
+
+ 
+
+/* SUBROUTINES */
+
+/**************************************************************************
+ *	RandomGen
+ *      A random number generator that generates uniformly
+ *      distributed random numbers between 0 and 1 inclusive.
+ *      The algorithm is based on:
+ *      W.H. Press, S.A. Teukolsky, W.T. Vetterling, and B.P.
+ *      Flannery, "Numerical Recipes in C," Cambridge University
+ *      Press, 2nd edition, (1992).
+ *      and
+ *      D.E. Knuth, "Seminumerical Algorithms," 2nd edition, vol. 2
+ *      of "The Art of Computer Programming", Addison-Wesley, (1981).
+ *
+ *      When Type is 0, sets Seed as the seed. Make sure 0<Seed<32000.
+ *      When Type is 1, returns a random number.
+ *      When Type is 2, gets the status of the generator.
+ *      When Type is 3, restores the status of the generator.
+ *
+ *      The status of the generator is represented by Status[0..56].
+ *
+ *      Make sure you initialize the seed before you get random
+ *      numbers.
+ ****/
+#define MBIG 1000000000
+#define MSEED 161803398
+#define MZ 0
+#define FAC 1.0E-9
+
+double RandomGen(char Type, long Seed, long *Status){
+  static long i1, i2, ma[56];   /* ma[0] is not used. */
+  long        mj, mk;
+  short       i, ii;
+
+  if (Type == 0) {              /* set seed. */
+    mj = MSEED - (Seed < 0 ? -Seed : Seed);
+    mj %= MBIG;
+    ma[55] = mj;
+    mk = 1;
+    for (i = 1; i <= 54; i++) {
+      ii = (21 * i) % 55;
+      ma[ii] = mk;
+      mk = mj - mk;
+      if (mk < MZ)
+        mk += MBIG;
+      mj = ma[ii];
+    }
+    for (ii = 1; ii <= 4; ii++)
+      for (i = 1; i <= 55; i++) {
+        ma[i] -= ma[1 + (i + 30) % 55];
+        if (ma[i] < MZ)
+          ma[i] += MBIG;
+      }
+    i1 = 0;
+    i2 = 31;
+  } else if (Type == 1) {       /* get a number. */
+    if (++i1 == 56)
+      i1 = 1;
+    if (++i2 == 56)
+      i2 = 1;
+    mj = ma[i1] - ma[i2];
+    if (mj < MZ)
+      mj += MBIG;
+    ma[i1] = mj;
+    return (mj * FAC);
+  } else if (Type == 2) {       /* get status. */
+    for (i = 0; i < 55; i++)
+      Status[i] = ma[i + 1];
+    Status[55] = i1;
+    Status[56] = i2;
+  } else if (Type == 3) {       /* restore status. */
+    for (i = 0; i < 55; i++)
+      ma[i + 1] = Status[i];
+    i1 = Status[55];
+    i2 = Status[56];
+  } else
+    puts("Wrong parameter to RandomGen().");
+  return (0);
+}
+#undef MBIG
+#undef MSEED
+#undef MZ
+#undef FAC
+

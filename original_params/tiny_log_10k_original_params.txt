@@ -1,0 +1,183 @@
+time elapsed: 0.3641 seconds
+
+=================================
+
+sim results:
+
+Tiny Monte Carlo by Scott Prahl (https://omlc.org)
+1 W Point Source Heating in Infinite Isotropic Scattering Medium
+
+Scattering =   20.000/cm
+Absorption =    2.000/cm
+Photons    =    10000
+
+ Radius         Heat
+[microns]     [W/cm^3]
+     0     19784.02055
+    50      3294.50108
+   100      1363.99179
+   150       761.32232
+   200       486.11674
+   250       342.23374
+   300       256.74767
+   350       207.70232
+   400       166.33197
+   450       132.12894
+   500       111.37956
+   550        94.48623
+   600        80.50293
+   650        69.51335
+   700        58.98686
+   750        52.63657
+   800        46.58717
+   850        41.69146
+   900        36.74354
+   950        33.25361
+  1000        28.02933
+  1050        26.35386
+  1100        24.14482
+  1150        21.45445
+  1200        19.13618
+  1250        17.41676
+  1300        16.01625
+  1350        14.83359
+  1400        12.97580
+  1450        12.25119
+  1500        11.64404
+  1550        10.17423
+  1600         9.45396
+  1650         8.65681
+  1700         7.79178
+  1750         7.42539
+  1800         6.66920
+  1850         6.12918
+  1900         5.38856
+  1950         5.12453
+  2000         4.80145
+  2050         4.47741
+  2100         4.04144
+  2150         3.77663
+  2200         3.40357
+  2250         3.07452
+  2300         2.79041
+  2350         2.68087
+  2400         2.54799
+  2450         2.25529
+  2500         2.23251
+  2550         2.02463
+  2600         1.87240
+  2650         1.74686
+  2700         1.58824
+  2750         1.49512
+  2800         1.36345
+  2850         1.26609
+  2900         1.17040
+  2950         1.08120
+  3000         1.01583
+  3050         0.94776
+  3100         0.90220
+  3150         0.87681
+  3200         0.76174
+  3250         0.71430
+  3300         0.67361
+  3350         0.60670
+  3400         0.55380
+  3450         0.54945
+  3500         0.51516
+  3550         0.48804
+  3600         0.45011
+  3650         0.43611
+  3700         0.39298
+  3750         0.37418
+  3800         0.33187
+  3850         0.30793
+  3900         0.29783
+  3950         0.28085
+  4000         0.26194
+  4050         0.23838
+  4100         0.22005
+  4150         0.21567
+  4200         0.19104
+  4250         0.18744
+  4300         0.16263
+  4350         0.15925
+  4400         0.15245
+  4450         0.14393
+  4500         0.13284
+  4550         0.12196
+  4600         0.11205
+  4650         0.11437
+  4700         0.10093
+  4750         0.08902
+  4800         0.08455
+  4850         0.08504
+  4900         0.08252
+  4950         0.07540
+ extra         0.02347
+
+
+=================================
+
+code that generated this simulation:
+
+char   t1[80] = "Tiny Monte Carlo by Scott Prahl (https://omlc.org)";
+char   t2[80] = "1 W Point Source Heating in Infinite Isotropic Scattering Medium";
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#define SHELL_MAX  101
+
+double mu_a = 2;			   /* Absorption Coefficient in 1/cm !!non-zero!! */
+double mu_s = 20;			   /* Reduced Scattering Coefficient in 1/cm */
+double microns_per_shell = 50; /* Thickness of spherical shells in microns */
+long   i, shell, photons = 10000;
+double x, y, z, u, v, w, weight;
+double albedo, shells_per_mfp, xi1, xi2, t, heat[SHELL_MAX];
+
+int main () 
+{
+	albedo = mu_s / (mu_s + mu_a);
+	shells_per_mfp = 1e4/microns_per_shell/(mu_a+mu_s);
+	
+	for (i = 1; i <= photons; i++)
+	{
+		x = 0.0; y = 0.0; z = 0.0;					/*launch*/  
+		u = 0.0; v = 0.0; w = 1.0;		
+		weight = 1.0;
+		
+		for (;;) {
+			t = -log((rand()+1.0)/(RAND_MAX+1.0));	/*move*/
+			x += t * u;
+			y += t * v;
+			z += t * w;  
+
+			shell=sqrt(x*x+y*y+z*z)*shells_per_mfp;	/*absorb*/
+			if (shell > SHELL_MAX-1) shell = SHELL_MAX-1;	
+			heat[shell] += (1.0-albedo)*weight;
+			weight *= albedo;
+		
+			for(;;) {								/*new direction*/
+				xi1=2.0*rand()/RAND_MAX - 1.0; 
+				xi2=2.0*rand()/RAND_MAX - 1.0; 
+				if ((t=xi1*xi1+xi2*xi2)<=1) break;
+			}
+			u = 2.0 * t - 1.0;
+			v = xi1 * sqrt((1-u*u)/t);
+			w = xi2 * sqrt((1-u*u)/t);
+			
+			if (weight < 0.001){ 					/*roulette*/
+				if (rand() > 0.1 * RAND_MAX) break; 
+				weight /= 0.1;
+			}
+		} 
+	}	
+	
+	printf("%s\n%s\n\nScattering = %8.3f/cm\nAbsorption = %8.3f/cm\n",t1,t2,mu_s,mu_a);
+	printf("Photons    = %8ld\n\n Radius         Heat\n[microns]     [W/cm^3]\n",photons);
+	t = 4*3.14159*pow(microns_per_shell,3)*photons/1e12;
+	for (i=0;i<SHELL_MAX-1;i++)
+		printf("%6.0f    %12.5f\n",i*microns_per_shell, heat[i]/t/(i*i+i+1.0/3.0));
+	printf(" extra    %12.5f\n",heat[SHELL_MAX-1]/photons);
+	return 0;
+}

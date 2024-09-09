@@ -4,8 +4,8 @@ import time
 # choose sim
 sim_names_list = ["tiny", "small", "mc321"]
 sim_name = sim_names_list[2]
-dirs = ["benchmark_sims", "original"]
-rel_scritpt_dir = dirs[0]
+dirs = ["benchmark_sims", "original_params"]
+rel_scritpt_dir = dirs[1]
 
 # filenames
 sim_exe = "{}_mc.exe".format(sim_name)
