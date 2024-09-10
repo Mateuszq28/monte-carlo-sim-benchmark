@@ -50,9 +50,9 @@
 double RandomGen(char Type, long Seed, long *Status);  
      /* Random number generator */
 
-void save_3d_array_to_json(const char* filename, double arr[MAX_XY][MAX_XY][MAX_Z], int x, int y, int z, double Nphotons, double cube_overflow);
+void save_3d_array_to_json(const char* filename, double arr[MAX_XY][MAX_XY][MAX_Z], int x, int y, int z, long long Nphotons, double cube_overflow);
 
-void displayProgressBar(int progress, int total, int min_step);
+void displayProgressBar(long long progress, long long total, long long min_step);
 
 
 int main() {
@@ -93,8 +93,8 @@ double	mus;        /* scattering coefficient [cm^-1] */
 double	g;          /* anisotropy [-] */
 double	albedo;     /* albedo of tissue */
 double	nt;         /* tissue index of refraction */
-double	Nphotons;   /* number of photons in simulation */
-long min_step_progress_bar;
+long long	Nphotons;   /* number of photons in simulation */
+long long min_step_progress_bar;
 short	NR_z;         /* number of z positions */
 short	NR_xy;         /* number of xy positions */
 double	z_size;  /* maximum z size of cube */
@@ -130,7 +130,7 @@ mua         = 1.0;     /* cm^-1 */
 mus         = 0.0;  /* cm^-1 */
 g           = 0.9;  
 nt          = 1.33;
-Nphotons    = 1e4; /* set number of photons in simulation */
+Nphotons    = 1e8; /* set number of photons in simulation */
 min_step_progress_bar = Nphotons/100;
 z_size = 2.0;   /* cm, total range over which bins extend */
 xy_size = 1.5; // cm
@@ -169,7 +169,7 @@ z_start = 239 * dr;
    Launch N photons, initializing each one before progation.
 *****/
 printf("simulation progress:\n");
-for (unsigned long i_photon = 1; i_photon <= Nphotons; i_photon++)
+for (long long i_photon = 1; i_photon <= Nphotons; i_photon++)
 {
 displayProgressBar(i_photon, Nphotons, min_step_progress_bar);
   
@@ -315,7 +315,7 @@ printf("saving data...\n");
 target = fopen("mc456_out.txt", "w");
 
 /* print header */
-fprintf(target, "number of photons = %f\n", Nphotons);
+fprintf(target, "number of photons = %lld\n", Nphotons);
 fprintf(target, "bin size = %5.5f [cm] \n", dr);
 fprintf(target, "last row is overflow. Ignore.\n");
 
@@ -434,7 +434,7 @@ double RandomGen(char Type, long Seed, long *Status){
 
 
 
-void save_3d_array_to_json(const char* filename, double arr[180][180][240], int x, int y, int z, double Nphotons, double cube_overflow) {
+void save_3d_array_to_json(const char* filename, double arr[180][180][240], int x, int y, int z, long long Nphotons, double cube_overflow) {
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
         printf("Error opening file!\n");
@@ -450,7 +450,7 @@ void save_3d_array_to_json(const char* filename, double arr[180][180][240], int 
     */
 
     fprintf(file, "{\n");
-    fprintf(file, "\"n_photons\": %f,\n", Nphotons);
+    fprintf(file, "\"n_photons\": %lld,\n", Nphotons);
     fprintf(file, "\"overflow\": %4.3e,\n", cube_overflow);
 
     // Start the JSON array
@@ -492,7 +492,7 @@ void save_3d_array_to_json(const char* filename, double arr[180][180][240], int 
 }
 
 
-void displayProgressBar(int progress, int total, int min_step) {
+void displayProgressBar(long long progress, long long total, long long min_step) {
     if (progress % min_step == 0)
     {
       int barWidth = 50; // Width of the progress bar
@@ -506,7 +506,7 @@ void displayProgressBar(int progress, int total, int min_step) {
               printf(" ");
           }
       }
-      printf("] %d%%", (progress * 100) / total);
+      printf("] %lld%%", (progress * 100) / total);
       if (progress != total) printf("\r");
       else printf("\n");
       fflush(stdout);  // Force the output to be printed immediately
