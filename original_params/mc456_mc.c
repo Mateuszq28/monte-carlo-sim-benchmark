@@ -50,7 +50,7 @@
 double RandomGen(char Type, long Seed, long *Status);  
      /* Random number generator */
 
-void save_3d_array_to_json(const char* filename, double arr[MAX_XY][MAX_XY][MAX_Z], int x, int y, int z, long long Nphotons, double cube_overflow);
+void save_3d_array_to_json(const char* filename, double arr[MAX_XY][MAX_XY][MAX_Z], int x, int y, int z, long long Nphotons, double cube_overflow, double bins_per_1_cm);
 
 void displayProgressBar(long long progress, long long total, long long min_step);
 
@@ -341,8 +341,8 @@ fflush(target);
 fclose(target);
 
 
-
-save_3d_array_to_json("mc456_mc_cube.json", Cube, NR_xy, NR_xy, NR_z, Nphotons, cube_overflow);
+double bins_per_1_cm = NR_z/z_size;
+save_3d_array_to_json("mc456_mc_cube.json", Cube, NR_xy, NR_xy, NR_z, Nphotons, cube_overflow, bins_per_1_cm);
 
 } /* end of main */
 
@@ -434,7 +434,7 @@ double RandomGen(char Type, long Seed, long *Status){
 
 
 
-void save_3d_array_to_json(const char* filename, double arr[180][180][240], int x, int y, int z, long long Nphotons, double cube_overflow) {
+void save_3d_array_to_json(const char* filename, double arr[180][180][240], int x, int y, int z, long long Nphotons, double cube_overflow, double bins_per_1_cm) {
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
         printf("Error opening file!\n");
@@ -452,6 +452,7 @@ void save_3d_array_to_json(const char* filename, double arr[180][180][240], int 
     fprintf(file, "{\n");
     fprintf(file, "\"n_photons\": %lld,\n", Nphotons);
     fprintf(file, "\"overflow\": %4.3e,\n", cube_overflow);
+    fprintf(file, "\"bins_per_1_cm\": %4.3e,\n",  bins_per_1_cm);
 
     // Start the JSON array
     fprintf(file, "\"cube\": [\n");

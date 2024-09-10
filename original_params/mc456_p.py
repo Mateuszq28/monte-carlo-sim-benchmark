@@ -381,6 +381,7 @@ def main():
         data = {
             "n_photons": Nphotons,
             "overflow": cube_overflow,
+            "bins_per_1_cm": NR_z/z_size,
             "cube": Cube
         }
         json.dump(data, f)
