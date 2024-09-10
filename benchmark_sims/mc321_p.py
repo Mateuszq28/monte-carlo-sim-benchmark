@@ -171,7 +171,7 @@ def main():
     mus         = 23.88889  # cm^-1
     g           = 0.9
     nt          = 1.36
-    Nphotons    = 1e6 # set number of photons in simulation
+    Nphotons    = int(1e6) # set number of photons in simulation
     radial_size = 2.0 # cm, total range over which bins extend
     NR          = 240 # set number of bins.
     # IF NR IS ALTERED, THEN USER MUST ALSO ALTER THE ARRAY DECLARATION TO A SIZE = NR + 1.
