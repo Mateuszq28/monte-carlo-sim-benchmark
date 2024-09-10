@@ -52,7 +52,7 @@ double RandomGen(char Type, long Seed, long *Status);
 
 void save_3d_array_to_json(const char* filename, double arr[MAX_XY][MAX_XY][MAX_Z], int x, int y, int z, double Nphotons, double cube_overflow);
 
-void displayProgressBar(int progress, int total);
+void displayProgressBar(int progress, int total, int min_step);
 
 
 int main() {
@@ -94,6 +94,7 @@ double	g;          /* anisotropy [-] */
 double	albedo;     /* albedo of tissue */
 double	nt;         /* tissue index of refraction */
 double	Nphotons;   /* number of photons in simulation */
+long min_step_progress_bar;
 short	NR_z;         /* number of z positions */
 short	NR_xy;         /* number of xy positions */
 double	z_size;  /* maximum z size of cube */
@@ -130,6 +131,7 @@ mus         = 23.88889;  /* cm^-1 */
 g           = 0.9;  
 nt          = 1.36;
 Nphotons    = 1e3; /* set number of photons in simulation */
+min_step_progress_bar = Nphotons/100;
 z_size = 2.0;   /* cm, total range over which bins extend */
 xy_size = 1.5; // cm
 NR_z          = 240;	 /* set number of bins.  */
@@ -169,7 +171,7 @@ z_start = 239 * dr;
 printf("simulation progress:\n");
 for (unsigned long i_photon = 1; i_photon <= Nphotons; i_photon++)
 {
-displayProgressBar(i_photon, Nphotons);
+displayProgressBar(i_photon, Nphotons, min_step_progress_bar);
   
 
 
@@ -490,22 +492,25 @@ void save_3d_array_to_json(const char* filename, double arr[180][180][240], int 
 }
 
 
-void displayProgressBar(int progress, int total) {
-    int barWidth = 50; // Width of the progress bar
-    int completed = (progress * barWidth) / total;
+void displayProgressBar(int progress, int total, int min_step) {
+    if (progress % min_step == 0)
+    {
+      int barWidth = 50; // Width of the progress bar
+      int completed = (progress * barWidth) / total;
 
-    printf("[");
-    for (int i = 0; i < barWidth; i++) {
-        if (i < completed) {
-            printf("#");
-        } else {
-            printf(" ");
-        }
+      printf("[");
+      for (int i = 0; i < barWidth; i++) {
+          if (i < completed) {
+              printf("#");
+          } else {
+              printf(" ");
+          }
+      }
+      printf("] %d%%", (progress * 100) / total);
+      if (progress != total) printf("\r");
+      else printf("\n");
+      fflush(stdout);  // Force the output to be printed immediately
     }
-    printf("] %d%%", (progress * 100) / total);
-    if (progress != total) printf("\r");
-    else printf("\n");
-    fflush(stdout);  // Force the output to be printed immediately
 }
 
 
