@@ -8,44 +8,49 @@ My sim time (monte-carlo-sim-python): 3895.3408 seconds (1h) for 1 mln photons
 
 <u>tiny_mc.c</u>
 *programming language: c*
-original parameters 10 000 photons:
-original parameters 1 mln photons:
+original parameters 10 000 photons: 1.2420 seconds
+original parameters 1 mln photons: 16.6361 seconds
 my parameters on tiny 10 000 photons: 1.1717 seconds
 my parameters on tiny 1 mln photons: 108.9439 seconds
 
 <u>small_mc.c</u>
 *programming language: c*
-original parameters 100 000 photons:
-original parameters 1 mln photons:
+original parameters 10 000 photons: 1.1567 seconds
+original parameters 100 000 photons: 3.4751 seconds
+original parameters 1 mln photons: 26.5167 seconds
+my parameters on small 10 000 photons: 1.7543 seconds
 my parameters on small 100 000 photons: 8.9404 seconds
 my parameters on small 1 mln photons: 86.9339 seconds
 
 <u>mc321_mc.c</u>
 *programming language: c*
-original parameters 10 000 photons:
-original parameters 1 mln photons:
+original parameters 10 000 photons: 0.6321 seconds
+original parameters 1 mln photons: 1.2259 seconds
 my parameters on mc321 10 000 photons: 1.5611 seconds
 my parameters on mc321 1 mln photons: 134.7727 seconds
 
 <u>mc321_p.py</u>
 *programming language: python*
-original parameters 10 000 photons:
-original parameters 1 mln photons:
+original parameters 10 000 photons: 0.2350 seconds
+original parameters 1 mln photons: 9.8403 seconds
 my parameters on mc321 10 000 photons: 35.7755 seconds
 my parameters on mc321 1 mln photons: 3910.4484 seconds
 
 <u>mc456_p.py</u>
 *programming language: python*
-original parameters 10 000 photons:
-original parameters 1 mln photons:
+original parameters 10 000 photons: 10.8785 seconds
+original parameters 1 mln photons: 19.1455 seconds
 my parameters on mc456 10 000 photons: 55.4248 seconds
 my parameters on mc456 1 mln photons: 4490.3612 seconds
 
 <u>mc456_mc.c</u>
 *programming language: python*
-original parameters 10 000 photons:
-original parameters 1 mln photons:
-my parameters on mc456 10 000 photons:
+original parameters 10^4 = 10 000 photons:
+original parameters 10^6 = 1 mln photons:
+original parameters 10^7 = 10 mln photons:
+original parameters 10^8 = 100 mln photons:
+original parameters 10^9 = 1 mld photons:
+my parameters on mc456 10^4 = 10 000 photons:
 my parameters on mc456 10^6 = 1 mln photons:
 my parameters on mc456 10^7 = 10 mln photons:
 my parameters on mc456 10^8 = 100 mln photons:

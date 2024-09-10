@@ -1,4 +1,4 @@
-number of photons = 1000000.000000
+number of photons = 1000000
 bin size = 0.00833 [cm] 
 last row is overflow. Ignore.
 r [cm] 	 Fsph [1/cm2] 	 Fcyl [1/cm2] 	 Fpla [1/cm2]

@@ -8,7 +8,7 @@ sims_that_saves_output_itself = ["mc321_p", "mc456_p"]
 sim_names_list = ["mc321_p", "mc456_p"]
 sim_name = sim_names_list[1]
 dirs = ["benchmark_sims", "original_params"]
-rel_scritpt_dir = dirs[0]
+rel_scritpt_dir = dirs[1]
 
 # filenames
 sim_exe = "{}.py".format(sim_name)
