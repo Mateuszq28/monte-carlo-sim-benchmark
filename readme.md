@@ -31,15 +31,15 @@ my parameters on mc321 1 mln photons: 134.7727 seconds
 *programming language: python*
 original parameters 10 000 photons:
 original parameters 1 mln photons:
-my parameters on mc321 10 000 photons:
+my parameters on mc321 10 000 photons: 35.7755 seconds
 my parameters on mc321 1 mln photons: 3910.4484 seconds
 
 <u>mc456_p.py</u>
 *programming language: python*
 original parameters 10 000 photons:
 original parameters 1 mln photons:
-my parameters on mc456 10 000 photons:
-my parameters on mc456 1 mln photons:
+my parameters on mc456 10 000 photons: 55.4248 seconds
+my parameters on mc456 1 mln photons: 4490.3612 seconds
 
 <u>mc456_mc.c</u>
 *programming language: python*
