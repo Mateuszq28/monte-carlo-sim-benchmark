@@ -52,6 +52,8 @@ double RandomGen(char Type, long Seed, long *Status);
 
 void save_3d_array_to_json(const char* filename, double arr[MAX_XY][MAX_XY][MAX_Z], int x, int y, int z, double Nphotons, double cube_overflow);
 
+void displayProgressBar(int progress, int total);
+
 
 int main() {
 
@@ -164,8 +166,10 @@ z_start = 239 * dr;
 /**** RUN
    Launch N photons, initializing each one before progation.
 *****/
-for (unsigned long i_photon = 0; i_photon < Nphotons; i_photon++)
+printf("simulation progress:\n");
+for (unsigned long i_photon = 1; i_photon <= Nphotons; i_photon++)
 {
+displayProgressBar(i_photon, Nphotons);
   
 
 
@@ -483,6 +487,25 @@ void save_3d_array_to_json(const char* filename, double arr[180][180][240], int 
     // Flush the buffer to ensure all data is written
     fflush(file);
     fclose(file);
+}
+
+
+void displayProgressBar(int progress, int total) {
+    int barWidth = 50; // Width of the progress bar
+    int completed = (progress * barWidth) / total;
+
+    printf("[");
+    for (int i = 0; i < barWidth; i++) {
+        if (i < completed) {
+            printf("#");
+        } else {
+            printf(" ");
+        }
+    }
+    printf("] %d%%", (progress * 100) / total);
+    if (progress != total) printf("\r");
+    else printf("\n");
+    fflush(stdout);  // Force the output to be printed immediately
 }
 
 
