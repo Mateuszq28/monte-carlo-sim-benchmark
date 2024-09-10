@@ -2,3 +2,4 @@
 *.obj
 resultEnv.json
 sim_dump.json
+*cube.json
