@@ -8,22 +8,22 @@ My sim time (monte-carlo-sim-python): 3895.3408 seconds (1h) for 1 mln photons
 
 <u>tiny_mc.c</u>
 *programming language: c*
-original parameters 10 000 photons: 0.3641 seconds
-original parameters 1 mln photons: 18.0910 seconds
+original parameters 10 000 photons:
+original parameters 1 mln photons:
 my parameters on tiny 10 000 photons: 1.1717 seconds
 my parameters on tiny 1 mln photons: 108.9439 seconds
 
 <u>small_mc.c</u>
 *programming language: c*
-original parameters 100 000 photons: 2.9074 seconds
-original parameters 1 mln photons: 27.4483 seconds
+original parameters 100 000 photons:
+original parameters 1 mln photons:
 my parameters on small 100 000 photons: 8.9404 seconds
 my parameters on small 1 mln photons: 86.9339 seconds
 
 <u>mc321_mc.c</u>
 *programming language: c*
-original parameters 10 000 photons: 0.3167 seconds
-original parameters 1 mln photons: 0.5768 seconds
+original parameters 10 000 photons:
+original parameters 1 mln photons:
 my parameters on mc321 10 000 photons: 1.5611 seconds
 my parameters on mc321 1 mln photons: 134.7727 seconds
 

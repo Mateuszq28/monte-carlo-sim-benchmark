@@ -4,13 +4,13 @@ char   t2[80] = "1 W/cm^2 Uniform Illumination of Semi-Infinite Medium";
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define BINS 101
+#define BINS 241
 
 double mu_a = 5;			/* Absorption Coefficient in 1/cm */
 double mu_s = 95;			/* Scattering Coefficient in 1/cm */
 double g = 0.5;				/* Scattering Anisotropy -1<=g<=1 */
 double n = 1.5;				/* Index of refraction of medium */
-double microns_per_bin = 20;/* Thickness of one bin layer */
+double microns_per_bin = 83.3333333;/* Thickness of one bin layer */
 long   i, photons = 1e6;
 double x,y,z,u,v,w,weight;
 double rs, rd, bit, albedo, crit_angle, bins_per_mfp, heat[BINS];
@@ -99,7 +99,7 @@ int i;
 	printf("\n\n Depth         Heat\n[microns]     [W/cm^3]\n");
 
 	for (i=0;i<BINS-1;i++){
-		printf("%6.0f    %12.5f\n",i*microns_per_bin, heat[i]/microns_per_bin*1e4/(bit+photons));
+		printf("%6.0f    %12.5e \n",i*microns_per_bin, heat[i]/microns_per_bin*1e4/(bit+photons));
 	}
 	printf(" extra    %12.5f\n",heat[BINS-1]/(bit+photons));
 }
