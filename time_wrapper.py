@@ -2,9 +2,9 @@ import os
 import time
 
 # choose sim
-sims_that_saves_output_itself = ["mc321_p", "mc321"]
-sim_names_list = ["tiny", "small", "mc321"]
-sim_name = sim_names_list[2]
+sims_that_saves_output_itself = ["mc321", "mc456"]
+sim_names_list = ["tiny", "small", "mc321", "mc456"]
+sim_name = sim_names_list[3]
 dirs = ["benchmark_sims", "original_params"]
 rel_scritpt_dir = dirs[0]
 

@@ -23,6 +23,11 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdbool.h>
+
+// for Cube
+#define MAX_XY 180
+#define MAX_Z 240
 
 #define	PI          3.1415926
 #define	LIGHTSPEED	2.997925E10 /* in vacuo speed of light [cm/s] */
@@ -45,6 +50,8 @@
 double RandomGen(char Type, long Seed, long *Status);  
      /* Random number generator */
 
+void save_3d_array_to_json(const char* filename, double arr[MAX_XY][MAX_XY][MAX_Z], int x, int y, int z, double Nphotons, double cube_overflow);
+
 
 int main() {
 
@@ -58,7 +65,6 @@ double  sintheta;   /* sin(theta) */
 double	cospsi;     /* cos(psi) */
 double  sinpsi;     /* sin(psi) */
 double	psi;        /* azimuthal angle */
-double	i_photon;   /* current photon */
 double	W;          /* photon weight */
 double	absorb;     /* weighted deposited in a step due to absorption */
 short   photon_status;  /* flag = ALIVE=1 or DEAD=0 */
@@ -67,6 +73,16 @@ short   photon_status;  /* flag = ALIVE=1 or DEAD=0 */
 double	Csph[241];  /* spherical   photon concentration CC[ir=0..100] */
 double	Ccyl[241];  /* cylindrical photon concentration CC[ir=0..100] */
 double	Cpla[241];  /* planar      photon concentration CC[ir=0..100] */
+
+// to avoid stack overflow
+// Correct allocation with malloc
+double (*Cube)[MAX_XY][MAX_Z] = (double (*)[MAX_XY][MAX_Z])malloc(MAX_XY * MAX_XY * MAX_Z * sizeof(double));
+if (Cube == NULL) {
+    printf("Memory allocation failed.\n");
+    return 1;
+}
+
+double cube_overflow;
 double	Fsph;       /* fluence in spherical shell */
 double	Fcyl;       /* fluence in cylindrical shell */
 double	Fpla;       /* fluence in planar shell */
@@ -76,11 +92,23 @@ double	g;          /* anisotropy [-] */
 double	albedo;     /* albedo of tissue */
 double	nt;         /* tissue index of refraction */
 double	Nphotons;   /* number of photons in simulation */
-short	NR;         /* number of radial positions */
-double	radial_size;  /* maximum radial size */
+short	NR_z;         /* number of z positions */
+short	NR_xy;         /* number of xy positions */
+double	z_size;  /* maximum z size of cube */
+double	xy_size;  /* maximum xy size of cube */
 double	r;          /* radial position */
 double  dr;         /* radial bin size */
 short	ir;         /* index to radial position */
+short ix;
+short iy;
+short iz;
+double x_start;
+double y_start;
+double z_start;
+bool ix_is_in;
+bool iy_is_in;
+bool iz_is_in;
+bool is_in;
 double  shellvolume;  /* volume of shell at radial position r */
 
 /* dummy variables */
@@ -99,49 +127,63 @@ mua         = 0.37;     /* cm^-1 */
 mus         = 23.88889;  /* cm^-1 */
 g           = 0.9;  
 nt          = 1.36;
-Nphotons    = 1e6; /* set number of photons in simulation */
-radial_size = 2.0;   /* cm, total range over which bins extend */
-NR          = 240;	 /* set number of bins.  */
-   /* IF NR IS ALTERED, THEN USER MUST ALSO ALTER THE ARRAY DECLARATION TO A SIZE = NR + 1. */
-dr          = radial_size/NR;  /* cm */
+Nphotons    = 1e3; /* set number of photons in simulation */
+z_size = 2.0;   /* cm, total range over which bins extend */
+xy_size = 1.5; // cm
+NR_z          = 240;	 /* set number of bins.  */
+NR_xy = 180;
+   /* IF NR_z IS ALTERED, THEN USER MUST ALSO ALTER THE ARRAY DECLARATION TO A SIZE = NR_z + 1. */
+dr          = z_size/NR_z;  /* cm */
 albedo      = mus/(mus + mua);
 
 
 /**** INITIALIZATIONS 
 *****/
-i_photon = 0;
 InitRandomGen;
-for (ir=0; ir<=NR; ir++) {
-   Csph[ir] = 0;
-   Ccyl[ir] = 0;
-   Cpla[ir] = 0;
-   }
-   
+printf("initializing arrays with zeros...\n");
+for (ir=0; ir<=NR_z; ir++) {
+  Csph[ir] = 0;
+  Ccyl[ir] = 0;
+  Cpla[ir] = 0;
+}
+
+// [x][y][z]
+for (int ix=0; ix<NR_xy; ix++)
+  for (int iy=0; iy<NR_xy; iy++)
+    for (int iz=0; iz<NR_z; iz++)
+      Cube[ix][iy][iz] = 0;
+cube_overflow = 0;
+printf("initializing done...\n");
+
+// start pos
+x_start = 89 * dr;
+y_start = 89 * dr;
+z_start = 239 * dr;
+
+
 /**** RUN
    Launch N photons, initializing each one before progation.
 *****/
-do {
+for (unsigned long i_photon = 0; i_photon < Nphotons; i_photon++)
+{
+  
 
 
 /**** LAUNCH 
    Initialize photon position and trajectory.
-   Implements an isotropic point source.
+   Implements a point source [0,0,-1].
 *****/
-i_photon += 1;	/* increment photon count */
 W = 1.0;                    /* set photon weight to one */
 photon_status = ALIVE;      /* Launch an ALIVE photon */
 
-x = 0;                      /* Set photon position to origin. */
-y = 0;
-z = 0;
+x = x_start;    /* Set photon position to origin. */
+y = y_start;
+z = z_start;
 
-/* Randomly set photon trajectory to yield an isotropic source. */
-costheta = 2.0*RandomNum - 1.0;   
-sintheta = sqrt(1.0 - costheta*costheta);	/* sintheta is always positive */
-psi = 2.0*PI*RandomNum;
-ux = sintheta*cos(psi);
-uy = sintheta*sin(psi);
-uz = costheta;
+/* source - vartical down [0,0,-1] */
+ux = 0;
+uy = 0;
+uz = -1;
 
 
 /* HOP_DROP_SPIN_CHECK
@@ -171,21 +213,31 @@ do {
    /* spherical */
    r = sqrt(x*x + y*y + z*z);    /* current spherical radial position */
    ir = (short)(r/dr);           /* ir = index to spatial bin */
-   if (ir >= NR) ir = NR;        /* last bin is for overflow */
+   if (ir >= NR_z) ir = NR_z;        /* last bin is for overflow */
    Csph[ir] += absorb;           /* DROP absorbed weight into bin */
    
    /* cylindrical */
    r = sqrt(x*x + y*y);          /* current cylindrical radial position */
    ir = (short)(r/dr);           /* ir = index to spatial bin */
-   if (ir >= NR) ir = NR;        /* last bin is for overflow */
+   if (ir >= NR_z) ir = NR_z;        /* last bin is for overflow */
    Ccyl[ir] += absorb;           /* DROP absorbed weight into bin */
    
    /* planar */
    r = fabs(z);                  /* current planar radial position */
    ir = (short)(r/dr);           /* ir = index to spatial bin */
-   if (ir >= NR) ir = NR;        /* last bin is for overflow */
+   if (ir >= NR_z) ir = NR_z;        /* last bin is for overflow */
    Cpla[ir] += absorb;           /* DROP absorbed weight into bin */
-   
+
+  // --- cube ---
+  ix = x/dr;
+  iy = y/dr;
+  iz = z/dr;
+  ix_is_in = (0 <= ix && ix < NR_xy);
+  iy_is_in = (0 <= iy && iy < NR_xy);
+  iz_is_in = (0 <= iz && iz < NR_z);
+  is_in = (ix_is_in && iy_is_in && iz_is_in);
+  if (!is_in) cube_overflow += absorb;
+  else Cube[ix][iy][iz] += absorb;
 
 /**** SPIN 
    Scatter photon into new trajectory defined by theta and psi.
@@ -247,14 +299,14 @@ while (photon_status == ALIVE);
 
   /* If photon dead, then launch new photon. */
 } /* end RUN */
-while (i_photon < Nphotons);
 
 
 /**** SAVE
    Convert data to relative fluence rate [cm^-2] and save to file called "mcmin321.out".
 *****/
 // target = fopen("mc321.out", "w");
-target = fopen("mc321_out.txt", "w");
+printf("saving data...\n");
+target = fopen("mc456_out.txt", "w");
 
 /* print header */
 fprintf(target, "number of photons = %f\n", Nphotons);
@@ -265,7 +317,7 @@ fprintf(target, "last row is overflow. Ignore.\n");
 fprintf(target, "r [cm] \t Fsph [1/cm2] \t Fcyl [1/cm2] \t Fpla [1/cm2]\n");
 
 /* print data:  radial position, fluence rates for 3D, 2D, 1D geometries */
-for (ir=0; ir<=NR; ir++) {
+for (ir=0; ir<=NR_z; ir++) {
   	/* r = sqrt(1.0/3 - (ir+1) + (ir+1)*(ir+1))*dr; */
   	r = (ir + 0.5)*dr;
   	shellvolume = 4.0*PI*r*r*dr; /* per spherical shell */
@@ -277,8 +329,14 @@ for (ir=0; ir<=NR; ir++) {
   	fprintf(target, "%5.5f \t %4.3e \t %4.3e \t %4.3e \n", r, Fsph, Fcyl, Fpla);
   	}
 
+// Flush the buffer to ensure all data is written
+fflush(target);
+
 fclose(target);
 
+
+
+save_3d_array_to_json("mc456_mc_cube.json", Cube, NR_xy, NR_xy, NR_z, Nphotons, cube_overflow);
 
 } /* end of main */
 
@@ -368,3 +426,64 @@ double RandomGen(char Type, long Seed, long *Status){
 #undef MZ
 #undef FAC
 
+
+
+void save_3d_array_to_json(const char* filename, double arr[180][180][240], int x, int y, int z, double Nphotons, double cube_overflow) {
+    FILE *file = fopen(filename, "w");
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    /*
+    data = {
+    "n_photons": Nphotons,
+    "overflow": cube_overflow,
+    "cube": Cube
+    }
+    */
+
+    fprintf(file, "{\n");
+    fprintf(file, "\"n_photons\": %f,\n", Nphotons);
+    fprintf(file, "\"overflow\": %4.3e,\n", cube_overflow);
+
+    // Start the JSON array
+    fprintf(file, "\"cube\": [\n");
+
+    // Iterate through the 3D array
+    for (int i = 0; i < x; i++) {
+        fprintf(file, "  [\n");  // Start of the 2D array
+        for (int j = 0; j < y; j++) {
+            fprintf(file, "    [");  // Start of the 1D array
+            for (int k = 0; k < z; k++) {
+                fprintf(file, "%4.3e", arr[i][j][k]);
+                if (k < z - 1) {
+                    fprintf(file, ", ");
+                }
+            }
+            fprintf(file, "]");  // End of the 1D array
+            if (j < y - 1) {
+                fprintf(file, ",\n");
+            } else {
+                fprintf(file, "\n");
+            }
+        }
+        fprintf(file, "  ]");  // End of the 2D array
+        if (i < x - 1) {
+            fprintf(file, ",\n");
+        } else {
+            fprintf(file, "\n");
+        }
+    }
+
+    // End the JSON array
+    fprintf(file, "]\n");
+    fprintf(file, "}\n");
+
+    // Flush the buffer to ensure all data is written
+    fflush(file);
+    fclose(file);
+}
+
+
+free(Cube);
