@@ -43,9 +43,6 @@ original parameters 1 mln photons: 19.1455 seconds
 my parameters on mc456 10 000 photons: 55.4248 seconds
 my parameters on mc456 1 mln photons: 4490.3612 seconds (1h 15 min)
 
-
-_1mln_my_params
-
 <u>mc456_mc.c</u>
 *programming language: python*
 original parameters 10^4 = 10 000 photons: 8.0297 seconds
@@ -58,8 +55,7 @@ my parameters on mc456 10^4 = 10 000 photons: 10.5652 seconds
 my parameters on mc456 10^5 = 100 000 photons: 23.9545 seconds
 my parameters on mc456 10^6 = 1 mln photons: 151.7471 seconds
 my parameters on mc456 10^7 = 10 mln photons: 1356.2483 seconds (23 min)
-my parameters on mc456 10^8 = 100 mln photons:
-my parameters on mc456 10^9 = 1 mld photons:
+my parameters on mc456 10^8 = 100 mln photons: 13290.7210 seconds (3h 42 min)
 
 ## Generator period
 
