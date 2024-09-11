@@ -45,6 +45,50 @@ my parameters on mc456 1 mln photons: 4490.3612 seconds (1h 15 min)
 
 <u>mc456_mc.c</u>
 *programming language: python*
+original parameters 10^4 = 10 000 photons:
+original parameters 10^5 = 100 000 photons:
+original parameters 10^6 = 1 mln photons:
+original parameters 10^7 = 10 mln photons:
+original parameters 10^8 = 100 mln photons:
+original parameters 10^9 = 1 mld photons:
+my parameters on mc456 10^4 = 10 000 photons:
+my parameters on mc456 10^5 = 100 000 photons:
+my parameters on mc456 10^6 = 1 mln photons:
+my parameters on mc456 10^7 = 10 mln photons:
+my parameters on mc456 10^8 = 100 mln photons:
+
+
+NAME POOL
+mc456_log_10k_original_params.txt
+mc456_mc_10k_original_params_cube.json
+mc456_log_100k_original_params.txt
+mc456_mc_100k_original_params_cube.json
+mc456_log_1mln_original_params.txt
+mc456_mc_1mln_original_params_cube.json
+mc456_log_10mln_original_params.txt
+mc456_mc_10mln_original_params_cube.json
+mc456_log_100mln_original_params.txt
+mc456_mc_100mln_original_params_cube.json
+mc456_log_1mld_original_params.txt
+mc456_mc_1mld_original_params_cube.json
+
+
+mc456_log_10k_my_params.txt
+mc456_mc_10k_my_params_cube.json
+mc456_log_100k_my_params.txt
+mc456_mc_100k_my_params_cube.json
+mc456_log_1mln_my_params.txt
+mc456_mc_1mln_my_params_cube.json
+mc456_log_10mln_my_params.txt
+mc456_mc_10mln_my_params_cube.json
+mc456_log_100mln_my_params.txt
+mc456_mc_100mln_my_params_cube.json
+
+
+<!--
+overflow and too less digits in print e notation
+<u>mc456_mc.c</u>
+*programming language: python*
 original parameters 10^4 = 10 000 photons: 8.0297 seconds
 original parameters 10^5 = 100 000 photons: 7.9869 seconds
 original parameters 10^6 = 1 mln photons: 9.4164 seconds
@@ -56,6 +100,7 @@ my parameters on mc456 10^5 = 100 000 photons: 23.9545 seconds
 my parameters on mc456 10^6 = 1 mln photons: 151.7471 seconds
 my parameters on mc456 10^7 = 10 mln photons: 1356.2483 seconds (23 min)
 my parameters on mc456 10^8 = 100 mln photons: 13290.7210 seconds (3h 42 min)
+-->
 
 ## Generator period
 
