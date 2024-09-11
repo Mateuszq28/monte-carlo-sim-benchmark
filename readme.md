@@ -58,18 +58,14 @@ my parameters on mc456 10^7 = 10 mln photons: 1358.7487 seconds (23 min)
 my parameters on mc456 10^8 = 100 mln photons:
 
 
+
+
 NAME POOL
 
-mc456_log_10k_my_params.txt
-mc456_mc_10k_my_params_cube.json
-.txt
-.json
-.txt
-.json
-.txt
-.json
-.txt
-.json
+mc456_log_100mln_my_params
+mc456_mc_100mln_my_params_cube
+
+
 
 
 <!--
