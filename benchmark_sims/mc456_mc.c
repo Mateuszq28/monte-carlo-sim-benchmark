@@ -314,6 +314,21 @@ while (photon_status == ALIVE);
 printf("saving data...\n");
 target = fopen("mc456_out.txt", "w");
 
+fprintf(target, "number of photons = %lld\n", Nphotons);
+fprintf(target, "overflow: %.20e\n", cube_overflow);
+long double cube_sum = 0;
+for (int i=0; i<NR_xy; i++)
+  for (int j=0; j<NR_xy; j++)
+    for (int k=0; k<NR_z; k++)
+      cube_sum += Cube[i][j][k];
+fprintf(target, "sum: %.20e\n", cube_sum);
+long double cube_sum2 = Nphotons - cube_overflow;
+fprintf(target, "sum: %.20e\n", cube_sum2);
+long double avg = cube_sum / Nphotons;
+fprintf(target, "avg: %.20e\n", avg);
+float perc_in = cube_sum / Nphotons * 100;
+fprintf(target, "perc_in: %2.2f\n\n", perc_in);
+
 /* print header */
 fprintf(target, "number of photons = %lld\n", Nphotons);
 fprintf(target, "bin size = %5.5f [cm] \n", dr);
@@ -337,9 +352,7 @@ for (ir=0; ir<=NR_z; ir++) {
 
 // Flush the buffer to ensure all data is written
 fflush(target);
-
 fclose(target);
-
 
 double bins_per_1_cm = NR_z/z_size;
 save_3d_array_to_json("mc456_mc_cube.json", Cube, NR_xy, NR_xy, NR_z, Nphotons, cube_overflow, bins_per_1_cm);
