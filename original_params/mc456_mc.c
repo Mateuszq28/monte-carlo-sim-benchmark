@@ -41,16 +41,16 @@
      /* If 1-cos(theta) <= ONE_MINUS_COSZERO, fabs(theta) <= 1e-6 rad. */
      /* If 1+cos(theta) <= ONE_MINUS_COSZERO, fabs(PI-theta) <= 1e-6 rad. */
 #define SIGN(x)           ((x)>=0 ? 1:-1)
-#define InitRandomGen    (double) RandomGen(0, 1, NULL)
+#define InitRandomGen    (long double) RandomGen(0, 1, NULL)
      /* Initializes the seed for the random number generator. */     
-#define RandomNum        (double) RandomGen(1, 0, NULL)
+#define RandomNum        (long double) RandomGen(1, 0, NULL)
      /* Calls for a random number from the randum number generator. */
 
 /* DECLARE FUNCTION */
-double RandomGen(char Type, long Seed, long *Status);  
+long double RandomGen(char Type, long Seed, long *Status);  
      /* Random number generator */
 
-void save_3d_array_to_json(const char* filename, double arr[MAX_XY][MAX_XY][MAX_Z], int x, int y, int z, long long Nphotons, double cube_overflow, double bins_per_1_cm);
+void save_3d_array_to_json(const char* filename, long double arr[MAX_XY][MAX_XY][MAX_Z], int x, int y, int z, long long Nphotons, long double cube_overflow, double bins_per_1_cm);
 
 void displayProgressBar(long long progress, long long total, long long min_step);
 
@@ -67,27 +67,27 @@ double  sintheta;   /* sin(theta) */
 double	cospsi;     /* cos(psi) */
 double  sinpsi;     /* sin(psi) */
 double	psi;        /* azimuthal angle */
-double	W;          /* photon weight */
-double	absorb;     /* weighted deposited in a step due to absorption */
+long double	W;          /* photon weight */
+long double	absorb;     /* weighted deposited in a step due to absorption */
 short   photon_status;  /* flag = ALIVE=1 or DEAD=0 */
 
 /* other variables */
-double	Csph[241];  /* spherical   photon concentration CC[ir=0..100] */
-double	Ccyl[241];  /* cylindrical photon concentration CC[ir=0..100] */
-double	Cpla[241];  /* planar      photon concentration CC[ir=0..100] */
+long double	Csph[241];  /* spherical   photon concentration CC[ir=0..100] */
+long double	Ccyl[241];  /* cylindrical photon concentration CC[ir=0..100] */
+long double	Cpla[241];  /* planar      photon concentration CC[ir=0..100] */
 
 // to avoid stack overflow
 // Correct allocation with malloc
-double (*Cube)[MAX_XY][MAX_Z] = (double (*)[MAX_XY][MAX_Z])malloc(MAX_XY * MAX_XY * MAX_Z * sizeof(double));
+long double (*Cube)[MAX_XY][MAX_Z] = (long double (*)[MAX_XY][MAX_Z])malloc(MAX_XY * MAX_XY * MAX_Z * sizeof(long double));
 if (Cube == NULL) {
     printf("Memory allocation failed.\n");
     return 1;
 }
 
-double cube_overflow;
-double	Fsph;       /* fluence in spherical shell */
-double	Fcyl;       /* fluence in cylindrical shell */
-double	Fpla;       /* fluence in planar shell */
+long double cube_overflow;
+long double	Fsph;       /* fluence in spherical shell */
+long double	Fcyl;       /* fluence in cylindrical shell */
+long double	Fpla;       /* fluence in planar shell */
 double	mua;        /* absorption coefficient [cm^-1] */
 double	mus;        /* scattering coefficient [cm^-1] */
 double	g;          /* anisotropy [-] */
@@ -112,11 +112,11 @@ bool ix_is_in;
 bool iy_is_in;
 bool iz_is_in;
 bool is_in;
-double  shellvolume;  /* volume of shell at radial position r */
+long double  shellvolume;  /* volume of shell at radial position r */
 
 /* dummy variables */
-double  rnd;        /* assigned random value 0-1 */
-double	temp;    /* dummy variables */
+long double  rnd;        /* assigned random value 0-1 */
+long double	temp;    /* dummy variables */
 FILE*	target;     /* point to output file */
 
 
@@ -256,7 +256,7 @@ do {
      if (g == 0.0)
         costheta = 2.0*rnd - 1.0;
      else {
-        double temp = (1.0 - g*g)/(1.0 - g + 2*g*rnd);
+        long double temp = (1.0 - g*g)/(1.0 - g + 2*g*rnd);
         costheta = (1.0 + g*g - temp*temp)/(2.0*g);
         }
   sintheta = sqrt(1.0 - costheta*costheta); /* sqrt() is faster than sin(). */
@@ -332,7 +332,7 @@ for (ir=0; ir<=NR_z; ir++) {
     Fcyl = Ccyl[ir]/Nphotons/shellvolume/mua;
   	shellvolume = dr;            /* per cm2 area of plane */
     Fpla =Cpla[ir]/Nphotons/shellvolume/mua;
-  	fprintf(target, "%5.5f \t %4.3e \t %4.3e \t %4.3e \n", r, Fsph, Fcyl, Fpla);
+  	fprintf(target, "%5.5f \t %.20e \t %.20e \t %.20e \n", r, Fsph, Fcyl, Fpla);
   	}
 
 // Flush the buffer to ensure all data is written
@@ -377,7 +377,7 @@ save_3d_array_to_json("mc456_mc_cube.json", Cube, NR_xy, NR_xy, NR_z, Nphotons, 
 #define MZ 0
 #define FAC 1.0E-9
 
-double RandomGen(char Type, long Seed, long *Status){
+long double RandomGen(char Type, long Seed, long *Status){
   static long i1, i2, ma[56];   /* ma[0] is not used. */
   long        mj, mk;
   short       i, ii;
@@ -434,7 +434,7 @@ double RandomGen(char Type, long Seed, long *Status){
 
 
 
-void save_3d_array_to_json(const char* filename, double arr[180][180][240], int x, int y, int z, long long Nphotons, double cube_overflow, double bins_per_1_cm) {
+void save_3d_array_to_json(const char* filename, long double arr[180][180][240], int x, int y, int z, long long Nphotons, long double cube_overflow, double bins_per_1_cm) {
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
         printf("Error opening file!\n");
@@ -451,8 +451,8 @@ void save_3d_array_to_json(const char* filename, double arr[180][180][240], int 
 
     fprintf(file, "{\n");
     fprintf(file, "\"n_photons\": %lld,\n", Nphotons);
-    fprintf(file, "\"overflow\": %4.3e,\n", cube_overflow);
-    fprintf(file, "\"bins_per_1_cm\": %4.3e,\n",  bins_per_1_cm);
+    fprintf(file, "\"overflow\": %.20e,\n", cube_overflow);
+    fprintf(file, "\"bins_per_1_cm\": %.20e,\n",  bins_per_1_cm);
 
     // Start the JSON array
     fprintf(file, "\"cube\": [\n");
@@ -463,7 +463,7 @@ void save_3d_array_to_json(const char* filename, double arr[180][180][240], int 
         for (int j = 0; j < y; j++) {
             fprintf(file, "    [");  // Start of the 1D array
             for (int k = 0; k < z; k++) {
-                fprintf(file, "%4.3e", arr[i][j][k]);
+                fprintf(file, "%.20e", arr[i][j][k]);
                 if (k < z - 1) {
                     fprintf(file, ", ");
                 }

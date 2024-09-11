@@ -348,7 +348,7 @@ def main():
         Fcyl = Ccyl[ir]/Nphotons/shellvolume/mua
         shellvolume = dr # per cm2 area of plane
         Fpla =Cpla[ir]/Nphotons/shellvolume/mua
-        file.write(f"{r:5.5f} \t {Fsph:4.3e} \t {Fcyl:4.3e} \t {Fpla:4.3e} \n")
+        file.write(f"{r:5.5f} \t {Fsph:.20e} \t {Fcyl:.20e} \t {Fpla:.20e} \n")
 
     file.close()
 

@@ -171,7 +171,7 @@ def main():
     mus         = 0.0  # cm^-1
     g           = 0.90
     nt          = 1.33
-    Nphotons    = int(1e6) # set number of photons in simulation
+    Nphotons    = int(1e3) # set number of photons in simulation
     radial_size = 2.0 # cm, total range over which bins extend
     NR          = 240 # set number of bins.
     # IF NR IS ALTERED, THEN USER MUST ALSO ALTER THE ARRAY DECLARATION TO A SIZE = NR + 1.
@@ -348,7 +348,7 @@ def main():
         Fcyl = Ccyl[ir]/Nphotons/shellvolume/mua
         shellvolume = dr # per cm2 area of plane
         Fpla =Cpla[ir]/Nphotons/shellvolume/mua
-        file.write(f"{r:5.5f} \t {Fsph:4.3e} \t {Fcyl:4.3e} \t {Fpla:4.3e} \n")
+        file.write(f"{r:5.5f} \t {Fsph:.20e} \t {Fcyl:.20e} \t {Fpla:.20e} \n")
 
     file.close()
 
