@@ -55,18 +55,7 @@ my parameters on mc456 10^4 = 10 000 photons: 12.4692 seconds
 my parameters on mc456 10^5 = 100 000 photons: 38.7502 seconds
 my parameters on mc456 10^6 = 1 mln photons: 162.7858 seconds (2 min 43 s)
 my parameters on mc456 10^7 = 10 mln photons: 1358.7487 seconds (23 min)
-my parameters on mc456 10^8 = 100 mln photons:
-
-
-
-
-NAME POOL
-
-mc456_log_100mln_my_params
-mc456_mc_100mln_my_params_cube
-
-
-
+my parameters on mc456 10^8 = 100 mln photons: 13275.9499 seconds (3h 42 min)
 
 <!--
 overflow and too less digits in print e notation

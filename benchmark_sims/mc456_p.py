@@ -319,7 +319,7 @@ def main():
                 uzz = costheta * SIGN(uz) # SIGN() is faster than division.
 
             else: # usually use this option
-                temp = math.sqrt(1.0 - uz * uz);
+                temp = math.sqrt(1.0 - uz * uz)
                 uxx = sintheta * (ux * uz * cospsi - uy * sinpsi) / temp + ux * costheta
                 uyy = sintheta * (uy * uz * cospsi + ux * sinpsi) / temp + uy * costheta
                 uzz = -sintheta * cospsi * temp + uz * costheta
