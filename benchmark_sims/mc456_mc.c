@@ -130,7 +130,7 @@ mua         = 0.37;     /* cm^-1 */
 mus         = 23.88889;  /* cm^-1 */
 g           = 0.9;  
 nt          = 1.36;
-Nphotons    = 1e7; /* set number of photons in simulation */
+Nphotons    = 1e8; /* set number of photons in simulation */
 min_step_progress_bar = Nphotons/100;
 z_size = 2.0;   /* cm, total range over which bins extend */
 xy_size = 1.5; // cm
@@ -250,6 +250,8 @@ do {
    Theta is specified by cos(theta), which is determined 
    based on the Henyey-Greenstein scattering function.
    Convert theta and psi into cosines ux, uy, uz. 
+   psi - berween x-y axis
+   theta between z and R
 *****/
   /* Sample for costheta */
   rnd = RandomNum;

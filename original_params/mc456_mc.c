@@ -249,7 +249,9 @@ do {
    Scatter photon into new trajectory defined by theta and psi.
    Theta is specified by cos(theta), which is determined 
    based on the Henyey-Greenstein scattering function.
-   Convert theta and psi into cosines ux, uy, uz. 
+   Convert theta and psi into cosines ux, uy, uz.
+   psi - berween x-y axis
+   theta between z and R
 *****/
   /* Sample for costheta */
   rnd = RandomNum;
