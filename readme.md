@@ -1,5 +1,5 @@
 
-[[benchmark_sims]](benchmark_sims)
+[benchmark_sims](benchmark_sims)
 
 [Link do plików json z wynikami symulacji](https://drive.google.com/drive/folders/1VByTZKmBNYR8t2rjlFV-DcrW1aDlFMf-?usp=sharing)
 
