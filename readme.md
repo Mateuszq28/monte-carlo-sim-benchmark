@@ -6,28 +6,31 @@ Kolejnym ważnym folderem jest [mati_sim_transform](mati_sim_transform). W środ
 \
 Ostatecznie najważniejszy jest interaktywny notatnik [compare_cubes/compare.ipynb](compare_cubes/compare.ipynb) służący do porównywania ze sobą wynikowych prostopadłościanów z różnych symulacji.\
 \
-Wynikowe pliku z końcóką _cubes.json umieszczono w chmurze ze względu na duży rozmiar plików.
+Wynikowe pliku z końcówką *_cubes.json* umieszczono w chmurze ze względu na duży rozmiar plików.
 [Link do plików json z wynikami symulacji](https://drive.google.com/drive/folders/1VByTZKmBNYR8t2rjlFV-DcrW1aDlFMf-?usp=sharing)
+
+- oryginalne parametry - oryginalne paremetry środowiska symulacji z implementacji z literatury
+- własne parametry - parametry wybrane na podstawie przeglądu literatury pod kątem optycznych parametrów skóry
 
 ### Struktura folderów
 
 - W folderze [original_all](original_all) umieszczono oryginalne kody źródłowe 3 symulacji światła w jednolitym ośrodku.
-- W folderze [original_params](original_params) umieszczono kody źródłowe symulacji światła w jednolitym ośrodku z **oryginalnymi** paramerami ośrdoka symulacji. 
-- W folderze [benchmark_sims](benchmark_sims) umieszczono kody źródłowe symulacji światła w jednolitym ośrodku z **własnymi** paramerami ośrdoka symulacji.
+- W folderze [original_params](original_params) umieszczono kody źródłowe uruchomionych symulacji światła w jednolitym ośrodku z **oryginalnymi** paramerami ośrodoka symulacji. 
+- W folderze [benchmark_sims](benchmark_sims) umieszczono kody źródłowe uruchomionych symulacji światła w jednolitym ośrodku z **własnymi** paramerami ośrdoka symulacji.
 
 ### Zmodyfikowane wersje mc321.c
 - [mc456_mc.c](benchmark_sims/mc456_mc.c) - dodaje zapis prostopadłościanu, zmienia źródło światła na takie samo jak we własnej implementacji [0,0,-1], nie ingeruje w algorytm (np. nie wymusza zakończenia symulowania fotonu po przekroczeniu umownej granicy).
 - [mc456_p.py](benchmark_sims/mc456_p.py) - to samo co wyżej, tylko przetłumaczona na język python.
 
-## Wrappery
+### Wrappery
 - [time_wrapper.py](time_wrapper.py) - ułatwia zapis logów z symulacji (wersja dla programów kompilowanych c)
 - [time_wrapper_p.py](time_wrapper_p.py) - ułatwia zapis logów z symulacji (wersja dla programów python)
 
-## Kompilowanie programów
+### Kompilowanie programów
 
 Przykładowo, przy użyciu Visual Studio 2022 wystarczy uruchomić konsolę deweloperską:\
 *developer Command Prompt for VS 2022*\
-Następnie po otworzeniu w konsoli folderu z kodem źródłowym wpisać:
+Następnie po otworzeniu w konsoli folderu z kodem źródłowym należy wpisać:
 
 ```
 cl mc456_mc.c
@@ -37,9 +40,6 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 
 ## Porównanie czasu symulacji
 
-- oryginalne parametry - oryginalne paremetry środowiska symulacji z implementacji z literatury
-- własne parametry - parametry wybrane na podstawie przeglądu literatury pod kątem optycznych parametrów skóry
-
 <ins>monte-carlo-python</ins>\
 [repozytorium github](https://github.com/Mateuszq28/monte-carlo-sim-python)\
 *język programowania: python*\
@@ -47,7 +47,7 @@ jednolita tkanka\
 Moja implementacja (monte-carlo-sim-python): 3895 sekund (1h 5 min) dla 1 mln fotonów\
 Po zoptymalizowaniu liczenia sinusów i cosinusów 1mln fotonów: 1784 sekund (30 min)
 
-<ins>tiny_mc.c</ins>\
+<ins>tiny_mc.c</ins>
 [[5]](#5)\
 *język programowania: c*\
 oryginalne parametry 10 000 fotonów: 1 sekunda\
@@ -55,7 +55,7 @@ oryginalne parametry 1 mln fotonów: 16 sekund\
 własne parametry 10 000 fotonów: 1 sekund\
 własne parametry 1 mln fotonów: 109 sekund
 
-<ins>small_mc.c</ins>\
+<ins>small_mc.c</ins>
 [[5]](#5)\
 *język programowania: c*\
 oryginalne parametry 10 000 fotonów: 1 sekunda\
@@ -73,7 +73,7 @@ oryginalne parametry 1 mln fotonów: 1.2 sekund\
 własne parametry 10 000 fotonów: 1.6 sekund\
 własne parametry 1 mln fotonów: 135 sekund
 
-<ins>mc321_p.py</ins>\
+<ins>mc321_p.py</ins>
 [[5]](#5)\
 *język programowania: python*\
 oryginalne parametry 10 000 fotonów: 0.2 sekund\
@@ -81,7 +81,7 @@ oryginalne parametry 1 mln fotonów: 9.8 sekund\
 własne parametry 10 000 fotonów: 35.8 sekund\
 własne parametry 1 mln fotonów: 3910 sekund (1h 5 min)
 
-<ins>mc456_p.py</ins>\
+<ins>mc456_p.py</ins>
 [[5]](#5)\
 *język programowania: python*\
 oryginalne parametry 10 000 fotonów: 11 sekund\
@@ -89,7 +89,7 @@ oryginalne parametry 1 mln fotonów: 19 sekund\
 własne parametry 10 000 fotonów: 55 sekund\
 własne parametry 1 mln fotonów: 4490 sekund (1h 15 min)
 
-<ins>mc456_mc.c</ins>\
+<ins>mc456_mc.c</ins>
 [[5]](#5)\
 *język programowania: python*\
 oryginalne parametry 10^4 = 10 000 fotonów: 11 sekund\
@@ -137,7 +137,7 @@ Autorzy wykorzystali własny algorytm generatora liczb losowych oparty na dwóch
 
 <ins>Z notatki dołączonej do kodu możemy wyczytać:</ins>
 
-Generator liczb losowych, który generuje równomiernie rozłożone liczby losowe od 0 do 1 włącznie.\
+Generator liczb losowych, który generuje równomiernie rozłożone liczby losowe od 0 do 1 włącznie.
 
 Algorytm opiera się na:\
 *W.H. Press, S.A. Teukolsky, W.T. Vetterling, and B.P.
