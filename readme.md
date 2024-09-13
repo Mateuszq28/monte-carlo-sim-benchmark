@@ -8,30 +8,30 @@
 - oryginalne parametry - oryginalne paremetry środowiska symulacji z implementacji z literatury
 - własne parametry - parametry wybrane na podstawie przeglądu literatury pod kątem optycznych parametrów skóry
 
-<u>monte-carlo-python</u>
-[repo](https://github.com/Mateuszq28/monte-carlo-sim-python)
-*język programowania: python*
-jednolita tkanka
-Moja implementacja (monte-carlo-sim-python): 3895 sekund (1h 5 min) dla 1 mln fotonów
-Po zoptymalizowaniu liczenia sinusów i cosinusów 1mln fotonów: 1784 sekund (30 min)
+<u>monte-carlo-python</u>\
+[repozytorium github](https://github.com/Mateuszq28/monte-carlo-sim-python)\
+*język programowania: python*\
+jednolita tkanka\
+Moja implementacja (monte-carlo-sim-python): 3895 sekund (1h 5 min) dla 1 mln fotonów\
+Po zoptymalizowaniu liczenia sinusów i cosinusów 1mln fotonów: 1784 sekund (30 min)\
 
-<u>tiny_mc.c</u>
-[[5]](#5)
-*język programowania: c*
-oryginalne parametry 10 000 fotonów: 1 sekunda
-oryginalne parametry 1 mln fotonów: 16 sekund
-własne parametry 10 000 fotonów: 1 sekund
-własne parametry 1 mln fotonów: 109 sekund
+<u>tiny_mc.c</u>\
+[[5]](#5)\
+*język programowania: c*\
+oryginalne parametry 10 000 fotonów: 1 sekunda\
+oryginalne parametry 1 mln fotonów: 16 sekund\
+własne parametry 10 000 fotonów: 1 sekund\
+własne parametry 1 mln fotonów: 109 sekund\
 
-<u>small_mc.c</u>
-[[5]](#5)
-*język programowania: c*
-oryginalne parametry 10 000 fotonów: 1 sekunda
-oryginalne parametry 100 000 fotonów: 3.5 sekund
-oryginalne parametry 1 mln fotonów: 26.5 sekund
-własne parametry on small 10 000 fotonów: 1.6 sekund
-własne parametry small 100 000 fotonów: 9 sekund
-własne parametry small 1 mln fotonów: 87 sekund
+<u>small_mc.c</u>\
+[[5]](#5)\
+*język programowania: c*\
+oryginalne parametry 10 000 fotonów: 1 sekunda\
+oryginalne parametry 100 000 fotonów: 3.5 sekund\
+oryginalne parametry 1 mln fotonów: 26.5 sekund\
+własne parametry on small 10 000 fotonów: 1.6 sekund\
+własne parametry small 100 000 fotonów: 9 sekund\
+własne parametry small 1 mln fotonów: 87 sekund\
 
 <u>mc321_mc.c</u>
 [[5]](#5)
