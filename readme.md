@@ -6,6 +6,8 @@ Kolejnym ważnym folderem jest [mati_sim_transform](mati_sim_transform). W środ
 \
 Ostatecznie najważniejszy jest interaktywny notatnik [compare_cubes/compare.ipynb](compare_cubes/compare.ipynb) służący do porównywania ze sobą wynikowych prostopadłościanów z różnych symulacji.\
 \
+UWAGA! Notatnik jest jeszcze w ciągłej zmianie. Brakuje map ciepła, porównania dla przekrojów 2D i sum wzdłóż 1 lub 2 osi. Wersję zmieniającą się "na gorąco" umieszczono: [compare_cubes/compare_work_in_progress.ipynb](compare_cubes/compare_work_in_progress.ipynb)\
+\
 Wynikowe pliku z końcówką *_cubes.json* umieszczono w chmurze ze względu na duży rozmiar plików.
 [Link do plików json z wynikami symulacji](https://drive.google.com/drive/folders/1VByTZKmBNYR8t2rjlFV-DcrW1aDlFMf-?usp=sharing)
 
