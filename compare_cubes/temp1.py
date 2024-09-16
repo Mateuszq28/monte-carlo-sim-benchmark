@@ -126,19 +126,17 @@ def heatmap2d_grid_shared_colorbar(arr_list: list, bins_per_cm, grid_shape: tupl
         ax.tick_params(axis='both', which='major', labelsize=12)
 
     # Dodanie wspólnego colorbara po prawej stronie
-    fig.subplots_adjust(right=0.88, wspace=0.2, hspace=0.3)  # Zmniejszenie odstępów między kolumnami i wierszami
-    cbar_ax = fig.add_axes([0.90, 0.1, 0.03, 0.8])  # Zmniejszenie odstępu między wykresami a colorbar
-    fig.colorbar(im, cax=cbar_ax).set_label(r'$ 1/cm^2 $', fontsize=14)
+    fig.subplots_adjust(left=0.1, right=0.85, wspace=0.05, hspace=0.2)  # Minimalny odstęp między wykresami
+    cbar_ax = fig.add_axes([0.88, 0.1, 0.03, 0.8])  # Zmniejszenie odstępu między wykresami a colorbar
+    cb = fig.colorbar(im, cax=cbar_ax)
+    cb.set_label(r'$ 1/cm^2 $', fontsize=14)  # Etykieta paska kolorów
+    cb.ax.tick_params(labelsize=14)  # Zwiększenie czcionki skali na colorbar
 
-    # Ustawienie wspólnego tytułu nad wszystkimi wykresami
+    # Ustawienie wspólnego tytułu nad wszystkimi wykresami, wyżej, aby nie nachodził na wykresy
     if main_title is not None:
-        fig.suptitle(main_title, fontsize=20, y=1.02)
+        fig.suptitle(main_title, fontsize=20, y=1.05)  # Przesunięcie tytułu wyżej
 
-    # Układanie wykresów
-    plt.tight_layout(rect=[0, 0, 0.88, 0.95])  # Dostosowanie layoutu do paska kolorów i tytułu
     plt.show()
-
-
 
 
 
