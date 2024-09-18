@@ -33,7 +33,7 @@
 #define	LIGHTSPEED	2.997925E10 /* in vacuo speed of light [cm/s] */
 #define ALIVE       1   		/* if photon not yet terminated */
 #define DEAD        0    		/* if photon is to be terminated */
-#define THRESHOLD   1.0E-4		/* used in roulette */
+#define THRESHOLD   0.01		/* used in roulette */
 #define CHANCE      0.1  		/* used in roulette */
 #define COS90D      1.0E-6
      /* If cos(theta) <= COS90D, theta >= PI/2 - 1e-6 rad. */
@@ -130,7 +130,7 @@ mua         = 0.37;     /* cm^-1 */
 mus         = 23.88889;  /* cm^-1 */
 g           = 0.9;  
 nt          = 1.36;
-Nphotons    = 1e8; /* set number of photons in simulation */
+Nphotons    = 1e6; /* set number of photons in simulation */
 min_step_progress_bar = Nphotons/100;
 z_size = 2.0;   /* cm, total range over which bins extend */
 xy_size = 1.5; // cm
@@ -471,7 +471,7 @@ void save_3d_array_to_json(const char* filename, long double arr[180][180][240],
     fprintf(file, "\"mu_a\": %.20e,\n",  mua);
     fprintf(file, "\"name\": \"org_%dmln_cube\",\n",  (int)(Nphotons/1000000));
     fprintf(file, "\"photon_weight\": %.20e,\n",  W);
-    fprintf(file, "\"normalized_already\": False,\n");
+    fprintf(file, "\"normalized_already\": false,\n");
 
     // Start the JSON array
     fprintf(file, "\"cube\": [\n");

@@ -471,7 +471,7 @@ void save_3d_array_to_json(const char* filename, long double arr[180][180][240],
     fprintf(file, "\"mu_a\": %.20e,\n",  mua);
     fprintf(file, "\"name\": \"org_%dmln_cube\",\n",  (int)(Nphotons/1000000));
     fprintf(file, "\"photon_weight\": %.20e,\n",  W);
-    fprintf(file, "\"normalized_already\": False,\n");
+    fprintf(file, "\"normalized_already\": false,\n");
 
     // Start the JSON array
     fprintf(file, "\"cube\": [\n");
