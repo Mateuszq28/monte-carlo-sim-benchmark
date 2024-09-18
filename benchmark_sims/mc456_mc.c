@@ -50,7 +50,7 @@
 long double RandomGen(char Type, long Seed, long *Status);  
      /* Random number generator */
 
-void save_3d_array_to_json(const char* filename, long double arr[MAX_XY][MAX_XY][MAX_Z], int x, int y, int z, long long Nphotons, long double cube_overflow, double bins_per_1_cm, double mua);
+void save_3d_array_to_json(const char* filename, long double arr[MAX_XY][MAX_XY][MAX_Z], int x, int y, int z, long long Nphotons, long double cube_overflow, double bins_per_1_cm, double mua, long double W);
 
 void displayProgressBar(long long progress, long long total, long long min_step);
 
@@ -357,7 +357,7 @@ fflush(target);
 fclose(target);
 
 double bins_per_1_cm = NR_z/z_size;
-save_3d_array_to_json("mc456_mc_cube.json", Cube, NR_xy, NR_xy, NR_z, Nphotons, cube_overflow, bins_per_1_cm, mua);
+save_3d_array_to_json("mc456_mc_cube.json", Cube, NR_xy, NR_xy, NR_z, Nphotons, cube_overflow, bins_per_1_cm, mua, W);
 
 } /* end of main */
 
@@ -449,7 +449,7 @@ long double RandomGen(char Type, long Seed, long *Status){
 
 
 
-void save_3d_array_to_json(const char* filename, long double arr[180][180][240], int x, int y, int z, long long Nphotons, long double cube_overflow, double bins_per_1_cm, double mua) {
+void save_3d_array_to_json(const char* filename, long double arr[180][180][240], int x, int y, int z, long long Nphotons, long double cube_overflow, double bins_per_1_cm, double mua, long double W) {
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
         printf("Error opening file!\n");
@@ -469,6 +469,9 @@ void save_3d_array_to_json(const char* filename, long double arr[180][180][240],
     fprintf(file, "\"overflow\": %.20e,\n", cube_overflow);
     fprintf(file, "\"bins_per_1_cm\": %.20e,\n",  bins_per_1_cm);
     fprintf(file, "\"mu_a\": %.20e,\n",  mua);
+    fprintf(file, "\"name\": \"org_%dmln_cube\",\n",  (int)(Nphotons/1000000));
+    fprintf(file, "\"photon_weight\": %.20e,\n",  W);
+    fprintf(file, "\"normalized_already\": False,\n");
 
     // Start the JSON array
     fprintf(file, "\"cube\": [\n");

@@ -173,7 +173,7 @@ def main():
     mus         = 0.0  # cm^-1
     g           = 0.9
     nt          = 1.33
-    Nphotons    = int(1e6) # set number of photons in simulation
+    Nphotons    = int(1e2) # set number of photons in simulation
     z_size = 2.0 # cm, total range over which bins extend
     xy_size = 1.5 # cm
     NR_z          = 240 # set number of bins.
@@ -319,7 +319,7 @@ def main():
                 uzz = costheta * SIGN(uz) # SIGN() is faster than division.
 
             else: # usually use this option
-                temp = math.sqrt(1.0 - uz * uz);
+                temp = math.sqrt(1.0 - uz * uz)
                 uxx = sintheta * (ux * uz * cospsi - uy * sinpsi) / temp + ux * costheta
                 uyy = sintheta * (uy * uz * cospsi + ux * sinpsi) / temp + uy * costheta
                 uzz = -sintheta * cospsi * temp + uz * costheta
@@ -382,6 +382,10 @@ def main():
             "n_photons": Nphotons,
             "overflow": cube_overflow,
             "bins_per_1_cm": NR_z/z_size,
+            "mu_a": mua,
+            "name": f"org_{ Nphotons // 1_000_000 }mln_cube",
+            "photon_weight": W,
+            "normalized_already": False,
             "cube": Cube
         }
         json.dump(data, f)

@@ -382,6 +382,10 @@ def main():
             "n_photons": Nphotons,
             "overflow": cube_overflow,
             "bins_per_1_cm": NR_z/z_size,
+            "mu_a": mua,
+            "name": f"my_{ Nphotons // 1_000_000 }mln_cube",
+            "photon_weight": W,
+            "normalized_already": False,
             "cube": Cube
         }
         json.dump(data, f)
