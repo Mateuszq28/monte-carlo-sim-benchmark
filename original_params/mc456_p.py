@@ -169,8 +169,8 @@ def main():
     # Input the number of photons
     # *****
 
-    mua         = 1.0     # cm^-1
-    mus         = 0.0  # cm^-1
+    mua         = 1.673     # cm^-1
+    mus         = 312.0  # cm^-1
     g           = 0.9
     nt          = 1.33
     Nphotons    = int(1e2) # set number of photons in simulation
