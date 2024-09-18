@@ -10,22 +10,26 @@ def chart3d_vispy(data1=None, data2=None, data3=None, min_heat=None, max_heat=No
     # Przykładowe dane
     # data1 = np.random.rand(18, 18)  # Tablica 180x180 na płaszczyznę XY
     data1 = np.full((180, 180), 128) if data1 is None else data1.copy() # Tablica 180x180 na płaszczyznę XY
-    data1[0:40, 0:40] = 40
-    data1[-40:-1, -40:-1] = 255
     # data2 = np.random.rand(24, 18)  # Tablica 240x180 na płaszczyznę ZX
     data2 = np.full((240, 180), 128) if data2 is None else data2.copy()  # Tablica 240x180 na płaszczyznę ZX
-    data2[0:40, 0:40] = 40
-    data2[-40:-1, -40:-1] = 255
     # data3 = np.random.rand(18, 24)  # Tablica 240x180 na płaszczyznę ZY
     data3 = np.full((180, 240), 128) if data3 is None else data3.copy()  # Tablica 240x180 na płaszczyznę ZY
-    data3[0:40, 0:40] = 40
-    data3[-40:-1, -40:-1] = 255
 
     # Definicja minimalnych i maksymalnych wartości
     if min_heat is None:
         min_heat = np.min([np.min(data1), np.min(data2), np.min(data3)])
     if max_heat is None:
         max_heat = np.max([np.max(data1), np.max(data2), np.max(data3)])
+
+    # markery na rogach
+    min_marker = min_heat + 0.01 * max_heat
+    max_marker = max_heat
+    data1[0:40, 0:40] = min_marker
+    data1[-40:-1, -40:-1] = max_marker
+    data2[0:40, 0:40] = min_marker
+    data2[-40:-1, -40:-1] = max_marker
+    data3[0:40, 0:40] = min_marker
+    data3[-40:-1, -40:-1] = max_marker
 
     # Współrzędne środka przecięcia [90, 90, 120]
     x_center, y_center, z_center = 90, 90, 120
@@ -102,7 +106,15 @@ def get_frame(filename, name):
     arr2 = cube['frames'][1].transpose()
     # ZY
     arr3 = cube['frames'][12]
-    return [arr1, arr2, arr3]
+
+    # skala logarytmiczna
+    # Upewnij się, że wszystkie wartości są większe od 0 (logarytm wymaga wartości > 0)
+    out = [arr1, arr2, arr3]
+    for i in range(len(out)):
+        out[i][out[i] == 0] = np.min(out[i][out[i] > 0])  # Zastąp 0 minimalną dodatnią wartością
+        out[i] = np.log10(out[i])
+
+    return out
 
 
 def show3d_cube(arr_list, min_heat=None, max_heat=None):
@@ -123,7 +135,7 @@ if __name__ == '__main__':
 
     arr_lists = []
     arr_lists.append(get_frame("mati_1mln_cube.json", "mati_1mln_cube"))
-    # arr_lists.append(get_frame("mc456_mc_100mln_my_params_cube.json", "benchmark_my_100mln_cube"))
+    arr_lists.append(get_frame("mc456_mc_100mln_my_params_cube.json", "benchmark_my_100mln_cube"))
 
     min_heat, max_heat = get_min_max_heat(arr_lists)
 
