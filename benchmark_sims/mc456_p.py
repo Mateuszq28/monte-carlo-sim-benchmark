@@ -8,7 +8,7 @@ PI = math.pi
 LIGHTSPEED = 2.997925E10 # in vacuo speed of light [cm/s]
 ALIVE = 1 # if photon not yet terminated
 DEAD = 0 # if photon is to be terminated
-THRESHOLD = 1.0E-4 # used in roulette
+THRESHOLD = 0.01 # used in roulette
 CHANCE = 0.1 # used in roulette
     # If cos(theta) <= COS90D, theta >= PI/2 - 1e-6 rad
 COS90D = 1.0E-6
