@@ -97,7 +97,7 @@ def test_log(data_dict, filename):
 def run():
     sim_c_filenames = ["tiny_mc.c", "small_mc.c", "mc456_mc.c"]
     params_types = ["original_params", "my_params"]
-    n_photons = [10**n for n in range(4,5)]
+    n_photons = [10**n for n in range(4,9)]
 
     # small test
     # sim_c_filenames = ["tiny_mc.c"]
@@ -105,9 +105,9 @@ def run():
     # n_photons = [10_000]
 
 
-    for sim_c_filename in sim_c_filenames:
-        for params_type in params_types:
-            for n_photon in n_photons:
+    for n_photon in n_photons:
+        for sim_c_filename in sim_c_filenames:
+            for params_type in params_types:
 
                 print("iter start")
                 # setup dict that describes all features of the test
@@ -118,6 +118,7 @@ def run():
                 print(test_dict['n_photons'])
                 print(test_dict)
                 # path to dir with script
+                print()
                 print("set paths")
                 self_path = os.path.dirname(os.path.abspath(__file__))
                 script_dir = os.path.join(self_path, test_dict['script_dir'])
@@ -142,10 +143,12 @@ def run():
                 replace_line_in_file(cfile_path, regex_pattern, new_sentence)
                 # compile
                 print("compile")
+                print()
                 # /Fe - flag to tell where put .exe output file
                 # /Fo - flag to tell where put .obj output file
                 # /O2 - maximum optimization for speed
                 os.system(f"cl {cfile_path} /Fe{exefile_path} /Fo{objfile_path} /O2")
+                print()
                 # change source code in time wrapper
                 print("change time_wrapper.py")
                 pywrap_path = os.path.join(self_path, "time_wrapper.py")
