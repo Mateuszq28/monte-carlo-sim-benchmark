@@ -1,0 +1,1 @@
+{"sim_c_filename": "small_mc.c", "params_type": "my_params", "n_photons": 100000000, "out_log_default_name": "small_log.txt", "out_cube_default_name": null, "out_log_change_name": "small_log_100mln_my_params.txt", "out_cube_change_name": null, "script_dir": "benchmark_sims", "time_wrapper_Dir_id": 0, "time_wrapper_Sim_id": 1}

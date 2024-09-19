@@ -95,7 +95,7 @@ def test_log(data_dict, filename):
 
 
 def run():
-    sim_c_filenames = ["tiny_mc.c", "small_mc.c", "mc456_mc.c"]
+    sim_c_filenames = ["mc456_mc.c", "tiny_mc.c", "small_mc.c"]
     params_types = ["original_params", "my_params"]
     n_photons = [10**n for n in range(4,9)]
 
