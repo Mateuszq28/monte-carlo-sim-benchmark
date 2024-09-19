@@ -9,17 +9,43 @@ char   t2[80] = "1 W Point Source Heating in Infinite Isotropic Scattering Mediu
 double mu_a = 1.673;			   /* Absorption Coefficient in 1/cm !!non-zero!! */
 double mu_s = 312.0;			   /* Reduced Scattering Coefficient in 1/cm */
 double microns_per_shell = 83.3333333; /* Thickness of spherical shells in microns */
-long   i, shell, photons = 10000; /*ID_EDIT_1_1*/
+long   i, shell, photons = 1000000; /*ID_EDIT_1_1*/
 double x, y, z, u, v, w, weight;
 double albedo, shells_per_mfp, xi1, xi2, t, heat[SHELL_MAX];
+
+
+void displayProgressBar(long long progress, long long total, long long min_step) {
+    if (progress % min_step == 0)
+    {
+      int barWidth = 50; // Width of the progress bar
+      int completed = (progress * barWidth) / total;
+
+      printf("[");
+      for (int i = 0; i < barWidth; i++) {
+          if (i < completed) {
+              printf("#");
+          } else {
+              printf(" ");
+          }
+      }
+      printf("] %lld%%", (progress * 100) / total);
+      if (progress != total) printf("\r");
+      else printf("\n");
+      fflush(stdout);  // Force the output to be printed immediately
+    }
+}
+
 
 int main () 
 {
 	albedo = mu_s / (mu_s + mu_a);
 	shells_per_mfp = 1e4/microns_per_shell/(mu_a+mu_s);
+	long progressBarStep = photons / 100;
 	
 	for (i = 1; i <= photons; i++)
 	{
+		displayProgressBar(i, photons, progressBarStep);
+
 		x = 0.0; y = 0.0; z = 0.0;					/*launch*/  
 		u = 0.0; v = 0.0; w = 1.0;		
 		weight = 1.0;

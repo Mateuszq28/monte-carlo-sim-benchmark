@@ -15,6 +15,29 @@ long   i, photons = 1e3; /*ID_EDIT_1_2*/
 double x,y,z,u,v,w,weight;
 double rs, rd, bit, albedo, crit_angle, bins_per_mfp, heat[BINS];
 
+
+void displayProgressBar(long long progress, long long total, long long min_step) {
+    if (progress % min_step == 0)
+    {
+      int barWidth = 50; // Width of the progress bar
+      int completed = (progress * barWidth) / total;
+
+      printf("[");
+      for (int i = 0; i < barWidth; i++) {
+          if (i < completed) {
+              printf("#");
+          } else {
+              printf(" ");
+          }
+      }
+      printf("] %lld%%", (progress * 100) / total);
+      if (progress != total) printf("\r");
+      else printf("\n");
+      fflush(stdout);  // Force the output to be printed immediately
+    }
+}
+
+
 void launch() /* Start the photon */
 {
 	x = 0.0; y = 0.0; z = 0.0;		  
@@ -106,12 +129,14 @@ int i;
 
 int main ()
 {
+	long progressBarStep = photons / 100;
 	albedo = mu_s / (mu_s + mu_a);
 	rs = (n-1.0)*(n-1.0)/(n+1.0)/(n+1.0);	/* specular reflection */
 	crit_angle = sqrt(1.0-1.0/n/n);			/* cos of critical angle */
 	bins_per_mfp = 1e4/microns_per_bin/(mu_a+mu_s);
 	
 	for (i = 1; i <= photons; i++){
+		displayProgressBar(i, photons, progressBarStep);
 		launch ();
 		while (weight > 0) {
 			move ();

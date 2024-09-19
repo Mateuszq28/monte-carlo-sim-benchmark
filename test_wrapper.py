@@ -100,9 +100,9 @@ def run():
     n_photons = [10**n for n in range(4,7)]
 
     # small test
-    sim_c_filenames = ["tiny_mc.c"]
-    params_types = ["original_params"]
-    n_photons = [10_000]
+    # sim_c_filenames = ["tiny_mc.c"]
+    # params_types = ["original_params"]
+    # n_photons = [10_000]
 
 
     for sim_c_filename in sim_c_filenames:
@@ -111,6 +111,10 @@ def run():
 
                 # setup dict that describes all features of the test
                 test_dict = make_test_dict(sim_c_filename, params_type, n_photon)
+                print()
+                print("===============================================")
+                print(test_dict['n_photons'])
+                print(test_dict)
                 # path to dir with script
                 self_path = os.path.dirname(os.path.abspath(__file__))
                 script_dir = os.path.join(self_path, test_dict['script_dir'])
@@ -147,6 +151,16 @@ def run():
                 replace_line_in_file(pywrap_path, regex_pattern2, new_sentence2)
                 # run using time wrapper
                 os.system(f"python {pywrap_path}")
+                # rename
+                # rename cube.json
+                old_name = test_dict["out_cube_default_name"]
+                new_name = test_dict["out_cube_change_name"]
+                if old_name is not None:
+                    os.rename(old_name, new_name)
+                # rename log.txt
+                old_name = test_dict["out_log_default_name"]
+                new_name = test_dict["out_log_change_name"]
+                os.rename(old_name, new_name)
                 # save state log
                 test_log(test_dict, "test_wrapper_log.txt")
                 
