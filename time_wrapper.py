@@ -4,9 +4,9 @@ import time
 # choose sim
 sims_that_saves_output_itself = ["mc321", "mc456"]
 sim_names_list = ["tiny", "small", "mc321", "mc456"]
-sim_name = sim_names_list[1] # ID_EDIT_2
+sim_name = sim_names_list[3] # ID_EDIT_2
 dirs = ["benchmark_sims", "original_params"]
-rel_scritpt_dir = dirs[1] # ID_EDIT_3
+rel_scritpt_dir = dirs[0] # ID_EDIT_3
 
 # filenames
 sim_exe = "{}_mc.exe".format(sim_name)

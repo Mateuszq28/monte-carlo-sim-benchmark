@@ -9,7 +9,7 @@ char   t2[80] = "1 W Point Source Heating in Infinite Isotropic Scattering Mediu
 double mu_a = 0.37;			   /* Absorption Coefficient in 1/cm !!non-zero!! */
 double mu_s = 23.88889;			   /* Reduced Scattering Coefficient in 1/cm */
 double microns_per_shell = 83.3333333; /*  8.(3)e-7   Thickness of spherical shells in microns */
-long   i, shell, photons = 1e6;
+long   i, shell, photons = 1e6; /*ID_EDIT_1_1*/
 double x, y, z, u, v, w, weight;
 double albedo, shells_per_mfp, xi1, xi2, t, heat[SHELL_MAX];
 
