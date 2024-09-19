@@ -118,8 +118,19 @@ def run():
                 cfile_path = os.path.join(script_dir, sim_c_filename)
                 exefile_path = os.path.join(script_dir, sim_c_filename[:-1] + ".exe")
                 objfile_path = os.path.join(script_dir, sim_c_filename[:-1] + ".obj")
-                regex_pattern = r".*ID_EDIT_1.*"
-                new_sentence = f"Nphotons    = {n_photon}; /* set number of photons in simulation */ /*ID_EDIT_1*/"
+                if sim_c_filename == "tiny_mc.c":
+                    regex_pattern = r".*ID_EDIT_1_1.*"
+                    new_sentence = f"long   i, shell, photons = {n_photon}; /*ID_EDIT_1_1*/"
+                elif sim_c_filename == "small_mc.c":
+                    regex_pattern = r".*ID_EDIT_1_2.*"
+                    new_sentence = f"long   i, photons = {n_photon}; /*ID_EDIT_1_2*/"
+                elif sim_c_filename == "mc456_mc.c":
+                    regex_pattern = r".*ID_EDIT_1_3.*"
+                    new_sentence = f"Nphotons    = {n_photon}; /* set number of photons in simulation */ /*ID_EDIT_1_3*/"
+                else:
+                    print("break!")
+                    print(test_dict)
+                    break
                 replace_line_in_file(cfile_path, regex_pattern, new_sentence)
                 # compile
                 # /Fe - flag to tell where put .exe output file
