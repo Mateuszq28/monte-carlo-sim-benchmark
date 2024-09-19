@@ -116,8 +116,8 @@ def run():
                 script_dir = os.path.join(self_path, test_dict['script_dir'])
                 # change nphotons in c source code
                 cfile_path = os.path.join(script_dir, sim_c_filename)
-                exefile_path = os.path.join(script_dir, sim_c_filename[:-1] + ".exe")
-                objfile_path = os.path.join(script_dir, sim_c_filename[:-1] + ".obj")
+                exefile_path = os.path.join(script_dir, sim_c_filename[:-1] + "exe")
+                objfile_path = os.path.join(script_dir, sim_c_filename[:-1] + "obj")
                 if sim_c_filename == "tiny_mc.c":
                     regex_pattern = r".*ID_EDIT_1_1.*"
                     new_sentence = f"long   i, shell, photons = {n_photon}; /*ID_EDIT_1_1*/"
