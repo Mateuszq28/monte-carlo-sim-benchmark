@@ -356,8 +356,10 @@ for (ir=0; ir<=NR_z; ir++) {
 fflush(target);
 fclose(target);
 
+printf("saving cube into file...\n");
 double bins_per_1_cm = NR_z/z_size;
 save_3d_array_to_json("mc456_mc_cube.json", Cube, NR_xy, NR_xy, NR_z, Nphotons, cube_overflow, bins_per_1_cm, mua, W);
+printf("saving cube completed\n");
 
 } /* end of main */
 

@@ -130,7 +130,7 @@ mua         = 0.37;     /* cm^-1 */ /*ID_EDIT_4_1*/
 mus         = 23.88889;  /* cm^-1 */ /*ID_EDIT_4_2*/
 g           = 0.9;  
 nt          = 1.36;  /*ID_EDIT_4_3*/
-Nphotons    = 100000000; /* set number of photons in simulation */ /*ID_EDIT_1_3*/
+Nphotons    = 100; /* set number of photons in simulation */ /*ID_EDIT_1_3*/
 min_step_progress_bar = Nphotons/100;
 z_size = 2.0;   /* cm, total range over which bins extend */
 xy_size = 1.5; // cm
@@ -356,8 +356,10 @@ for (ir=0; ir<=NR_z; ir++) {
 fflush(target);
 fclose(target);
 
+printf("saving cube into file...\n");
 double bins_per_1_cm = NR_z/z_size;
 save_3d_array_to_json("mc456_mc_cube.json", Cube, NR_xy, NR_xy, NR_z, Nphotons, cube_overflow, bins_per_1_cm, mua, W);
+printf("saving cube completed\n");
 
 } /* end of main */
 
