@@ -145,7 +145,7 @@ def run():
     sim_c_filenames = ["mc456_mc.c"]
     params_types = ["my_params"]
     n_photons = [10**8]
-    tissue_material_id = list(range(1,9))
+    tissue_material_id = list(range(2,9))
 
     # small test
     # sim_c_filenames = ["tiny_mc.c"]
