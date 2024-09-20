@@ -52,20 +52,30 @@ Po zoptymalizowaniu liczenia sinusów i cosinusów 1mln fotonów: 1784 sekund (3
 <ins>tiny_mc.c</ins>
 [[5]](#5)\
 *język programowania: c*\
-oryginalne parametry 10 000 fotonów: 1 sekunda\
-oryginalne parametry 1 mln fotonów: 16 sekund\
-własne parametry 10 000 fotonów: 1 sekund\
-własne parametry 1 mln fotonów: 109 sekund
+oryginalne parametry 10 000 fotonów: 3.44 sekundy\
+oryginalne parametry 100 000 fotonów: 22.96 sekund\
+oryginalne parametry 1 mln fotonów: 227.51 sekund (3 min 47s)\
+oryginalne parametry 10 mln fotonów: 2257.98 sekund (37 min 38s)\
+oryginalne parametry 100 mln fotonów: 23994.01 sekund (6h 40 min)\
+własne parametry 10 000 fotonów: 1.97 sekundy\
+własne parametry 100 000 fotonów: 9.06 sekund\
+własne parametry 1 mln fotonów: 78.93 sekund (1 min 19s)\
+własne parametry 10 mln fotonów: 787.23 sekund (13 min 7s)\
+własne parametry 100 mln fotonów: 7939.78 sekund (2h 12 min)
 
 <ins>small_mc.c</ins>
 [[5]](#5)\
 *język programowania: c*\
-oryginalne parametry 10 000 fotonów: 1 sekunda\
-oryginalne parametry 100 000 fotonów: 3.5 sekund\
-oryginalne parametry 1 mln fotonów: 26.5 sekund\
-własne parametry on small 10 000 fotonów: 1.6 sekund\
-własne parametry small 100 000 fotonów: 9 sekund\
-własne parametry small 1 mln fotonów: 87 sekund
+oryginalne parametry 10 000 fotonów: 2.66 sekundy\
+oryginalne parametry 100 000 fotonów: 22.96 sekund\
+oryginalne parametry 1 mln fotonów: 227.51 sekund (3 min 48 s)\
+oryginalne parametry 10 mln fotonów: 2257.98 sekund (37 min 38 s)\
+oryginalne parametry 100 mln fotonów: 23994.01 sekund (6h 40 min)\
+własne parametry on small 10 000 fotonów: 1.92 sekundy\
+własne parametry small 100 000 fotonów: 7.76 sekund\
+własne parametry small 1 mln fotonów: 65.39 sekund (1 min 5 s)\
+własne parametry small 10 mln fotonów: 649.34 sekund (10 min 49 s)\
+własne parametry small 100 mln fotonów: 7699.98 sekund (2h 8 min)
 
 <ins>mc321_mc.c</ins>
 [[5]](#5)\
@@ -94,17 +104,16 @@ własne parametry 1 mln fotonów: 4490 sekund (1h 15 min)
 <ins>mc456_mc.c</ins>
 [[5]](#5)\
 *język programowania: python*\
-oryginalne parametry 10^4 = 10 000 fotonów: 11 sekund\
-oryginalne parametry 10^5 = 100 000 fotonów: 11 sekund\
-oryginalne parametry 10^6 = 1 mln fotonów: 12 sekund\
-oryginalne parametry 10^7 = 10 mln fotonów: 14 sekund\
-oryginalne parametry 10^8 = 100 mln fotonów: 15.6 sekund\
-oryginalne parametry 10^9 = 1 mld fotonów: 287.5 sekund (5 min)
-własne parametry 10^4 = 10 000 fotonów: 12 sekund\
-własne parametry 10^5 = 100 000 fotonów: 38.8 sekund\
-własne parametry 10^6 = 1 mln fotonów: 162.8 sekund (2 min 43 s)\
-własne parametry 10^7 = 10 mln fotonów: 1358.7 sekund (23 min)\
-własne parametry 10^8 = 100 mln fotonów: 13275.9 sekund (3h 42 min)
+oryginalne parametry 10^4 = 10 000 fotonów: 11.14 sekund\
+oryginalne parametry 10^5 = 100 000 fotonów: 21.53 sekund\
+oryginalne parametry 10^6 = 1 mln fotonów: 117.16 sekund (1 min 57 s)\
+oryginalne parametry 10^7 = 10 mln fotonów: 1073.31 sekund (17 min 53 s)\
+oryginalne parametry 10^8 = 100 mln fotonów: 10559.07 sekund (2h 56 min)\
+własne parametry 10^4 = 10 000 fotonów: 10.66 sekund\
+własne parametry 10^5 = 100 000 fotonów: 16.05 sekund\
+własne parametry 10^6 = 1 mln fotonów: 53.89 sekund\
+własne parametry 10^7 = 10 mln fotonów: 410.25 sekund (6 min 50 s)\
+własne parametry 10^8 = 100 mln fotonów: 3864.15 sekund (1h 4 min)
 
 
 <!--
