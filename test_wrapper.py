@@ -36,6 +36,23 @@ num_decoder = {
 }
 
 
+g_decoder = {
+    "0": "0",
+    "0.0": "0",
+    "0.1": "0_1",
+    "0.2": "0_2",
+    "0.3": "0_3",
+    "0.4": "0_4",
+    "0.5": "0_5",
+    "0.6": "0_6",
+    "0.7": "0_7",
+    "0.8": "0_8",
+    "0.9": "0_9",
+    "1.0": "1",
+    "1": "1"
+}
+
+
 tissue_properties = {
     "-2": {"mu_a": 5, "mu_s": 95, "n": 1.0, "name": "ignore label", "print color": "#AACB23"},
     "-1": {"mu_a": None, "mu_s": None, "n": None, "name": "light source", "print color": "#FFE800"},
@@ -55,11 +72,12 @@ tissue_properties = {
 def make_test_dict(sim_c_filename, params_type, n_photon, tiss, g):
     out_log_default_name = sim_c_filename[:-4] + "log.txt"
     num = num_decoder[n_photon]
-    out_log_change_name = sim_c_filename[:-4] + "log" + "_" + num + "_" + params_type + "_tiss_id_"+str(tiss)+ ".txt"
+    g_str = g_decoder[str(g)]
+    out_log_change_name = sim_c_filename[:-4] + "log" + "_" + num + "_" + params_type + "_tiss_id_"+str(tiss)+ "_g_"+g_str+"_" + ".txt"
 
     if sim_c_filename == "mc456_mc.c":
         out_cube_default_name = sim_c_filename[:-2] + "_cube.json"
-        out_cube_change_name = sim_c_filename[:-2] + "_" + num + "_" + params_type + "_tiss_id_"+str(tiss)+ "_cube.json"
+        out_cube_change_name = sim_c_filename[:-2] + "_" + num + "_" + params_type + "_tiss_id_"+str(tiss)+ "_g_"+g_str+"_" + "_cube.json"
     else:
         out_cube_default_name = None
         out_cube_change_name = None
