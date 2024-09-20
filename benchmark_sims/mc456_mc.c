@@ -126,10 +126,10 @@ FILE*	target;     /* point to output file */
    Input the number of photons
 *****/
 
-mua         = 0.37;     /* cm^-1 */
-mus         = 23.88889;  /* cm^-1 */
+mua         = 0.37;     /* cm^-1 */ /*ID_EDIT_4_1*/
+mus         = 23.88889;  /* cm^-1 */ /*ID_EDIT_4_2*/
 g           = 0.9;  
-nt          = 1.36;
+nt          = 1.36;  /*ID_EDIT_4_3*/
 Nphotons    = 100000000; /* set number of photons in simulation */ /*ID_EDIT_1_3*/
 min_step_progress_bar = Nphotons/100;
 z_size = 2.0;   /* cm, total range over which bins extend */
