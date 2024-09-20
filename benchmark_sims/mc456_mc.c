@@ -128,7 +128,7 @@ FILE*	target;     /* point to output file */
 
 mua         = 0.37;     /* cm^-1 */ /*ID_EDIT_4_1*/
 mus         = 23.88889;  /* cm^-1 */ /*ID_EDIT_4_2*/
-g           = 0.9;  
+g           = 0.9;  /*ID_EDIT_5*/
 nt          = 1.36;  /*ID_EDIT_4_3*/
 Nphotons    = 100; /* set number of photons in simulation */ /*ID_EDIT_1_3*/
 min_step_progress_bar = Nphotons/100;
