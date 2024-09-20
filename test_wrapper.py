@@ -52,7 +52,7 @@ tissue_properties = {
 }
 
 
-def make_test_dict(sim_c_filename, params_type, n_photon, tiss):
+def make_test_dict(sim_c_filename, params_type, n_photon, tiss, g):
     out_log_default_name = sim_c_filename[:-4] + "log.txt"
     num = num_decoder[n_photon]
     out_log_change_name = sim_c_filename[:-4] + "log" + "_" + num + "_" + params_type + "_tiss_id_"+str(tiss)+ ".txt"
@@ -94,6 +94,8 @@ def make_test_dict(sim_c_filename, params_type, n_photon, tiss):
         "tiss_mu_a": tissue_properties[str(tiss)]['mu_a'],
         "tiss_mu_s": tissue_properties[str(tiss)]['mu_s'],
         "tiss_n": tissue_properties[str(tiss)]['n'],
+
+        "anisotropy_g": g
     }
 
     return d
@@ -170,7 +172,7 @@ def run():
                         iter_start_time = time.time()
                         # setup dict that describes all features of the test
                         print("make_test_dict")
-                        test_dict = make_test_dict(sim_c_filename, params_type, n_photon, tiss)
+                        test_dict = make_test_dict(sim_c_filename, params_type, n_photon, tiss, g)
                         print()
                         print("===============================================")
                         print(test_dict['n_photons'])
@@ -220,7 +222,7 @@ def run():
                             cfile_path = os.path.join(script_dir, sim_c_filename)
                             # g
                             regex_pattern = r".*ID_EDIT_5.*"
-                            new_sentence = f"g           = {g};  /*ID_EDIT_5*/"
+                            new_sentence = f"g           = {test_dict['anisotropy_g']};  /*ID_EDIT_5*/"
                             replace_line_in_file(cfile_path, regex_pattern, new_sentence)
                         # compile
                         print("compile")
