@@ -186,10 +186,10 @@ x = x_start;    /* Set photon position to origin. */
 y = y_start;
 z = z_start;
 
-/* source - vartical down [0,0,-1] */
-ux = 0;
-uy = 0;
-uz = -1;
+/* source - vartical down [0,0,-1] */ /*ID_EDIT_6_FIXED*/
+ux = 0; /*ID_EDIT_6_DEL*/
+uy = 0; /*ID_EDIT_6_DEL*/
+uz = -1; /*ID_EDIT_6_DEL*/
 
 
 /* HOP_DROP_SPIN_CHECK
