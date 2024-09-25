@@ -292,7 +292,7 @@ def run():
                                     new_sentence += "y = y_start; /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "z = z_start - 120 * dr; /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "/*ID_EDIT_6_DEL*/" + "\n"
-                                    new_sentence = "/* Randomly set photon trajectory to yield an isotropic source. */ /*ID_EDIT_6_DEL*/" + "\n"
+                                    new_sentence += "/* Randomly set photon trajectory to yield an isotropic source. */ /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "costheta = 2.0*RandomNum - 1.0; /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "sintheta = sqrt(1.0 - costheta*costheta);	/* sintheta is always positive */ /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "psi = 2.0*PI*RandomNum; /*ID_EDIT_6_DEL*/" + "\n"
