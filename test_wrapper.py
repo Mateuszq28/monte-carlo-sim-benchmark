@@ -301,7 +301,7 @@ def run():
                                     new_sentence += "uz = costheta; /*ID_EDIT_6_DEL*/"
                                 elif ls == "coll_gauss":
                                     # Collimated Gaussian Beam
-                                    new_sentence = "b = 20 * SIGN(2*RND-1) * dr;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/" + "\n"
+                                    new_sentence = "b = 20 * SIGN(2*RandomNum-1) * dr;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/" + "\n"
                                     new_sentence += "x = x_start + b * sqrt(-log(RandomNum)); /* log is e base */ /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "y = y_start; /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "z = z_start; /*ID_EDIT_6_DEL*/" + "\n"
@@ -310,12 +310,12 @@ def run():
                                     new_sentence += "uz = -1; /*ID_EDIT_6_DEL*/"
                                 elif ls == "foc_gauss":
                                     # Focused Gaussian Beam
-                                    new_sentence = "w = 20 * SIGN(2*RND-1) * dr;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/" + "\n"
+                                    new_sentence = "w = 20 * SIGN(2*RandomNum-1) * dr;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/" + "\n"
                                     new_sentence += "x = x_start + w * sqrt(-log(RandomNum)); /* log is e base */ /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "y = y_start; /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "z = z_start; /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "z_focus = 60 * dr; /*ID_EDIT_6_DEL*/" + "\n"
-                                    new_sentence += "x_focus = w * sqrt(-log(RandomNum)) * SIGN(2*RND-1); /*ID_EDIT_6_DEL*/" + "\n"
+                                    new_sentence += "x_focus = w * sqrt(-log(RandomNum)) * SIGN(2*RandomNum-1); /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "temp = sqrt(pow((x-x_focus),2) + pow(z_focus,2)); /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "sin_theta = -(x-x_focus)/temp; /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "cos_theta = z_focus/temp; /*ID_EDIT_6_DEL*/" + "\n"
