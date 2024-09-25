@@ -182,11 +182,11 @@ displayProgressBar(i_photon, Nphotons, min_step_progress_bar);
 W = 1.0;                    /* set photon weight to one */
 photon_status = ALIVE;      /* Launch an ALIVE photon */
 
-x = x_start;    /* Set photon position to origin. */
-y = y_start;
-z = z_start;
-
-/* source - vartical down [0,0,-1] */ /*ID_EDIT_6_FIXED*/
+x = x_start;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/
+y = y_start; /*ID_EDIT_6_DEL*/
+z = z_start; /*ID_EDIT_6_DEL*/
+ /*ID_EDIT_6_DEL*/
+/* source - vartical down [0,0,-1] */ /*ID_EDIT_6_DEL*/
 ux = 0; /*ID_EDIT_6_DEL*/
 uy = 0; /*ID_EDIT_6_DEL*/
 uz = -1; /*ID_EDIT_6_DEL*/
