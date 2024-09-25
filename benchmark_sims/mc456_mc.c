@@ -127,7 +127,7 @@ FILE*	target;     /* point to output file */
 *****/
 
 mua         = 0.37;     /* cm^-1 */ /*ID_EDIT_4_1*/
-mus         = 23.88889;  /* cm^-1 */ /*ID_EDIT_4_2*/
+mus         = 23.8888943003376;  /* cm^-1 */ /*ID_EDIT_4_2*/
 g           = 0.9;  /*ID_EDIT_5*/
 nt          = 1.36;  /*ID_EDIT_4_3*/
 Nphotons    = 100; /* set number of photons in simulation */ /*ID_EDIT_1_3*/
@@ -182,14 +182,18 @@ displayProgressBar(i_photon, Nphotons, min_step_progress_bar);
 W = 1.0;                    /* set photon weight to one */
 photon_status = ALIVE;      /* Launch an ALIVE photon */
 
-x = x_start;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/
+w = 20 * SIGN(2*RandomNum-1) * dr;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/
+x = x_start + w * sqrt(-log(RandomNum)); /* log is e base */ /*ID_EDIT_6_DEL*/
 y = y_start; /*ID_EDIT_6_DEL*/
 z = z_start; /*ID_EDIT_6_DEL*/
- /*ID_EDIT_6_DEL*/
-/* source - vartical down [0,0,-1] */ /*ID_EDIT_6_DEL*/
-ux = 0; /*ID_EDIT_6_DEL*/
+z_focus = 60 * dr; /*ID_EDIT_6_DEL*/
+x_focus = w * sqrt(-log(RandomNum)) * SIGN(2*RandomNum-1); /*ID_EDIT_6_DEL*/
+temp = sqrt(pow((x-x_focus),2) + pow(z_focus,2)); /*ID_EDIT_6_DEL*/
+sin_theta = -(x-x_focus)/temp; /*ID_EDIT_6_DEL*/
+cos_theta = z_focus/temp; /*ID_EDIT_6_DEL*/
+ux = sin_theta; /*ID_EDIT_6_DEL*/
 uy = 0; /*ID_EDIT_6_DEL*/
-uz = -1; /*ID_EDIT_6_DEL*/
+uz = cos_theta; /*ID_EDIT_6_DEL*/
 
 
 /* HOP_DROP_SPIN_CHECK
