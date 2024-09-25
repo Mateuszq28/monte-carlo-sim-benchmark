@@ -184,7 +184,7 @@ def run():
     # test na różne źródła światła
     sim_c_filenames = ["mc456_mc.c"]
     params_types = ["my_params"]
-    n_photons = [10**2]
+    n_photons = [10**8]
     tissue_material_id = [4] # domyślna skóra
     g_list = [0.9]
     light_source_list = ["down", "up", "isotropic", "coll_gauss", "foc_gauss"]
