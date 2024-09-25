@@ -73,11 +73,11 @@ def make_test_dict(sim_c_filename, params_type, n_photon, tiss, g, light_source)
     out_log_default_name = sim_c_filename[:-4] + "log.txt"
     num = num_decoder[n_photon]
     g_str = g_decoder[str(g)]
-    out_log_change_name = sim_c_filename[:-4] + "log" + "_" + num + "_" + params_type + "_tiss_id_"+str(tiss)+ "_g_"+g_str+"_" + ".txt"
+    out_log_change_name = sim_c_filename[:-4] + "log" + "_" + num + "_" + params_type + "_tiss_id_"+str(tiss)+ "_g_"+g_str+"_" + "ls_"+light_source+ ".txt"
 
     if sim_c_filename == "mc456_mc.c":
         out_cube_default_name = sim_c_filename[:-2] + "_cube.json"
-        out_cube_change_name = sim_c_filename[:-2] + "_" + num + "_" + params_type + "_tiss_id_"+str(tiss)+ "_g_"+g_str+"_" + "_cube.json"
+        out_cube_change_name = sim_c_filename[:-2] + "_" + num + "_" + params_type + "_tiss_id_"+str(tiss)+ "_g_"+g_str+"_" + "ls_"+light_source + "_cube.json"
     else:
         out_cube_default_name = None
         out_cube_change_name = None
