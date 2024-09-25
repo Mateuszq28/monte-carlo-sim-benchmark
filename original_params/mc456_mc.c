@@ -118,6 +118,7 @@ long double  shellvolume;  /* volume of shell at radial position r */
 long double  rnd;        /* assigned random value 0-1 */
 long double	temp;    /* dummy variables */
 FILE*	target;     /* point to output file */
+double z_focus, x_focus, b_rad, w_rad;
 
 
 /**** INPUT
@@ -182,14 +183,18 @@ displayProgressBar(i_photon, Nphotons, min_step_progress_bar);
 W = 1.0;                    /* set photon weight to one */
 photon_status = ALIVE;      /* Launch an ALIVE photon */
 
-x = x_start;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/
+w_rad = 20 * SIGN(2*RandomNum-1) * dr;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/
+x = x_start + w_rad * sqrt(-log(RandomNum)); /* log is e base */ /*ID_EDIT_6_DEL*/
 y = y_start; /*ID_EDIT_6_DEL*/
 z = z_start; /*ID_EDIT_6_DEL*/
- /*ID_EDIT_6_DEL*/
-/* source - vartical down [0,0,-1] */ /*ID_EDIT_6_DEL*/
-ux = 0; /*ID_EDIT_6_DEL*/
+z_focus = 60 * dr; /*ID_EDIT_6_DEL*/
+x_focus = w_rad * sqrt(-log(RandomNum)) * SIGN(2*RandomNum-1); /*ID_EDIT_6_DEL*/
+temp = sqrt(pow((x-x_focus),2) + pow(z_focus,2)); /*ID_EDIT_6_DEL*/
+sintheta = -(x-x_focus)/temp; /*ID_EDIT_6_DEL*/
+costheta = z_focus/temp; /*ID_EDIT_6_DEL*/
+ux = sintheta; /*ID_EDIT_6_DEL*/
 uy = 0; /*ID_EDIT_6_DEL*/
-uz = -1; /*ID_EDIT_6_DEL*/
+uz = costheta; /*ID_EDIT_6_DEL*/
 
 
 /* HOP_DROP_SPIN_CHECK

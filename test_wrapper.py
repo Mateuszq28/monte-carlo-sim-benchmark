@@ -301,8 +301,8 @@ def run():
                                     new_sentence += "uz = costheta; /*ID_EDIT_6_DEL*/"
                                 elif ls == "coll_gauss":
                                     # Collimated Gaussian Beam
-                                    new_sentence = "double b = 20 * SIGN(2*RandomNum-1) * dr;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/" + "\n"
-                                    new_sentence += "x = x_start + b * sqrt(-log(RandomNum)); /* log is e base */ /*ID_EDIT_6_DEL*/" + "\n"
+                                    new_sentence = "b_rad = 20 * SIGN(2*RandomNum-1) * dr;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/" + "\n"
+                                    new_sentence += "x = x_start + b_rad * sqrt(-log(RandomNum)); /* log is e base */ /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "y = y_start; /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "z = z_start; /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "ux = 0; /*ID_EDIT_6_DEL*/" + "\n"
@@ -310,18 +310,18 @@ def run():
                                     new_sentence += "uz = -1; /*ID_EDIT_6_DEL*/"
                                 elif ls == "foc_gauss":
                                     # Focused Gaussian Beam
-                                    new_sentence = "double w = 20 * SIGN(2*RandomNum-1) * dr;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/" + "\n"
-                                    new_sentence += "x = x_start + w * sqrt(-log(RandomNum)); /* log is e base */ /*ID_EDIT_6_DEL*/" + "\n"
+                                    new_sentence = "w_rad = 20 * SIGN(2*RandomNum-1) * dr;    /* Set photon position to origin. */ /*ID_EDIT_6_FIXED*/" + "\n"
+                                    new_sentence += "x = x_start + w_rad * sqrt(-log(RandomNum)); /* log is e base */ /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "y = y_start; /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "z = z_start; /*ID_EDIT_6_DEL*/" + "\n"
-                                    new_sentence += "double z_focus = 60 * dr; /*ID_EDIT_6_DEL*/" + "\n"
-                                    new_sentence += "double x_focus = w * sqrt(-log(RandomNum)) * SIGN(2*RandomNum-1); /*ID_EDIT_6_DEL*/" + "\n"
+                                    new_sentence += "z_focus = 60 * dr; /*ID_EDIT_6_DEL*/" + "\n"
+                                    new_sentence += "x_focus = w_rad * sqrt(-log(RandomNum)) * SIGN(2*RandomNum-1); /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "temp = sqrt(pow((x-x_focus),2) + pow(z_focus,2)); /*ID_EDIT_6_DEL*/" + "\n"
-                                    new_sentence += "double sin_theta = -(x-x_focus)/temp; /*ID_EDIT_6_DEL*/" + "\n"
-                                    new_sentence += "double cos_theta = z_focus/temp; /*ID_EDIT_6_DEL*/" + "\n"
-                                    new_sentence += "ux = sin_theta; /*ID_EDIT_6_DEL*/" + "\n"
+                                    new_sentence += "sintheta = -(x-x_focus)/temp; /*ID_EDIT_6_DEL*/" + "\n"
+                                    new_sentence += "costheta = z_focus/temp; /*ID_EDIT_6_DEL*/" + "\n"
+                                    new_sentence += "ux = sintheta; /*ID_EDIT_6_DEL*/" + "\n"
                                     new_sentence += "uy = 0; /*ID_EDIT_6_DEL*/" + "\n"
-                                    new_sentence += "uz = cos_theta; /*ID_EDIT_6_DEL*/"
+                                    new_sentence += "uz = costheta; /*ID_EDIT_6_DEL*/"
                                 else:
                                     raise NotImplementedError
                                 replace_line_in_file(cfile_path, regex_pattern, new_sentence)
