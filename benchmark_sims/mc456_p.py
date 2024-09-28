@@ -173,7 +173,7 @@ def main():
     mus         = 23.88889  # cm^-1
     g           = 0.9
     nt          = 1.36
-    Nphotons    = int(1e3) # set number of photons in simulation ID_EDIT_1_3
+    Nphotons    = 100000000 # set number of photons in simulation ID_EDIT_1_3
     z_size = 2.0 # cm, total range over which bins extend
     xy_size = 1.5 # cm
     NR_z          = 240 # set number of bins.
