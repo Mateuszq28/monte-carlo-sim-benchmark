@@ -6,3 +6,5 @@ sim_dump.json
 arr_control_normal_rvs.txt
 arr_cube_01.txt
 *.pkl
+*stat_table.xlsx
+*.zip
