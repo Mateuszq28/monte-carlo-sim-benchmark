@@ -1,0 +1,752 @@
+STRONA TYTUŁOWA PRACY DYPLOMOWEJ
+(strona nr 1, ale numer strony nie może być widoczny)
+Student, z portalu Moja PG, pobiera właściwą stronę tytułową pracy dyplomowej. 
+
+ 
+STRESZCZENIE
+Celem pracy magisterskiej było przeprowadzenie symulacji propagacji światła w skórze za pomocą metody Monte Carlo. Symulacje zostały przeprowadzone w środowisku Python, a własna implementacja algorytmu Monte Carlo umożliwiła modelowanie interakcji fotonów z różnorodnymi modelami skóry, uwzględniając właściwości optyczne takie jak współczynnik absorpcji, rozpraszania i anizotropii. Praca skupiła się na opracowaniu własnych modeli reprezentacji skóry oraz porównaniu wyników symulacji z przykładami z literatury. Uzyskane wyniki pozwoliły na głębsze zrozumienie mechanizmów propagacji światła w skórze, co ma potencjalne zastosowanie w dziedzinach medycyny, takich jak fototerapia czy diagnostyka obrazowa. Przeprowadzone eksperymenty potwierdziły, że własna implementacja jest skuteczna w porównaniu do istniejących narzędzi, takich jak symulacja mc321.
+Słowa kluczowe: symulacja światła, metoda Monte Carlo, optyka skóry, fototerapia, Python
+Dziedzina nauki i techniki, zgodnie z wymogami OECD: <Nauki inżynieryjne i techniczne>, <Inżynieria medyczna>, <Engineering and Technology>, <Medical engineering>
+ABSTRACT
+The objective of this master's thesis was to simulate light propagation in human skin using the Monte Carlo method. Simulations were performed in Python, with a custom Monte Carlo algorithm designed to model photon interactions with various skin models, considering optical properties such as absorption, scattering, and anisotropy coefficients. The work focused on developing original model representations of the skin and comparing simulation results with literature data. The results provided valuable insights into the mechanisms of light propagation in skin, which has potential applications in medical fields like phototherapy and diagnostic imaging. The experiments confirmed that the custom implementation is effective when compared to existing tools, such as mc321.
+Keywords: light simulation, Monte Carlo method, skin optics, phototherapy, Python 
+SPIS TREŚCI
+Wykaz ważniejszych oznaczeń i skrótów	6
+1. Wstęp i cel pracy	7
+2. Wstęp teoretyczny	8
+2.1. Zastosowania fototerapii w medycynie	9
+2.2. Metoda Monte Carlo	12
+2.2.1. Próbkowanie Monte Carlo	18
+2.2.2. Długość kroku fotonu	18
+2.2.3. Funkcje rozpraszania	19
+2.3. Algorytm maszerujących sześcianów	22
+2.4. Właściwości optyczne skóry	23
+2.5. Normalizacja wyników	25
+2.6. Przykładowe implementacje symulacji światła	26
+3. Metodologia	27
+3.1. Własna implementacja symulacji	27
+3.1.1. Diagram aplikacji	27
+3.1.2. Spis wszystkich klas	30
+3.1.3. Zarządzanie generatorami liczb pseudolosowych	32
+3.1.4. Opis działania	34
+3.1.5. Wizualizacja wyników	37
+3.2. Plik konfiguracyjny	41
+3.3. Próba kontrolna	42
+3.4. Implementacja trójwymiarowych modeli skóry	43
+3.4.1. Jednolity ośrodek propagacji	43
+3.4.2. Implementacja bazująca na trójwymiarowej tablicy	43
+3.4.3. Implementacja bazująca na opisie brył geometrycznych	44
+3.4.4. Modele skóry	46
+3.4.5. Identyfikacja przekroczenia granicy ośrodków	49
+3.4.6. Zapis do pliku	50
+3.5. Implementacja źródła światła	50
+3.6. Przeprowadzone eksperymenty	51
+3.7. Metody porównawcze	53
+4. Analiza i dyskusja uzyskanych wyników	54
+5. Podsumowanie	69
+6. Bibliografia	70
+Załącznik nr 1: monte-carlo-sim-python	71
+Załącznik nr 2: monte-carlo-sim-benchmark	71
+Załącznik nr 3: CUBES – wyniki eksperymentów	71
+Załącznik nr 4: Tabela ze statystykami rozkładów	71
+Załącznik nr 5: Tabela porównawcza rozkładów	71
+ 
+Wykaz ważniejszych oznaczeń i skrótów
+2D – przestrzeń dwuwymiarowa
+3D – przestrzeń trójwymiarowa
+BMS – zespół pieczenia jamy ustnej,in.stomatodynia (ang.bourning mouth syndrome)
+CI – przedział ufności (ang.confidence interval)
+CRF – osłabienie związane z chorobą nowotworową (ang.cancer–related fatigue)
+CW – fala ciągła (ang.continous wave)
+HG – funkcja Henyeya–Greensteina
+LED – dioda elektroluminescencyjna (ang.light–emitting diode)
+LLLT – niskoenergetyczna terapia laserowa/światłem (ang.low–level laser/light therapy)
+MRI – obrazowanie rezonansu magnetycznego (ang.magnetic resonance imaging)
+MSE – błąd średniokwadratowy (ang.mean squared error)
+NIR – światło bliskiej podczerwieni (ang.near–infrared light)
+p – wartość p,prawdopodobieństwo testowe (ang.p–value,probability value)
+PW –fala pulsująca (ang.pulsed wave)
+RCT – randomizowane badania kliniczne (ang.randomized controlled trial)
+RMSE – średnia kwadratowa błędów (ang.root mean square error)
+SMD – standaryzowana różnica średnich (ang.standarized mean difference)
+TK – tomografia komputerowa (ang.computed tomography-CT)
+VAS – wizualna skala analogowa (ang.visual analog scale)
+g- wskaźnik Hedgesa
+g-współczynnik anizotropii
+liczby losowe – w kontekście implementacji rozumie się je jako liczby pseudolosowe
+liczby pseudolosowe-liczby wygenerowane deterministycznie,
+                                               które są prawie nieodróżnialne od liczb pochodzących z prawdziwie losowego źródła
+n-współczynnik załamania światła
+μ_a- współczynnik absorpcji [1/cm]
+μ_s-współczynnik rozpraszania [1/cm]
+μ_t-współczynnik tłumienia [1/cm]
+ 
+Wstęp i cel pracy
+Analiza propagacji światła jest ważnym etapem projektowania urządzeń medycznych wykorzystujących fale elektromagnetyczne. Jej głównym celem jest dostrojenie urządzenia do środowiska, w jakim będzie pracować. Symulacje komputerowe znacznie ułatwiają to zadanie. Pozwalają uniknąć kosztownych i czasochłonnych badań laboratoryjnych na rzecz obliczeń numerycznych. W ten sposób można oszacować, w jaki sposób rozproszy się dostarczona do tkanki moc wiązki świetlnej. Otrzymane dane liczbowe stanowią solidną podpowiedź do dalszych prac inżynierów. Nawet gdy dostępne są wyniki rzeczywistych eksperymentów, symulacji używa się jako punkt odniesienia. Dziedziną wykorzystującą fale elektromagnetyczne do obrazowania ciała człowieka jest elektroradiologia. Interpretacją wyników obrazowania zajmują się lekarze – radiolodzy [941]. Są to dziedziny, u których podstaw leżą pomiary fal elektromagnetycznych poza zakresem światła widzialnego (długość światła widzialnego
+380-780 nm [942]). Różnice w otrzymanych obrazach w zależności od właściwości optycznych tkanek są odtwarzalne za pomocą symulacji. Podobne eksperymenty są niezwykle przydatne przy dobieraniu dawki promieniowania w radioterapii [942]. Zastosowań symulacji jest bardzo wiele i mimo ubiegu lat, wciąż powstają nowe badania. Przykładowo, w jednym z nich wykorzystano symulacje komputerowe do zwiększenia wiarygodności oceny diagnostycznej radiologów [901]. Takie podejście pozwala szybko konfrontować stawiane tezy. Jest to szczególnie istotne w dziedzinach medycznych, gdzie każda zwłoka czasu może zostać przepłacona życiem. Im szybciej lekarz postawi właściwą diagnozę, tym szybciej może wprowadzić skuteczną metodę leczenia.  Jest to dowód na to, że symulacje mogą wybiegać swoją przydatnością poza samo obrazowanie. Zazwyczaj symulacji światła używa się do badania propagacji światła w ośrodku o zadanych właściwościach optycznych. Możliwe jest także podejście odwrotne. W pracy [903] użyto odwrotnej analizy Monte Carlo do określenia parametrów optycznych materiałów na podstawie pomierzonych widm spektroskopowych.
+Celem tej pracy jest analiza propagacji światła w skórze, która jest ważnym elementem diagnostyki i terapii medycznej. W pracy należało wykonać symulacje numeryczne w języku Python [926] w celu zamodelowania trójwymiarowej struktury skóry, przeprowadzenie szeregu eksperymentów pokazujących wpływ propagacji światła w zależności od parametrów i właściwości modelu skóry jak i źródła światła wraz z dyskusją uzyskanych wyników oraz porównaniem uzyskanych wyników z podobnymi pracami naukowymi.
+Do zadań do wykonania należało:
+	Zapoznanie się z tematyką modelowania propagacji światła za pomocą metody Monte Carlo w układach dwuwymiarowych i trójwymiarowych,
+	Projekt i implementacja modeli trójwymiarowych skóry oraz źródła światła,
+	Przeprowadzenie szeregu obliczeń numerycznych propagacji światła w zaprojektowanym modelu,
+	Analiza oraz dyskusja uzyskanych wyników.
+Wszystkie zadania ukończono z powodzeniem, spełniając cel pracy. W ramach badań zapoznano się z tematyką modelowania propagacji światła za pomocą metody Monte Carlo w układach dwuwymiarowych i trójwymiarowych. Dokonano przeglądu literatury i na jej podstawie zaproponowano współczynniki absorpcji μ_a, rozpraszania μ_s, anizotropii g oraz załamania światła n dla 8 typów ośrodka propagacji. Przeprowadzono analizę kodów źródłowych przykładowych implementacji napisanych w języku C [943][944][945] oraz przetłumaczono je na język Python. Programy dostosowano do własnych potrzeb, dodając funkcjonalność zapisu do ujednoliconego formatu w pliku json [947][948]. Na podstawie opisów symulacji w książkach dotyczących tematyki radiacji, przykładowych kodów źródłowych oraz innowacyjnych metod zaproponowanych w publikacjach, napisano własną implementację symulacji w języku Python, obsługującą skomplikowane, niejednolite ośrodki propagacji. Do programu dołączono autorski moduł wyświetlania zbieranych w trakcie symulacji danych. Repozytorium projektu jest publicznie dostępne na portalu github zał. nr 1: monte-carlo-sim-python. Następnie przeprowadzono szereg eksperymentów używając własnoręcznie zaproponowanych modeli skóry. Wyniki zapisano w formie surowej, nieznormalizowanej trójwymiarowej tablicy zaabsorbowanych wag energii fotonów wraz z metadanymi opisującymi nastawy symulacji. Najważniejsze z nich umieszczono na wirtualnym dysku w chmurze Google Drive zał. nr 3: CUBES – wyniki eksperymentów, zapewniając pełną odtwarzalność przeprowadzonych eksperymentów. Macierze otrzymane z własnej symulacji porównano do wyników symulacji innych naukowców z literatury. Zademonstrowano wpływ propagacji światła w zależności od 7 typów ośrodka o różnych parametrach optycznych. Powietrze, jako ósmy typ ośrodka reprezentujący przerwę między źródłem światła, a skórą, zostało pominięta ze względu nazbyt małe współczynniki absorpcji i rozpraszania. Pokazano również zachowanie fotonów na modelach złożonych z kilku warstw oraz przy użyciu różnych źródeł światła. Pracę zwieńczono analizą i dyskusją wyników ze wskazaniem na dalsze kierunki badań.
+Wstęp teoretyczny
+Istnieje wiele podejść do symulowania światła. Każda z nich odwzorowuje nieco inne spektrum tego skomplikowanego zjawiska. Przy wyborze metody należy przede wszystkim skupić się na tym, co zamierza się zaobserwować z dużą dokładnością, i co można przybliżyć z dokładnością już nieco mniejszą. Trzeba się liczyć z dualną naturą korposkularno-falową światła i mieć na uwadze, że niektórych zachodzących zjawisk nie uda się zobrazować wcale. Model może przewidywać rozpraszanie anizotropowe lub ograniczać się wyłącznie do rozpraszania izotropowego (rys. 2.1). Część metod jest szczególnie czuła na zmianę ośrodka, na przykład wierniej odwzorowują zachowanie światła w ośrodkach, w których nad absorpcją przeważa zjawisko rozpraszania. Drugą ważną zasadą przy wybieraniu metody symulowania światła są założenia projektowe dotyczące odległości badanego obszaru od źródła światła.
+ 
+Rys. 2.1. Rozpraszanie izotropowe oraz anizotropowe. Źródło: [964].
+	W tej pracy skupiono się na 4 zjawiskach; rozpraszaniu wiązki światła w jednolitym materiale, odbiciu i ugięciu fali na granicy materiałów oraz absorpcji światła. Do przybliżenia tych zjawisk świetnie nadaje się metoda Monte Carlo. Inną popularną metodą, która dobrze oddaje naturę wymienionych zjawisk i jest równie wydajna obliczeniowo – jest metoda dyfuzyjna. Ma ona jednak pewne ograniczenia – zawodzi gdy badamy obszar blisko źródła światła oraz gdy absorpcja jest dużo silniejsza względem rozpraszania [937]. W części teoretycznej przedstawiono zastosowania światła w medycynie. Stanowią one dowód na terapeutyczny wpływ terapii światłem, jak i podstawę do dalszej analizy propagacji w skórze. Omówiono metodę Monte Carlo oraz jej przykładowe implementacje. Dokonano również przeglądu literatury w celu wybrania parametrów do modelowania skóry. Celem jest zebranie informacji do przeprowadzenia symulacji i zbadania wpływu komercyjnie używanych urządzeń na skórę.
+Zastosowania fototerapii w medycynie
+Wiele prac wykazało, że w terapii światłem o niskim poziomie mocy (ang. low-level laser (light) therapy - LLLT) elektrony mitochondrialne działają jako układ fotoakceptorowy, będąc światłoczułym na światło czerwone i bliskiej podczerwieni (ang. near-infrared light - NIR). W  eksperymencie [951] przeprowadzonym na 15 myszach i 12 szczurach, podzielonych na 3 grupy, oceniono proces gojenia się ran skórnych przy zastosowaniu terapii światłem o niskim poziomie mocy diodą elektroluminescencyjną (ang. light-emitting diode - LED) o długości fali 850 nm i 660 nm dla odpowiadająco, ciągłej fali (ang. continuous wave - CW) i pulsującej fali (ang. pulsed wave - PW). W rezultacie zmiany, które zostały napromieniowane, goiły się szybciej niż zmiany kontrolne. Terapia światłem o fali pulsacyjnej wykazała lepsze wyniki niż terapia światłem o stałym poziomie. W pracy [952] szeroko omówiono metody leczenia światłem przypadków łuszczycy. Czerwone światło (620–770 nm) jest w stanie głęboko wniknąć w skórę do około 6 mm [953], stymulować aktywność mitochondriów i modulować uwalnianie cytokin z makrofagów w celu zmniejszenia miejscowego stanu zapalnego [954]. U pacjentów z łuszczycą plackowatą poddanych sekwencyjnemu leczeniu diodami LED dostarczającymi ciągłe światło o długości fali 830 i 633 nm w dwóch 20-minutowych sesjach przez 4 lub 5 tygodni uzyskano 60–100% ustępowania zmian bez wystąpienia znaczących skutków ubocznych. Terapie światłem, zwłaszcza zielonym, jako niefarmakologiczne metody leczenia chronicznej migreny są uznawane za obiecujące i bezpieczne [956]. Równie ciekawe wydają się wyniki badań leczenia zespołu pieczenia jamy ustnej (in. stomatodynia). Zespół pieczenia jamy ustnej (ang. burning mouth syndrome - BMS) to złożone przewlekłe zaburzenie bólowe, które znacząco pogarsza jakość życia pacjentów. W metaanalizie [955] 14 randomizowanych badań klinicznych (ang. randomized controlled trial - RCT) obejmujących łącznie 550 pacjentów z BMS wykazano, że LLLT (mierzone za pomocą VAS; SMD: -0,87, 95% CI: -1,29 do -0,45, P < 0,001) było skuteczniejsze w łagodzeniu palącego bólu niż placebo LLLT czy klonazepam. Kolejna metaanaliza wykazała pozytywny wpływ światłoterapii na osłabienie związane z chorobą nowotworową (ang. cancer-related fatigue – CRF) [957]. Wyniki zebrano z 13 randomizowanych badań klinicznych obejmujących łącznie 551 pacjentów z chorobą nowotworową. Natężenie światła wahało się od 417,9 do 12 tys. luksów. Terapia światłem wiązała się ze znaczną poprawą wskaźnika CRF (SMD = 0,45, P = 0,007), depresji (SMD = -0,26, P = 0,03) i trudności w zasypianiu (SMD = -2,46, P = 0,0006). Terapeutyczny efekt w leczeniu bezsenności wydaje się potwierdzać metaanaliza [958], która składa się z 53 badań z udziałem łącznie 1154 uczestników. Przeanalizowano efekty ogólne oraz oddzielnie; wyniki dotyczące rytmu dobowego i snu. Stwierdzono, że terapia światłem jest w ogólności skuteczna w leczeniu problemów ze snem (wskaźnik Hedgesa g = 0,39), a także w zaburzeniach snu związanych z rytmem dobowym (g = 0,41), bezsenności (g = 0,47) i problemach ze snem związanych z chorobą Alzheimera/demencją (g = 0,30). W przypadku zaburzeń snu związanych z rytmem dobowym efekty były mniejsze w przypadku randomizowanych badań klinicznych. Dla bezsenności stwierdzono większe efekty w przypadku badań wykorzystujących wyższą intensywność światła. Jednak większość rozmiarów efektów jest mała lub średnia. Fototerapia wykazuje  także skuteczność w leczeniu zaburzeń depresyjnych. Jej działanie udowodniono nie tylko w zaburzeniach sezonowych [959], ale także w depresji sezonowej [960], jak i chorobie afektywnej dwybiegunowej [961]. Co istotne, nie wykazano szkodliwego wpływu światłoterapii na oczy [962]. Jednakże rozważania teoretyczne nie powinny zwalniać z bezpiecznych przeciwwskazań. W dermatologii LLLT jest znane ze swoich właściwości stymulujących, gojących i odbudowujących skórę. W tab. 2.1 przedstawiono listę urządzeń wykorzystywanych w dermatologii. W dalszej części pracy gęstości mocy z tabeli posłużą jako wartości referencyjne źródła światła. Ponadto, w związku z powszechnym wykorzystaniem światłoterapii w leczeniu zaburzeń psychicznych, rozważono sytuację naświetlania skóry z natężeniem od 417,9 do 12 tys. luksów.
+Tab. 2.1. Przykłady urządzeń LLLT wykorzystywanych w dermatologii. Źródło: [963].
+Producent	Nazwa produktu	Długość fali (nm)	Gęstość mocy (mW/cm2)	Dawka standardowa (J/cm2)	Aplikacja
+PhotoMedex (Manchester, UK)	Omnilux	415 (±5)
+633 (±6)
+830 (±5)	40
+105
+55	48
+126
+66	Trądzik, uszkodzenia skóry spowodowane działaniem promieni słonecznych, nowotwory skóry inne niż czerniak, odmładzanie skóry, bielactwo i gojenie się ran po zabiegach chirurgicznych
+Edge Systems (Signal Hill, CA)	Delphia del Sol	420
+600–700
+700–1000		7,4 J na obszar zabiegowy	Trądzik, poprawa tekstury skóry, jędrności i elastyczności, zwiększenie aktywności układu limfatycznego, drobne linie, zmarszczki i powierzchowna hiperpigmentacja
+Flip 4 (Sainte-Julie, Quebec, Canada)	Max7	420–700	≤4		Trądzik, odmłodzenie, gojenie uszkodzonej skóry, w tym skrócenie czasu trwania rumienia po resurfacingu skóry
+Light BioSciences (Virginia Beach, VA)	Gentlewaves	588 (±10)	Zmienna		Przeciwstarzeniowy
+OPUSMED (Montreal, Canada)	LumiPhase-R	660	150		Jędrność skóry, głębokość bruzd, zmarszczki
+Revitalight (Chicago, IL)	Revitalight 747
+Hand Spa 
+Food Spa Evolution	420
+
+590
+625
+940	80
+
+80
+80
+80	7,2 J na 90 sek. na obszar zabiegowy	Drobne linie, zmarszczki i plamy starcze na twarzy, szyi i dłoniach
+Soli-Tone (Woburn, MA)	LumiFacial
+Lumilift	470
+525
+590
+640	84
+27
+10
+89		Trądzik, starzenie się, przebarwienia, trądzik różowaty
+DUSA (Wilmington, MA)	BLU-U	417	10		Trądzik
+Curelight (Rehovot, Israel)	iClearXL
+Clear100XL	405–420
+890–900		60	Trądzik, odmładzanie, odmładzanie skóry, przyspieszenie gojenia się miejsc po peelingach i szwach chirurgicznych
+Lumenis (Santa Clara, CA)	ClearLight
+Clear100	405–420	200	60	Trądzik
+LIGHTWAVE Technologies (Phoneix, AZ)	LIGHTWAVE
+Profesjonalny System Deluxe LED	417
+630
+880			Przeciwstarzeniowe, odmładzanie skóry
+Dynatronics (Salt Lake City, UT)	Synergie LT2	660
+880	500 mW (moc całkowita)	6 J na obszar zabiegowy	Przeciwstarzeniowy, jędrność skóry, zmarszczki, koloryt i tekstura skóry twarzy i szyi
+Metoda Monte Carlo
+„Pod koniec lat 40. XX wieku Nicholas Metropolis zaproponował nazwę metody Monte Carlo dla statystycznego podejścia do rozwiązywania dyfuzji neutronów i problemów mnożenia, którymi zajmowano się w tym czasie w laboratorium Los Alamos. Inspiracją do nadania nazwy były anegdotki Stanisława Ulama o tym, jak jego wujek pożyczał pieniądze od bliskich, „bo po prostu musiał pojechać do kasyna Monte Carlo” [967]. Podejście metody zostało nakreślone w liście wysłanym przez von Neumanna do kierownika katedry „Teoretycznego Dzielenia”, Richtmyera [968][969]. W liście stwierdzono, że zasada metody statystycznej została zasugerowana przez Ulama. Nie było to jednak pierwsze znane zastosowanie metody znanej obecnie jako Monte Carlo do transmisji promieniowania. Według Sergè [970] i Andersona [971], Fermi „wynalazł” tę metodę i użył jej do badania moderowania neutronów ponad dekadę wcześniej, w 1934 roku, na Uniwersytecie Rzymskim. Nie opublikował jednak niczego na temat zastosowanej przez siebie techniki [970]. Metropolis i Ulam opisali tę metodę jako „statystyczne podejście do badania równań różniczkowych, lub ogólniej, równań całkowo-różniczkowych, które występują w różnych gałęziach nauk przyrodniczych” [972]. Od tego czasu zastosowanie metody Monte Carlo zostało rozszerzone poza równania różniczkowe i całkowo-różniczkowe oraz poza nauki przyrodnicze. Oczywiste jest, że Metropolis i Ulam postrzegali Monte Carlo jako numeryczną metodę rozwiązywania problemów matematycznych, równań, w tym tych, które pojawiają się w fizyce. Oznacza to, że przed zastosowaniem metody Monte Carlo do problemu fizycznego, problem powinien zostać sformułowany w kategoriach matematycznych, jako równanie lub układ równań. Unikalność metody Monte Carlo tkwi w jej podejściu statystycznym. Polega ona na metodach statystycznych, takich jak próbkowanie i wnioskowanie. Nie oznacza to, że metoda ta nadaje się wyłącznie do problemów obejmujących zdarzenia lub procesy losowe. Chociaż od wczesnych dni badań Monte Carlo metoda ta była stosowana głównie do badania zjawisk losowych. Transmisja promieniowania, będąca z natury procesem losowym, jest doskonałym przykładem. W przeciwieństwie do klasycznej statystyki, w Monte Carlo próbki są generowane przez algorytm komputerowy, a nie zbierane podczas obserwacji.” Powyższy rys historyczny w znacznej większości pochodzi z książki [936]. Tekst został przetłumaczony na język polski.
+Tak jak napomknięto na wstępie tego rozdziału, metoda Monte Carlo jest metodą statystyczną. U jej podstaw leży probabilistyka. Opiera się na założeniu zjawisko może przybliżać stosunkowo niewielka reprezentatywna grupa, jeśli jej zachowanie będzie zgodne z rozkładem prawdopodobieństwa prawdziwego zjawiska. Znacząco ułatwia to zadanie symulacji. Zamiast obliczać analitycznie zachowanie całej wiązki światła za pomocą skomplikowanych równań różniczkowych, problem przeobraża się do symulowania jednego fotonu, którego zachowaniem sterują parametry próbkowane z funkcji gęstości prawdopodobieństwa, odpowiadającej danemu zjawisku. Zwiększając liczbę powtórzeń symulacji – propagacji pojedynczego fotonu – zwiększa się dokładność odwzorowania zjawiska. Jest to swego rodzaju całkowanie próbek składających się na całokształt zjawiska, gdzie każda próbka jest pojedynczym zachowaniem fotonu. Zwiększając liczbę próbek, zmniejsza się wpływ pojedynczej próbki na odbiór zjawiska jako całości. Wprowadzane przez nią niedokładności są zagłuszane zachowaniem pozostałych członków grupy reprezentacyjnej. W ten sposób wyłania się ogólna, uśredniona po zachowaniu wszystkich próbek tendencja zjawiska. Gdy liczba próbek rośnie do nieskończoności, zjawisko odwzorowywane jest idealnie – zgodnie z zdefiniowanymi rozkładami prawdopodobieństw. Ogólny zarys działania tej techniki zobrazowano na rys. 2.2. W tym wypadku metody Monte Carlo użyto do symulacji oświetlenia. Kula umieszczona w skrzyni jest eksponowana na wiązkę fotonów skierowaną w jej kierunku. Każdy foton przebywa losową ścieżkę, odkładając część swojej energii przy odbiciu. Odłożone wagi wskazują jak często miejsce było odwiedzane przez fotony. Miejsca które były odwiedzane częściej, były mocniej oświetlone, zatem na obrazie zostały przedstawione przez jaśniejsze piksele. Miejsca zacienione przedstawiono ciemnymi pikselami. Pierwsze obrazy są wyraźnie zniekształcone szumem typu „sól i pieprz” (ang. salt-and-pepper noise). Prześwietlone piksele wskazują na miejsca, w których fotony były rejestrowane ponadnormatywnie częściej. Histogram jasności pikseli byłby poszarpany. Wynika to z użycia zbyt małej liczby próbek, czyli w tym wypadku fotonów. Wraz z wzrostem ich ilości, obraz staje się wyraźniejszy. Histogram byłby gładszy – zmiany jasności pikseli zbliżałyby się do funkcji ciągłej.
+ 
+Rys. 2.2. Zobrazowanie metody Monte Carlo – zanik szumu typu „pieprz i pieprz” wraz z wzrostem próbek (fotonów). Źródło: [965].
+Metoda Monte Carlo ma oczywiście wiele zastosowań. Można jej nawet użyć do obliczenia pola powierzchni skomplikowanej figury geometrycznej (rys. 2.3). Wystarczy umieścić figurę wewnątrz prostokąta o znanych bokach. Kolejnym krokiem jest zbieranie próbek. W tym wypadku losujemy punkty leżące wewnątrz prostokąta z jednakowym prawdopodobieństwem i sprawdzamy, czy punkt ten znajduje się wewnątrz figury o nieznanym polu. Stosunek punktów zliczanych w jej wnętrzu do wszystkich wylosowanych punktów będzie zbliżał się do stosunku pola powierzchni nieznanej figury do pola powierzchni prostokąta wraz z liczbą próbek. Oszacowaniem pola powierzchni będzie zatem iloczyn otrzymanego stosunku i pola prostokąta.
+ 
+Rys. 2.3. Obliczanie pola powierzchni metodą Monte Carlo. Źródło: [964].
+W symulacji światła metodą Monte Carlo dominują 3 procesy losowe potocznie nazywane „hop/drop/spin” [937]. Na rys. 2.4 każde przemieszczenie fotonu przedstawiono żółtą strzałką. W przytoczonej nomenklaturze długość strzałki odpowiada losowaniu skoku „hop”. „Drop” to absorpcja, czyli losowe pochłonięcie wagi fotonu. Waga może zostać pochłonięta częściowo lub w całości. W przypadku całkowitej absorpcji propagacja zostaje przerwana i następuje przejście do następnej iteracji. Rozproszenie, czyli losowa zmiana kierunku dalszego ruchu nazywa się „spin”. Zazwyczaj poprzedza je częściowa absorpcja, jednak na rysunku nie została przedstawiona. Transmisją (lub transmitancją) nazywamy ilość światła przechodzącego przez obiekt (warstwę) na jego drugą stronę. Termin ten jest również używany w elektronice do opisania transportu elektronów.
+ 
+Rys. 2.4. Zjawiska odwzorowywane w symulacji światła Monte Carlo. Źródło: [964].
+	Przebieg symulacji zaczyna źródło światła. Emituje foton z określoną wagą w. Używana jest przy tym wcześniej przygotowana funkcja odpowiadająca za lokalizację startową oraz kierunek początkowy. Następnie na podstawie wylosowanej liczby RND oraz parametrów ośrodka propagacji ustalana jest długość kroku fotonu „hop” zanim nastąpi absorpcja „drop” i ewentualne rozproszenie „spin”. Odłożone wagi zapisuje się w tablicy. Gdy waga fotonu jest bardzo mała możliwe jest jego całkowite zabsorbowanie. Decyzję podejmuje się metodą ruletki [937]. Przeważnie po każdym kroku ma miejsce absorpcja, a następnie rozproszenie, lecz bywają też inne implementacje. Oprócz tego, należy uwzględnić zachowanie fotonu na granicy ośrodków. W wielu symulacjach problem rozwiązuje się następująco. W przypadku  przekroczenia granicy ośrodków ruch fotonu jest cofany do punktu styku. Po uwzględnieniu odbicia części energii zmieniana jest jego waga. Dalej foton jest propagowany z taką długością kroku, jakby wylosowana została ta sama liczba RND, lecz w nowym ośrodku. Długość kroku jest także skalowana proporcjonalnie do części, jaką foton przebyłby od granicy ośrodka w głąb, gdyby nie nastąpiła jego zmiana. Wartość proporcji wagi odbicia (wzory 2.1-1) obliczana jest na podstawie indeksów refrakcji czołowego ośrodka n_f oraz poprzedzającego n_r. W tym celu używa się wartości wewnętrznej reflektancji zgodnie z równaniem Fresnela (2.3) [937]. Wzór ten, podobnie jak pozostałe wzory wektorowe przedstawione w tym rozdziale, ma zastosowanie zarówno w symulacjach trójwymiarowych, jak i dwuwymiarowych. W przeglądanej literaturze jednak unika się symulacji dwuwymiarowych. Zamiast tego przeprowadza się symulację w 3D, a do 2D ogranicza się tylko sam zapis odłożonych wag fotonów. Dotychczasowy wektor ruchu nazywamy wektorem padającym (ang. incidence vector). Wektor odbicia to inaczej wektor refleksji (ang. reflection vector). Wnikający zaś nazywany jest wektorem załamania lub wektorem refrakcji (ang. refraction vector) z powodu zjawiska ugięcia fali.
+w_reflection=R_i w waga fotonu odbitego 2.1
+w_refraction=〖(1-R〗_i)w waga fotonu odbitego (2.2)
+Gdzie w to waga fotonu przed zdarzeniem przekroczenia granicy.  
+█(R_i=〖(sinθ_1 cosθ_2-cosθ_1 sinθ_2)〗^2/2∙(〖((cosθ_1 cosθ_2+sinθ_1 sinθ_2)〗^2+〖(cosθ_1 cosθ_2-sinθ_1 sinθ_2)〗^2))/((〖(sinθ_1 cosθ_2+cosθ_1 sinθ_2)〗^2 〖(〖cosθ〗_1 cosθ_2+sinθ_1 sinθ_2)〗^2 ) )# (2.3))
+gdzie:
+θ_1 kąt padania
+uz składowa wektora padania prostopadła do płaszczyzny styku
+n_1=n_r indeks refrakcji ośrodka padania
+n_2=n_f indeks refrakcji ośrodka transmisji
+〖cos〗_θ1=uz trajektoria padania
+〖sin〗_θ1=√(1-uz^2 ) trajektoria padania
+〖sin〗_θ2=(n_1/n_2 ) 〖sin〗_θ1 trajektoria transmisji
+〖cos〗_θ2=√(1-〖〖sin〗_θ2〗^2 ) trajektoria transmisji
+Zjawisko komplikuje się, gdy chcemy odwzorować nie tylko proporcje wag, ale również zachować poprawne wektory kierunku odbicia i ugięcia fotonu wnikającego. Zwróćmy uwagę, że nie we wszystkich implementacjach realizuje się te zdarzenia. W niektórych sytuacjach sama zmiana współczynników tłumienia i absorpcji okazała się wystarczająca. Jeśli jednak zależy nam na uwzględnienia zmiany wektorów kierunku, należy sobie zadać pytanie, czy zamierzamy śledzić oba te kierunki, czy może wybrać jeden z nich. Dobrym rozwiązaniem jest wybór odbicia z prawdopodobieństwem równym wewnętrznej reflektancji lub ugięcia z prawdopodobieństwem dopełniającym. Wzory opisujące wektory kierunku odbicia i załamania wiązki światła opatrzono numerami (2.4-5) [973][974].
+〖□(v ⃗ )〗_reflection=□(i ⃗-2(i ⃗•n ⃗ ))n ⃗=□(i ⃗+2cosθ_1 ) n ⃗ kierunek wekotra odbicia (2.4)
+ponieważ:
+i ⃗•n ⃗=|i ⃗ ||n ⃗ |cosβ=1∙1∙cos⁡(180°+θ_1 )=-cosθ_1 
+gdzie:
+i ⃗ wektor padania
+n ⃗ wektor normalny do płaszczyzny styku ośrodków
+θ_1 kąt padania
+β kąt między wektorami odbicia i załamania
+v ⃗_refraction=ri ⃗+(rc-√(1-r^2 (1-c^2 ) )) n ⃗ kierunek wektora załamania (2.5)
+gdzie:
+n_1 indeks refrakcji ośrodka padania
+n_2 indeks refrakcji ośrodka transmisji
+r=n_1/n_2 
+c=cosθ_1=-i ⃗•n ⃗
+Do warunków brzegowych należą kąt zerowy θ_1=0 oraz wyprowadzony z prawa Snella (2.6) kąt całkowitego wewnętrznego odbicia α_gr (2.7) [973][974]. Dla kąta zerowego nie zachodzi odbicie. Foton wnika do nowego ośrodka nie zmieniając swojej wagi. Przy kącie padania θ_1>〖 ∝〗_gr cała wiązka zostanie odbita. Aby zaszło całkowite wewnętrzne odbicie indeks refrakcji ośrodka padania musi być większy od indeksu ośrodka transmisji. Takie zjawisko może zajść przy prowadzeniu promieni słonecznych z szkła akwarium w stronę wody. Prędkość światła jest mniejsza w ośrodku, w którym indeks refrakcji jest większy.
+(sinθ_1)/(sinθ_2 )=n_2/n_2  Prawo Snella (2.6)
+jeśli β=90°,to sinβ=1,dlatego: 
+α_gr=arcsin⁡(n_2/n_2 ) kąt graniczny całkowitego wewnętrznego odbicia (2.7)
+Na rys. 2.5 przedstawiono przykładową symulację. Na rysunku A pokazano ścieżkę przemieszczającego się fotonu. W części B umieszczono superpozycję miliona fotonów rejestrowanych jako fluencja względna [W/cm2] dla dostarczonej mocy wiązki W, co jest równoważnie określanie jako transport T [1/cm2]. Zjawiskiem opisanym przez rysunek B jest penetracja światła CO2 (długość fali 10,6 μm) do spojówki oka. Ilustruje to jak metoda Monte Carlo może opisać rozpraszanie w sytuacji, w której absorpcja dominuje nad rozpraszaniem, czyli w sytuacji, w której słabo radzi sobie metoda dyfuzji [937].
+ 
+Rys. 2.5. Transport fotonu w symulacji Monte Carlo. A - ścieżka propagacji pojedynczego fotonu. B – superpozycja miliona fotonów reprezentująca penetrację oka laserem. Źródło: [937].
+Próbkowanie Monte Carlo
+Do generowania pseudolosowych parametrów symulacji, czyli kroku fotonu, absorpcji oraz rozproszenia, nie wystarczy standardowa funkcja rand, zwracająca wartości od 0 do 1 z rozkładu jednostajnego. Rozkład prawdopodobieństwa musi być zgodny ze statystyką zdarzeń losowych występujących w naturze. Istnieje jednak funkcja powiązana z rozkładem, której zbiór wartości wynosi <0, 1> - tą funkcją jest dystrybuanta (2.8) [937], czyli całka funkcji gęstości prawdopodobieństwa. Generowanie zdarzenia losowego będzie polegało na próbkowaniu funkcji gęstości prawdopodobieństwa za pośrednictwem odpowiadającej mu wartości dystrybuanty wylosowanej już z rozkładu jednostajnego. W praktyce do skonstruowania funkcji losującej należy rozwiązać równanie (2.9). Zmienną x, reprezentującą wylosowaną cechę, należy uzależnić od funkcji zmiennej pseudolosowej RND. W implementacjach wartości brzegowe, tzn. 
+RND ϵ {0,1}, nie muszą być dokładnie odwzorowane. Pominięcie jednej z wartości skrajnych nie wpłynie znacząco na wynik, gdyż szansa na ich wylosowanie i tak byłaby bardzo mała. Stąd używanie popularnych generatorów zwracających liczby z rozkładu jednostronnie domkniętego jest dopuszczalne. Należy jednak zadbać, aby na wyjściu funkcji losującej nie pojawiły się wartości z poza oczekiwanego zakresu. Mogłoby to skutkować błędem dzielenia przez zero, dlatego popularnie losowanie umieszcza się w pętli while, która wymusza powtórzenie losowania w przypadku otrzymania niedozwolonych wartości. W kolejnych rozdziałach opisano przykładowe funkcje losujące. Dla każdego zjawiska rozwiązanie będzie inne.
+█(F(x_1 )=∫_0^x1▒〖p(x)dx=funkcja(x_1 ) 〗# (2.8))
+█(〖RND〗_1=F(x_1 )# (2.9))
+Długość kroku fotonu
+Rozkład wielkości kroku fotonu s ma charakter eksponencjalny (2.10). Wprowadzony zostaje współczynnik całkowitego tłumienia μ_t [cm-1] (2.11) jako suma współczynników absorpcji μ_a oraz rozpraszania μ_s. Wzory (2.12-15) przedstawiają wyprowadzenie funkcji losującej używanej w implementacjach symulacji Monte Carlo [937].
+█(p(s)=  e^(-μ_t s)/μ_t # (2.10))
+dla:
+μ_t≠0
+█(μ_t=μ_a+μ_s  [cm^(-1) ]  # (2.11))
+Zakłada się, że krok s musi być większy od 0. Zatem z definicji prawdopodobieństwa wynika:
+█(∫_0^∞▒〖p(s)ds=∫_0^∞▒e^(-μ_t s)/μ_t  ds=1〗  # (2.12))
+Rozwiązanie całki w szczególnym punkcie s_1:
+█(F(s_1 )=∫_0^s1▒〖p(s)ds=∫_0^s1▒〖e^(-μ_t s)/μ_t  ds=1-e^(-μ_t s) 〗〗  # (2.13))
+█(〖RND〗_1=F(s_1 )=1-e^(-μ_t s_1 )  # (2.14))
+Funkcja zwracająca losową cechę s_1 z rozkładu p(s):
+█(s_1=(-ln⁡(1-〖RND〗_1 ))/μ_t =(-ln⁡(〖RND〗_1 ))/μ_t   # (2.15)) 
+dla:
+〖RND〗_1  ϵ (0,1)
+Funkcja ma zastosowanie dla μ_t≠0, więc nie można jej użyć dla propagacji w próżni. Jest to również powód, przez który zrezygnowano z symulowania ósmego ośrodka propagacji – powietrza. Współczynniki absorpcji i rozpraszania były zbyt małe do badania propagacji światła na odległości kilku centymetrów.
+Funkcje rozpraszania
+Zmianę wektora kierunku ruchu fotonu realizuje się przez przesunięcie długości kątowych współrzędnych biegunowych względem lokalnego układu współrzędnych wektora ruchu. W przypadku rozpraszania izotropowego (g=0) poprzedni wektor ruchu nie ma wpływu na nowo otrzymany. Następny wektor ruchu będzie więc dowolnym wektorem łączącym środek układu współrzędnych z jednostkową sferą, skierowanym na zewnątrz. Dla ujednolicenia obliczeń przesunięcie i tak można wykonać. Wtedy kąty przesunięcia azymutalnego i zenitalnego oblicza się wzorami 2.16-17.
+█(φ=2π〖RND〗_2#(2.16))
+gdzie:
+φ ϵ ⟨0,2π)
+〖RND〗_2  ϵ ⟨0,2π)
+█(θ=π〖RND〗_3#(2.17))
+gdzie:
+θ ϵ ⟨0,π⟩
+〖RND〗_3  ϵ ⟨0,π⟩
+W przypadku anizotropowym kąty azymutalny i zenitalny wektora przesunięcia nie są już losowane z jednakowym prawdopodobieństwem z pełnej sfery, zatem kierunek początkowy ma znaczenie. Omówienie tych sytuacji zamieszczono w punktach 29 i 29. Skrajnym przypadkiem jest sytuacja, gdy współczynnik anizotropii wynosi 1. Wtedy zmiana kierunku nie występuje (φ=θ=0). W symulacji 2D do przesunięcia wektora ruchu zamiast φ i θ używa się kąta θ oraz funkcji znaku sgn (2.18-19).
+█(θ=θ_1 sgn(〖RND〗_4-1/2)#(2.18))
+█(sgn(x)={█(-1,&x<0@0,&x=0@1,&x>0)┤#(2.19))
+gdzie:
+θ_1-zenitalny kąt przesunięcia otrzymany analogicznie jak w przypadku 3D
+〖RND〗_4  ϵ ⟨0,1⟩
+Kąt azymutalny
+Dla g ϵ (0┤,1) kąt przesunięcia azymutalnego jest zawsze losowany tak jak w przypadku izotropowym, tzn. z pełnego okręgu z jednakowym prawdopodobieństwem. Przedstawiono to na wzorze 2.20, gdzie uniform oznacza funkcję losującą liczbę z rozkładu jednostajnego ograniczonego przedziałem podanym jako argumenty. Tą samą funkcję losowania kąta azymutalnego przedstawiono w pracy [937].
+█(φ=uniform(0,2π)=2πRND#(2.20))
+gdzie:
+φ-kąt azymutalny
+φ ϵ ⟨0,2π)
+RND ϵ ⟨0,1)
+Kąt zenitalny
+Do losowania kąta zenitalnego używana jest funkcja Henyeya-Greensteina opisana wzorami (2.21-24). Pierwszy raz została zaproponowana w 1941 r. do modelowania rozpraszania przez pył kosmiczny światła docierającego z odległych galaktyk. Według pracy [937] jest to najczęściej używana funkcja w zagadnieniach propagacji światła w środowisku skóry. W dalszej części jest ona określana skrótem „HG”.
+█(p(θ)=1/2  (1-g^2)/√((1+g^2-2gcosθ)^3 )#(2.21))
+█(∫_0^π▒〖p(θ)2πsinθ〗 dθ=1#(2.22))
+█(∫_0^π▒〖p(θ)cosθ2πsinθ〗 dθ=g#(2.23))
+█(θ=arccos((1+g^2-((1-g^2)/((1-g+2gRND) ))^2)/2g)#(2.24))
+gdzie:
+θ-kąt zenitalny
+θ ϵ ⟨0,π⟩
+RND-liczba wylosowana z rozkładu jednostajnego
+RND ϵ ⟨0┤,1⟩
+g-współczynnik anizotropii
+g ϵ (0┤,1)
+Na rys. 2.6 przedstawiono rozkład prawdopodobieństwa kąta przesunięcia θ losowanego za pomocą funkcji HG. Liczbę przedziałów kwantowania ustawiono na 200. Funkcja HG ma zastosowanie wyłącznie dla współczynnika anizotropii g ϵ (0┤,1).
+ 
+Rys. 2.6. Skwantowany rozkład prawdopodobieństwa funkcji HG.
+Algorytm maszerujących sześcianów
+Algorytm maszerujących sześcianów (ang. Marching Cubes algorithm) jest metodą w grafice komputerowej, służącą do rekonstrukcji powierzchni ekwipotencjalnych w przestrzeni trójwymiarowej na podstawie zadanego pola skalarnego. Działa on poprzez generowanie siatki wielokątów, które przybliżają powierzchnię o określonej wartości progowej [975][976]. Pierwszym krokiem jest utworzenie maski binarnej klasyfikującej przynależność punktu do badanej objętości. Następnie trójwymiarowa tablica jest skanowana sześciennym oknem. Sprawdzana jest przynależność 8 narożników maszerującego sześcianu. Na ich podstawie rozpoznawana jest jedna z 256 sytuacji. Każdej z nich odpowiada zestaw trójkątów opisujących powierzchnię graniczną. Trójkąty są zapisane w postaci 3 punktów – wierzchołków. Na koniec należy skorygować względną pozycję wierzchołków na bezwzględną – tak, aby ich pozycje odpowiadały lokalizacji w układzie współrzędnych całej bryły, a nie tylko maszerującemu sześcianowi. W ten sposób należy przeskanować całą trójwymiarową tablicę. Zasadę działania dobrze przedstawiono na filmie [977]. Dwuwymiarowym odpowiednikiem algorytmu maszerujących sześcianów jest algorytm maszerujących kwadratów.
+ 
+Rys. 2.7. Przybliżenia powierzchni wielokątami dla 15 kanonicznych orientacji sześcianu. Źródło: [975].
+Jednym z zastosowań algorytmu maszerujących sześcianów jest wizualizacja przestrzenna danych medycznych (rys. 2.8). Na podstawie serii dwuwymiarowych obrazów przekrojów ciała pacjenta, algorytm umożliwia rekonstrukcję trójwymiarowej reprezentacji struktur anatomicznych, co jest szczególnie przydatne w takich dziedzinach jak tomografia komputerowa (TK) i rezonans magnetyczny (MRI). Pozwala to na uzyskanie wysokiej jakości modeli 3D, które mogą być wykorzystywane zarówno w diagnostyce, jak i planowaniu zabiegów medycznych. Algorytm ma również zastosowanie w projektowaniu generatywnych map gier komputerowych [978]. W tej pracy wykorzystano go do triangulacji powierzchni zmiany ośrodków o nieregularnych kształtach.
+ 
+Rys. 2.8. Powierzchnia głowy odtworzona algorytmem maszerujących sześcianów ze 150 obrazów z rezonansu magnetycznego (około 150 tys. trójkątów). Źródło: [975].
+Właściwości optyczne skóry
+Dla każdego materiału wykorzystanego w implementacji symulacji światła przedstawionej w tej pracy potrzebne są cztery parametry reprezentujące właściwości optyczne:
+μ_a- współczynnik absorpcji [1/cm],
+μ_s-współczynnik rozpraszania [1/cm],
+μ_t-współczynnik tłumienia [1/cm],
+n-bezwzględny współczynnik załamania światła.
+Współczynnik tłumienia jako jedyny można obliczyć na podstawie dwóch wcześniej zdefiniowanych; współczynnika absorpcji i współczynnika rozpraszania.:
+█(μ_t=μ_a+μ_s#(2.25))
+Pozostałe muszą zostać określone w pliku konfiguracyjnym. Oprócz nich w symulacji należy sprecyzować również globalny współczynnik anizotropii. Przeważnie wynosi on 0,9, jak na przykład w [904] oraz [905]. Taką wartość przyjęto do eksperymentów przeprowadzonych w tej pracy. Wszystkie użyte materiały oraz ich parametry przedstawiono na tab. 2.2. Dla próżni współczynniki rozpraszania i absorpcji wynoszą 0, natomiast bezwzględny współczynnik załamania światła z definicji wynosi 1. W pracy [906] dla powietrza w ziemskiej atmosferze jako wartość bezwzględnego współczynnika załamania światła podano 1,000293. Współczynniki absorpcji i rozpraszania dla tego ośrodka zaczerpnięto z pracy [907], opisującej ich zmianę w zależności od zawartości sadzy w pyle unoszącym się w atmosferze. W celu określenia właściwości optycznych słonej wody skorzystano z prac [908] i [909]. Badania przeprowadzono na wodzie morskiej. W pracy [909] wzięto pod uwagę wpływ temperatury. Współczynnik załamania światła słonej wody malał wraz z wzrostem temperatury. Do określenia właściwości skóry właściwej, tłuszczowej tkanki podskórnej i błony śluzowej nosa skorzystano z pracy [904]. Przedstawiono w niej wyniki badań in vitro (pol. w szkle) dla fal świetlnych w zakresie długości 400-2000 nm. Z uwagi na trudność w pozyskaniu wystarczająco dużej próbki materiału do badań in vitro, parametry naskórka wybrano z pracy [910]. Badania przeprowadzono in vivio (w ciele) na grupie uczestników pochodzącej z Japonii. Do określenia parametrów podskórnych naczyń krwionośnych wybrano pracę badającą właściwości optyczne narządów wewnętrznych szczura [911]. Wartość bezwzględnego współczynnika załamania światła krwi zaproponowano w pracy [912]. Współczynniki absorpcji i rozpraszania dla fal 400-2500 nm propagowanych w krążącej w żyłach krwi pomierzono w pracy [912]. Warto zaznaczyć, że współczynnik rozpraszania użyty w symulacji Monte Carlo w materiale biologicznym [905] wynosi 312 cm-1, co znacznie odbiega od pomiarów statycznych materiałów z przytoczonych publikacji. Jedynie krążąca krew miała współczynnik rozpraszania tego samego rzędu wielkości. Dla pozostałych tkanek współczynnik rozpraszania był około 15 razy mniejszy. Podobnych nieścisłości dopatrzono się w pracy [913], gdzie współczynnik absorpcji dla tłuszczowej tkanki podskórnej wyszedł 10 razy mniejszy niż w pracy [904]. W pracach [910] [914] [915] utrzymuje się, że współczynnik załamania światła w skórze wynosi około 1,35-1,55. W pracy [914] wskazano także, że współczynnik ten nie zmienia się znacząco wraz z warstwą skóry. Zaproponowany tam model skóry miał ten sam współczynnik załamania światła wynoszący 1,33 dla wszystkich warstw. Różniły się one natomiast współczynnikami absorpcji i rozpraszania. W pracy [911] dla narządów wewnętrznych użyto współczynników załamania światła 1,46 i 1,35. W pracy [904] dla skóry właściwej użyto współczynników załamania światła 1,46 oraz 1,36, dla podskórnej tkanki tłuszczowej 1,455 i 1,36, a dla błony śluzowej nosa 1,45 i 1,36. Ostatecznie idąc za przykładem pracy [914], do naskórka, skóry właściwej, podskórnej tkanki tłuszczowej, błony śluzowej i naczyń krwionośnych przypisano ten sam współczynnik załamania światła równy 1,36.
+Tab. 2.2. Parametry optyczne materiałów użyte w symulacji.
+Źródło	Nazwa ośrodka propagacji w języku polskim	Nazwa ośrodka propagacji w języku angielskim	μ_a	μ_s	n
+	próżnia	vacuum	0	0	1
+[907][932]
+powietrze	air	0,0000019	0,0000006	1,000293
+[908][909][934]
+woda słona	salt water	0,001019	0,029813	1,333
+[910]
+naskórek	epidermis	0,0835	11,71	1,36
+[904]
+skóra właściwa	dermis	0,37	23,8888943	1,36
+[904]
+tłuszczowa tkanka podskórna	fatty subcutaneous tissue	1,1	12,8426993	1,36
+[904]
+błona śluzowa	mucous tissue	2,8	12,30868014	1,36
+[911]
+żyła	vein	6,14	17,06	1,36
+[912][933]
+krew	blood	2,1	773	1,37
+Normalizacja wyników
+Po symulacji wagi zapisane w tablicy Aw muszą zostać znormalizowane do jednakowego formatu. Każdą komórkę dzieli się przez odpowiadającą jej objętość zbierania fotonów w przestrzeni trójwymiarowej oraz całkowitą liczbę wyemitowanych fotonów. W ten sposób otrzymuje się ułamek absorpcji A [1/cm3], co zapisano wzorem 2.26 [937]. W niektórych przypadkach wag nie normalizuje się względem objętości, lecz odległości od źródła. Należy zwrócić uwagę, że nie zawsze objętości komórek będą jednakowe. Przykładowo, w implementacji mc321 [981] wagi zapisywane są w postaci sferycznej, cylindrycznej i planarnej. W przypadku zapisu sferycznego i cylindrycznego objętość komórki rośnie wraz z odległością od źródła. Może to doprowadzić do zniekształceń wyników, zwłaszcza dla małych wartości promienia, gdyż wagi będą estymowane mniej liczną próbą statystyczną. Transport fotonów T [1/cm2] to iloczyn absorpcji A i współczynnika absorpcji μ_a (2.27). Dalej, w zależności od przyjętej konwencji, można obliczyć wpływ mocy wiązki ɸ [W/(cm^2 )] lub dostarczone ciepło ψ [J/(cm^2 )] (2.28-29).
+█(A[i_x,i_y,i_z ]=(A_w [i_x,i_y,i_z ])/(V[i_x,i_y,i_z ] N_p )#(2.26))
+gdzie:
+i_x,i_y,i_z-indeksy tablic przechowujących wyniki
+A-absorpcja [1/(cm^3 )]
+A_w-wagi fotonów zapisane podczas symulacji
+V-objętość odpowiadająca komórce przechowującej wagi fotonów [1/(cm^3 )]
+N_p-całkowita liczba wyemitowanych fotonów
+█(T=A/μ_a #(2.27))
+█(ɸ=PT#(2.28))
+█(ψ=QT#(2.29))
+gdzie:
+T-transport fotonów [1/(cm^2 )]
+μ_a- współczynnik absorpcji [1/cm]
+ɸ-wpływ mocy wiązki [W/(cm^2 )]
+P-moc wiązki [W]
+ψ-dostarczone ciepło [J/(cm^2 )]
+Q-energia wiązki [J]
+Przykładowe implementacje symulacji światła
+Do najbardziej znanej serii symulacji światła metodą Monte Carlo należą mcml [980], mc321 [981], mcxyz [982] oraz mcml [983]. Pierwszą wersję programu zaproponowali Wilson i Adam [987] w 1983 r. Duży wkład w jego dalszy rozwój wniósł również Steven Jacques. Program został napisany w języku C i jest rozwijany do dzisiaj. Doczekał się licznych wariantów, zarówno wprowadzających nowe modyfikacje, jak i upraszczających kod do niezbędnego minimum. Na ich temat napisano wiele artykułów badawczych. Obecnie kody źródłowe można znaleźć pod domeną „omlc.org” [984]. Dołączono do nich skrypty programu MATLAB [985], ułatwiające projektowanie środowisk testowych, jak i wizualizację wyników. Największą zaletą symulacji z serii mcml jest ich szybkość, ze względu na wykorzystanie wydajnego, niskopoziomowego języka C. Wadą są natomiast mało elastyczne pod względem wprowadzania modyfikacji skrypty programu MATLAB oraz wymóg kompilacji kodu źródłowego. Na podstawie mcml została napisana symulacja PyTissueOptics [988] w języku Python. Ideą przyświecającą projektowi było uproszczenie procedury przygotowywanie środowiska testowego. Inną implementacją w języku Python jest PyXOpto [989][990][991][992]. Do przedstawienia skali rozbudowania programu posłużono się liczbą linijek kodu. Najprostrza  wersja programu z serii omlc, „tiny.c” [993], mieści się na pojedynczej stronie i składa się z zaledwie 61 linijek kodu. Dla PyXOpto jest to już prawie 31 tys. linijek kodu, a dla PyTissueOptics 102 tys. linijek. Przyczyną tak dużego rozmiaru jest liczna baza zaimplementowanych przykładów środowiska propagacji oraz zastosowanie zaawansowanych technik wizualizacji graficznej.
+Metodologia
+Napisano własną implementację symulacji światła. Zamodelowano 7 ośrodków skóry oraz 5 źródeł światła. Następnie zmodyfikowano przykładową implementację z literatury, by zwracała wyniki w jednolitym formacie. Na tak przeprowadzonych programach przeprowadzono szereg eksperymentów. Obliczono podstawowe statystyki rozkładów oraz sprawdzono poprawność wykonanej symulacji testami statystycznymi.
+Własna implementacja symulacji
+W założeniu własna implementacja symulacji metodą Monte Carlo nie miała konkurować z istniejącymi już programami, a być jedynie uproszczonym narzędziem do przeprowadzenia eksperymentów. Program został napisany obiektowo w języku i umożliwia dodawanie złożonych źródeł światła, jak i modeli skóry.
+Diagram aplikacji
+Na 3.1 umieszczono diagram części symulacyjnej aplikacji. Zostały na nim przedstawione najważniejsze zależności w programie. Trzon stanowią klasa RunAll oraz Sim. Klasa RunAll zarządza uruchamianiem procesu obliczeń, normalizacją wyników oraz finalnie, ich wizualizacją i zapisem do plików graficznych. Normalizacja odbywa się w klasie ResultEnvProcessing. Klasa Sim odpowiada za sam proces obliczeń numerycznych. Ścieżki prowadzące do plików wejściowych są określone w pliku konfiguracyjnym config.json. Są to pliki określające stan początkowy środowiska, czyli źródło światła, ośrodek propagacji oraz ich położenie w przestrzeni. W przypadku użycia domyślnych ścieżek, możliwe jest wcześniejsze wygenerowanie domyślnych plików wejściowych. Włączenie tej opcji jest konieczne po każdej modyfikacji domyślnych ustawień środowiska. Za generowanie plików determinujących ośrodek propagacji odpowiadają klasy Make oraz MakeMaterial. Różnią się one metodą opisu ośrodka propagacji. Make tworzy opis ośrodka za pomocą trójwymiarowej tablicy, zawierającej etykietki materiału przypisanego do lokalizacji o koordynatach odpowiadającym trzem indeksom tablicy. Opis ten przechowywany jest w klasie PropEnv, dziedziczącej po Object3D. Pomocna może okazać się również klasa FillShapes, odpowiedzialna za wypełnianie tablicy złożonymi kształtami, takimi jak model żyły. W przypadku opisu ośrodka propagacji opartego na trójwymiarowej tablicy, do aproksymowania płaszczyzny granicy ośrodków używany jest algorytm maszerujących sześcianów. Wykorzystywana jest przy tym klasa MarchingCubes. MakeMaterial odpowiada za bardziej abstrakcyjny opis, oparty na obiektach klasy Material. W szczególności obiekty klas Cuboid oraz Cylinder opisują ośrodek propagacji za pomocą trójwymiarowych brył geometrycznych - prostopadłościanu i cylindra. Opis wszystkich użytych obiektów klasy Material zrzeszony jest w ramach klasy PropEnvVec. Plik odpowiadający za źródło światła, w tym za ilość emitowanych fotonów, tworzony jest w klasie Make. Klasa przechowująca źródło światła to LightSource. Zawiera ona spis wszystkich punktowych źródeł światła LightSourcePoint. Każde punktowe źródło emituje fotony klasy Photon. Ośrodek propagacji, źródło światła oraz przesunięcie lokalnego układu współrzędnych źródła świata względem układu współrzędnych ośrodka propagacji agregowane są przez klasę PropSetup. Do generowania pseudolosowych parametrów symulacji służy interfejs FeatureSampling. Zarządza on generatorami liczb pseudolosowych przechowywanymi w obiektach klasy MyRandom. Funkcje pomocnicze, takie jak obliczanie wektora odbicia, zostały umieszczone w klasie Space3dTools. Do testowania zaimplementowanych funkcjonalności służy klasa Test. Wynikiem procesu symulacji, czyli działaniem obiektu klasy Sim, są pliki przechowywane w folderze resultRecords.
+ 
+Rys. 3.1. Diagram części symulacyjnej aplikacji.
+Na rys. 3.2 przedstawiono diagram interfejsu funkcji losowych MonteCarloSampling. Ze względu na jego dużą złożoność, zrezygnowano z jego używania w części symulacyjnej. Wciąż jednak można go użyć w celu przedstawienia funkcji losowych na wykresach. Realizuje się to w klasie Test. Klasa ChartLabel zawiera opisy funkcji pomocne przy kreśleniu wykresów. Klasa FunInterface zawiera odwołania do bazowych funkcji FunOrigin oraz ich przekształceń. Obrazują one etapy tworzenia funkcji próbkujących cechy z zadanych rozkładów prawdopodobieństwa. Klasa FunOrigin zawiera funkcje gęstości prawdopodobieństwa, FunIntegral – ich całki (skumulowane sumy), FunDistribution – dystrybuanty, a FunSampling – gotowe funkcje próbkujące losowe cechy.
+ 
+Rys. 3.2. Diagram interfejsu funkcji losowych.
+Na rys. 3.3 przedstawiono diagram części wizualizacyjnej aplikacji. Trzon stanowi klasa ChartMaker. Jej działanie jest uruchamiane w klasie RunAll po zakończeniu symulacji lub po wczytaniu jej wcześniejszego zapisu stanu. W przypadku używania opisu ośrodka propagacji za pomocą trójwymiarowej tablicy, możliwe jest wygenerowanie listy triangularyzowanych płaszczyzn granic ośrodków propagacji. Odpowiada za to klasa PlaneTriangles. W późniejszych krokach możliwe jest jej wyświetlenie jako siatki (ang. mesh). Do wizualizacji obiektów 3D używane są klasy ByVispy oraz ByMatplotlib. Obie dziedziczą po klasie View, w której określono ich uniwersalne funkcjonalności, takie jak ignorowanie wartości „0”. Klasa ByVispy do wyświetlania korzysta z biblioteki Vispy [916] [917], natomiast ByMatplotlib z biblioteki Matplotlib [918] [919] [920]. Do tworzenia płaskich wycinków obiektów 3D, tzw. „plastrów” (ang. slice), służy klasa Slice. Do wyświetlenia bardziej szczegółowych informacji niż te zawarte w tablicy absorpcji, czy w tablicy opisującej ośrodek propagacji, wymagane jest utworzenie obiektu typu DataFrame [921] z biblioteki Pandas [922] [923] [924]. Służy do tego klasa ColorPointDF. Umożliwia to późniejsze użycie złożonych metod kolorowania, czy używanie dokładnych pozycji, zamiast zaokrąglonych do całkowitych wartości (indeksy tablic są nieujemnymi liczbami całkowitymi). Klasa ArrowsDF tworzy obiekt klasy DataFrame, zawierający informacje pozwalające na wizualizowanie strzałek zmiany pozycji fotonów. Aby móc przedstawić obiekt 3D jako obraz 2D, należy go najpierw zrzutować na płaszczyznę 2D za pomocą jednej z klas Projection, ProjectionResultRecordsDF, ProjectionArrowsDF. Inną techniką umożliwiającą obrazowanie obiektu w 2D jest zsumowanie jego wartości wzdłuż wybranej osi. Służy do tego klasa SumProjection. Zapis do plików graficznych PNG [925] możliwy jest dzięki klasie Print.
+ 
+Rys. 3.3. Diagram części wizualizacyjnej aplikacji.
+Spis wszystkich klas
+W tabeli 3.1 umieszczono używane foldery. Tabela 3.3 przedstawia domyślne pliki wejściowe, natomiast tabela 3.4 pliki wyjściowe. Łącznie utworzono 41 klas rozdzielonych na 30 plików PY [926]. Liczba linijek napisanego kodu wynosi 8404. Do ich oszacowania użyto polecenia Bash [927].:
+█(ls | grep \'.py^' |xargs wc -l )
+Tab. 3.1. Wykaz klas aplikacji.
+Lp.	Nazwa klasy	Opis
+1	ArrowsDF	Tworzenie strzałek zmiany pozycji fotonów.
+2	ByMatplotlib	Wyświetlanie obiektów 3D za pomocą biblioteki Matplotlob.
+3	ByVispy	Wyświetlanie obiektów 3D za pomocą biblioteki Vispy.
+4	ChartLabel	Zawiera opisy funkcji losujących cechy.
+5	ChartMaker	Główna klasa zarządzająca wizualizacją wyników.
+6	ColorPointDF	Klasa tworząca obiekty typu DataFrame do zaawansowanego wyświetlania obiektów.
+7	Cuboid	Opis ośrodka propagacji na bazie prostopadłościanu.
+8	Cylinder	Opis ośrodka propagacji na bazie cylindra.
+9	FeatureSampling	Interfejs służący do próbkowania rozkładów losowych.
+10	FillShapes	Służy do wypełniania tablic 3D złożonymi kształtami.
+11	FunDistibution	Zawiera dystrybuanty rozkładów losowych.
+12	FunIntegral	Zawiera całki funkcji gęstości prawdopodobieństwa.
+13	FunInterface	Zawiera odnośniki do funkcji gęstości prawdopodobieństwa oraz ich przekształceń.
+14	FunOrigin	Zawiera funkcje gęstości prawdopodobieństwa.
+15	FunSampling	Zawiera funkcje używane do próbkowania cech z rozkładu losowego.
+16	LightSource	Zawiera opis źródła światła.
+17	LightSourcePoint	Zawiera opis punktowego źródła światła.
+18	Make	Tworzy pliki używane później w symulacji.
+19	MakeMaterial	Tworzy plik ośrodka symulacji opisany za pomocą abstrakcyjnych obiektów klasy Material, w szczególności trójwymiarowych brył geometrycznych.
+20	MarchingCubes	Zawiera pomocnicze listy wierzchołków używanych w algorytmie maszerujących sześcianów.
+21	Material	Klasa opisująca ośrodek symulacji za pomocą funkcji.
+22	MonteCarloSampling	Interfejs funkcji próbkujących cechy.
+23	MyRandom	Klasa tworząca generatory liczb losowych oraz odpowiedzialna za ich używanie.
+24	Object3D	Podstawowa klasa obiektu 3D. Jej głównym polem jest body, zawierające trójwymiarową tablicę. 
+25	Photon	Klasa wiązki światła.
+26	PlaneTriangles	Tworzy traingularyzowaną siatkę granicy ośrodków na podstawie tablicy 3D.
+27	Print	Umożliwia zapis do obrazów PNG.
+28	Projection	Rzutuje obiekty 3D (klasy Object3D) na płaszczyznę 2D.
+29	ProjectionArrowsDF	Odpowiada za strzałki zmiany pozycji fotonów.
+30	ProjectionResultRecordsDF	Rzutuje dane opisujące obiekt 3D zapisane w obiekcie typu DataFrame na płaszczyznę 2D.
+31	PropEnv	Klasa zawierająca opis ośrodka propagacji za pomocą trójwymiarowej tablicy.
+32	PropEnvVec	Klasa zawierająca opis ośrodka propagacji za pomocą funkcji, w szczególności brył geometrycznych.
+33	PropSetup	Klasa łącząca źródło światła z ośrodkiem propagacji.
+34	ResultEnvProcessing	Klasa odpowiedzialna za końcowe przetwarzanie wyników. Tutaj odbywa się normalizacja.
+35	RunAll	Klasa zarządzająca uruchomieniem symulacji lub wczytaniem jej stanu, normalizacją oraz wyświetlaniem wyników.
+36	Sim	Klasa odpowiedzialna za obliczenia numeryczne propagacji światła.
+37	Slice	Klasa służąca do tworzenia wycinków obiektów klasy Object3D
+38	Space3dTools	Zawiera narzędzia pomocnicze do obliczeń na wektorach 3D.
+39	SumProjection	Sumuje wartości tablicy obiektów 3D wzdłuż wybranej osi.
+40	Test	Służy do testowania funkcjonalności.
+41	View	Klasa bazowa dla klas ByVispy oraz ByMatplotlib.
+
+Tab. 3.2. Wykaz folderów aplikacji.
+Lp.	Nazwa folderu	Opis
+1	envs	Zawiera opisy ośrodków propagacji.
+2	lightSources	Zawiera opisy źródeł światła.
+3	propSetups	Zawiera pliki łączące źródło światła z ośrodkiem symulacji.
+4	resultRecords	Zawiera rejestr pozycji fotonów utworzony podczas symulacji.
+5	slice_img	Domyślny folder zapisu obrazów PNG.
+
+Tab. 3.3. Wykaz plików wejściowych aplikacji.
+Lp.	Nazwa pliku	Opis
+1	config.json	Plik konfiguracyjny.
+2	DefaultEnv.json	Opis domyślnego ośrodka propagacji.
+3	DefaultLightSource.json	Opis domyślnego źródła światła.
+4	DefaultPropSetup.json	Domyślny plik łączący źródło światła z ośrodkiem propagacji.
+
+Tab. 3.4. Wykaz plików wyjściowych aplikacji.
+Lp.	Nazwa pliku	Opis
+1	resultEnv.json	Tablica absorpcji fotonów.
+2	resultRecords.json	Rejestr pozycji fotonów.
+3	sim_dump.json	Zapis stanu symulacji.
+
+Zarządzanie generatorami liczb pseudolosowych
+Proces losowania rozdzielono między dwie klasy zarządzające. Klasa FeatureSampling przypisuje generatory liczb losowych oraz ich funkcje losowe do poszczególnych procesów symulacji. Jej opis znajduje się w rozdziale 4.2. Samo losowanie odbywa się już w klasie MyRandom, opisanej w rozdziale 4.1. Każdy generator inicjowany jest osobnym ziarnem (ang. seed). Taki sposób zarządzania ma zapewnić ściśle kontrolowaną powtarzalność wyników. Przykładowo, długość kroku fotonu przed dokonaniem absorpcji losowana jest oddzielnym generatorem. Można łatwo określić, ile będą wynosić kolejne wygenerowane odległości bez uruchamiania całej symulacji. Byłoby to niemożliwe, gdyby używany był wspólny generator dla wszystkich losowanych cech, gdyż każde losowanie pomiędzy obliczaniem kolejnych kroków fotonu zmieniałoby stan generatora. Kolejną zaletą tego rozwiązania jest opóźnienie osiągnięcia pełnego okresu generatora, po którym generowane liczby zaczęłyby się powtarzać. Jest to szczególnie istotne w metodach statystycznych, do których należy Monte Carlo.
+Interfejs generatorów
+Klasa MyRandom pośredniczy w każdej akcji generowania liczb losowych. Zawiera dwa pola klasy (odpowiednik pola statycznego z języka C++); random_seed_pool oraz generated_num. Na początku symulacji, w konstruktorze klasy Sim, wartość pola random_seed_pool ustawiana jest na wartość ziarna generatora z pliku konfiguracyjnego. Od tego momentu, każde utworzenie nowego obiektu klasy MyRandom przydzieli tej instancji nowy generator liczb losowych inicjowany ziarnem zawartym w ogólnodostępnym polu random_seed_pool, a następnie zwiększy pulę random_seed_pool o 1. W ten sposób wszystkie utworzone w programie generatory będą miały osobne ziarna. Liczba utworzonych generatorów jest również łatwa do monitorowania poprzez pole random_seed_pool. Drugie pole klasy, generated_num, używane jest do zliczania wygenerowanych liczb. Jego początkowa wartość wynosi 0. Przy każdym nowym losowaniu jest ono zwiększane o 1. Do utworzenia generatora posłużono się biblioteką NumPy [928]. Wybrany generator to 64-bitowy PCG64 (ang. Permuted Congruential Generator) [929]. Jest on używany domyślnie przez bibliotekę NumPy przy tworzeniu własnych instancji generatorów. Jego okres wynosi 2128, co jest równe 3,4∙1038. Innym popularnym generatorem jest MT19937 (ang. Mersenne Twister), którego okres wynosi 219937, czyli 4,3∙106001. Jest on używany jako domyślny globalny generator liczb losowych biblioteki NumPy. Podczas przeprowadzonych testów nie przekroczono liczby wygenerowanych liczb większej niż 17 mld dla 100 mln fotonów, a mowa tu o sumie wygenerowanych liczb z wszystkich generatorów. Liczba ta jest dużo mniejsza od okresów obu generatorów, zatem spełniają one wymagania projektowe. Klasa MyRandom udostępnia 4 funkcje losujące; uniform_closed, uniform_half_open, randint, standard_normal. Pierwsza z nich zwraca liczbę wylosowaną z rozkładu jednostajnego obustronnie zamkniętego, druga z rozkładu jednostajnego lewostronnie zamkniętego, trzecia zwraca liczbę całkowitą z przedziału lewostronnie zamkniętego, czwarta z rozkładu normalnego. Pierwsze trzy z nich zostały opatrzone parametrami low i high odpowiadającymi za wskazanie krańców przedziałów. Funkcja standard_normal pozwala na wybranie wartości średniej oraz odchylenia standardowego parametrami loc oraz scale.
+Interfejs funkcji losujących
+Jako interfejs funkcji próbkujących rozkłady zmiennych losowych służy klasa FeatureSampling. Zawiera ona funkcje odpowiadające procesom losowym w programie, takim jak losowanie następnego kroku fotonu czy zmiany jego kierunku ruchu. Do każdego z nich przyporządkowany jest osobny generator liczb losowych opakowany klasą MyRandom. Aby uniknąć tworzenia osobnych interfejsów dla każdego nowego obiektu, odwołania są tworzone tylko raz jako pole klasy. Przykładowo, wszystkie obiekty klasy Photon odwołują się do tego samego obiektu klasy FeatureSampling umieszczonego w polu klasy Photon. W części przypadków podstawowe funkcje losowe udostępniane przez generatory w klasie MyRandom są niewystarczające. W odpowiedzi na ten problem, utworzono funkcje przekształcające rozkłady jednostajne w przedziale <0,1> w rozkłady zgodne z oczekiwaną funkcją gęstości prawdopodobieństwa. Nie jest to proces automatyczny. Dla każdej funkcji gęstości prawdopodobieństwa przekształcenie wzoru jest nieco inne. Wykorzystuje się tu fakt, że zakres wartości dystrybuanty wynosi <0,1>, a liczby z tego zakresu można już wygenerować z rozkładu jednostajnego <0,1>. Po przekształceniach otrzymuje się funkcję zwracającą losową wartość cechy zależną od wartości dystrybuanty, którą zastępuje się liczbą losową z zakresu <0,1>. Przekształcenie to jest popularną praktyką w metodzie Monte Carlo i zostało dokładniej opisane w rozdziale 2.3. Wszystkie przekształcone tą metodą dostępne funkcje zagregowano w ramach klasy FunSampling. Jako jeden z argumentów przyjmują opakowany klasą MyRandom generator liczb losowych. Odwołania do nich zamieszczono w funkcjach odpowiadających procesom losowym w klasie FeatureSampling.
+Wykorzystane funkcje losujące
+W symulacji dwa procesy wymagały wykorzystania funkcji losowych o niestandardowych charakterystykach. Są to procesy losowania długości następnego kroku fotonu oraz kątów rozpraszania. W pozostałych przypadkach podstawowe funkcje losujące oferowane przez klasę MyRandom były wystarczające. Do ważniejszych procesów wykorzystujących podstawowe funkcje losujące należy sprawdzanie warunku zakończenia propagacji wiązki oraz podejmowanie decyzji o wniknięciu wiązki do materiału lub odbiciu się od niego na granicy ośrodków.
+Krok fotonu
+Za obliczanie długości następnego kroku fotonu odpowiedzialna jest funkcja photon_hop wewnątrz klasy FeatureSampling. Pierwszym krokiem jest odebranie długości kroku podanego w centymetrach z funkcji próbkującej rozkłady losowe exp1_aprox należącej do klasy agregującej FunSampling. Jako argumenty podawane są współczynnik tłumienia mu_t oraz generator liczb losowych opakowany klasą MyRandom. Następnie otrzymana wartość mnożona jest przez rozdzielczość przestrzenną symulacji umieszczoną w zmiennej bins_per_1_cm [N/cm]. Otrzymany wynik odpowiada przesunięciu fotonu w kierunku równoległym do dowolnej osi układu współrzędnych mierzonym w zmianie indeksu tablicy przechowywującej wyniki. Oczywiście w późniejszych krokach na ostateczną pozycję przesuniętego fotonu ma również wpływ kierunek jego ruchu. Kąt rozpraszania obliczany jest w podobny sposób.
+Opis działania
+Aplikacja składa się z dwóch części; obliczeniowej oraz wizualizacyjnej. Za główną klasę obliczeniową uznaje się Sim, a za wizualizacyjną ChartMaker. Niezależnie od tego, czy zamierza się dokonać obliczeń numerycznych, czy też wczytania plików i wyświetlenia ich zawartości, pracę z programem zaczyna się od klasy uruchomieniowej RunAll. Program używa zewnętrznych pakietów, dlatego należy je zainstalować poleceniem pip lub conda (w przypadku menadżera pakietów Anaconda [998]).:
+█(conda install PyOpenGL tabulate opencv matplotlib pillow vispy@scipy numpy pandas Geometry3D tqdm# )
+W części obliczeniowej używany jest plik konfiguracyjny. Przy samym wczytaniu wyników do wyświetlenia jest on ignorowany. Podstawowych ustawień dotyczących uruchomienia dokonuje się w ciele funkcji run klasy RunAll. Aby pominąć obliczenia należy ustawić wartość zmiennej LOAD_INSTEAD_OF_SIM na True. Znajduje się ona w pierwszej linijce funkcji run. Dalej miejsce ma blok obliczeń numerycznych lub wczytania poprzedniego stanu symulacji. Potem wykonywana jest normalizacja. Co istotne, pliki z symulacji zapisywane są przed normalizacją – w stanie surowym. Kolejne linijki kodu tyczą się ustawień wyświetlania. Można w nich wybrać schemat kolorowania wyświetlanych punktów oraz zaznaczyć opcję rysowania linii łączących punkty składające się na drogę pojedynczego fotonu.
+Przebieg symulacji
+Właściwa część symulacji zaczyna się po utworzeniu obiektu klasy Sim i wywołaniu jego metody start_sim. W ciele metody start_sim odbywa się iteracja po wszystkich punktowych źródłach światła. Dla każdego z nich odbywa się emitowanie fotonów w pętli. Wyemitowany foton zapisywany jest do rejestru fotonów. Zamieszczone są tam informacje o pozycji początkowej, ewentualnym rodzicu oraz potomkach (powstałych na skutek podziału). Następnie foton przekazywany jest do metody propagate_photon. Procedury metody propagate_photon wykonywane są w pętli dopóki spełniony jest warunek wartości wagi fotonu większej od 0. Tam pobierane są parametry ośrodka na podstawie etykietki materiału zapisanej w obiekcie fotonu. Foton wraz z współczynnikiem tłumienia przekazywany jest do funkcji hop. W funkcji hop losowany jest dystans następnego kroku fotonu. Dystans do przebycia wraz z fotonem przekazywany jest do metody try_move. Metoda ta sprawdza, czy możliwe jest przesunięcie fotonu w kierunku odpowiadającym polu dir fotonu o zadaną wartość distance. Odbywa się to w pętli dopóki obie zmienne distance oraz weight (waga fotonu) są większe od zera. Zaimplementowano także przerwanie pętli, jeśli liczba iteracji była większa niż 5. Ma to pomóc uniknąć sytuacji zakleszczenia fotonu, tzn. sytuacji w której foton odbija się w kółko między ścianami ciasnej szczeliny. W każdej iteracji sprawdzane jest czy foton nie przekroczył granicy ośrodków propagacji lub całego obszaru obserwacji. Jeśli nie napotkano żadnych przeszkód, pozycja fotonu jest przesuwana, a zmienna distance resetowana do 0. Przekroczenie granicy ośrodków ma charakter priorytetowy nad przekroczeniem granicy całego obszaru obserwacji, ponieważ odbywa się wcześniej. Z tego powodu przy przekroczeniu granicy ośrodków, flaga przekroczenia obszaru obserwacji ustawiana jest na fałsz. Jeśli mimo wszystko foton zdołał przekroczyć granicę obszaru obserwacji, uznaje się że uciekł. Jego pozycja ucieczki zapisywana jest do rejestru pozycji fotonów. Pozycja ta nie jest rejestrowana w tablicy absorpcji, ponieważ przekracza jej rozmiar. Waga fotonu jest także dodawana do zmiennej przechowywującej sumę wag fotonów, którym udało się uciec, a następnie jest resetowana do 0 wraz ze zmienną distance. Spowoduje to niespełnienie warunku pętli i przerwie dalszą propagację. W przypadku wykrywania przekroczenia granicy ośrodków sprawa jest bardziej skomplikowana. Samym wykrywaniem granicy zajmuje się metoda boundary_check. Jest zależna od metody implementacji ośrodka propagacji. Jej definicje znajdują się w klasach PropEnv oraz dziedziczącej po niej PropEnvVec. Funkcja boundary_check zwraca flagę przekroczenia granicy ośrodków. Jeśli zmiana miała miejsce, dodatkowo przekazywana jest dokładna pozycja przekroczenia granicy, wektor normlany płaszczyzny rozdzielającej ośrodki, etykietkę materiału znajdującego się przed granicą oraz etykietkę materiału znajdującego się za granicą. Punkt intersekcji odcinka ruchu z granicą ośrodków zapisywany jest rejestrze pozycji fotonów z wagą fotonu 0. Obliczany jest wektor odbicia. Następnie sprawdzany jest warunek całkowitego wewnętrznego odbicia. Jeśli nie było całkowitego wewnętrznego odbicia, obliczany jest wektor refrakcji, tzn. wektor załamania światła wnikającego w nowy ośrodek. Obliczania jest wewnętrzna reflektancja R z użyciem równania Fresnela. Jeśli miało miejsce całkowite wewnętrzne odbicie, jej wartość ustawiana jest na 0. Następuje korekcja dystansu do przebycia. Dla wektora odbitego pozostały dystans do przebycia równy jest dotychczasowej wartości zmiennej distance pomniejszonej o przebytą odległość do punktu granicznego ośrodków. Dla wektora wnikającego, pozostała droga do przebycia musi zostać jeszcze przeskalowana tak, aby odpowiadała współczynnikowi tłumienia nowego ośrodka. W tym celu używana jest funkcja dystrybuanty długości skoku fotonu. Jako argumenty otrzymuje współczynnik tłumienia poprzedniego ośrodka propagacji oraz długość skoku odpowiadającą pozostałej drodze do przebycia. Wartość dystrybuanty odpowiada liczbie RND, którą należałoby wylosować, aby otrzymać długość pozostałego do wykonania skoku. Wykorzystuje się ją, ponownie losując skok, ale już dla nowego współczynnika tłumienia. Możliwe jest to, ponieważ w funkcji odpowiedzialnej za losowanie skoków, zaimplementowano wymuszenie zadanej wartości RND poprzez parametr. Kolejne kroki zależne są od wartości wewnętrznej reflektancji R. Jeśli R ma wartość 0, foton traktowany jest jako wnikający. Przypisuje mu się nową pozycję, kierunek ruchu zgodny z wektorem refrakcji, i etykietkę materiału odpowiadającą ośrodkowi, do którego wnika. Do zmiennej distance przypisywana jest pozostała do przebycia droga. Zależnie od funkcji rozpraszania i metody opisu ośrodka propagacji, w niektórych przypadkach pożądane jest, aby wektor nie kończył swojego ruchu na granicy ośrodków. W przypadku dużej zmiany wektora kierunku ruchu na skutek rozproszenia, może on zacząć się cofać do poprzedniego ośrodka po kolejnym skoku. W takiej sytuacji przekroczenie granicy ośrodków nie zostanie wykryte i foton będzie miał przypisaną nieprawidłową etykietkę materiału. W późniejszych krokach możliwe jest wykrycie takiej sytuacji i ewentualne korekta, niemniej, spowodowałoby to zniekształcenie wyników. Z tego powodu na końcu metody try_move wektor jest jeszcze przesuwany o bardzo małą wartość, zgodnie z nowym kierunkiem ruchu. Odległość tego przesunięcia jest podawana w pliku konfiguracyjnym. Zakłada się, że podczas przesunięcia granica nie zostanie przekroczona ponownie. Pozostałą do przebycia drogę pomniejsza się o wartość końcowego przesunięcia. Jeśli R ma wartość 1, foton traktowany jest jako odbity i analogicznie modyfikowane są jego pola. W pozostałych przypadkach wiązka dzieli się na dwie. Jeśli w pliku konfiguracyjnym ustawiony jest probabilistyczny podział wiązki, foton będzie traktowany jako odbity lub wnikający zależnie od tego, czy wartość wylosowana z rozkładu jednostajnego <0,1) będzie większa od współczynnika wewnętrznej reflektancji. W przypadku tradycyjnego podziału, tworzony jest nowy obiekt klasy foton. Wagi są dzielone między wnikający i odbity foton proporcjonalnie do współczynnika R. Propagacja nowego fotonu może zostać wywołana od razu, wtedy mamy do czynienia z rekurencją. Przy wielu podziałach można przekroczyć limit zagnieżdżonych funkcji. Lepszym rozwiązaniem jest podejście iteracyjne. Nowy foton oraz parametry potrzebne do jego propagacji są zapisywane na liście i zostaną wywołane później. Po wykonaniu metody try_move następuje powrót do propagate_photon, a stamtąd od razu do after_hop. Metoda after_hop zwraca flagę przerwania propagacji. Jeśli przerwanie ma miejsce, następuje wyemitowanie następnego fotonu. W przeciwnym wypadku, kontynuowana jest iteracja, tzn. losowany jest kolejny skok. Jeśli waga fotonu jest równa 0, after_hop od razu zwraca prawdę. W innym wypadku wywoływana jest metoda drop, odpowiedzialna za absorpcję. W metodzie drop obliczana jest waga absorpcji równa proporcji współczynnika absorpcji do współczynnika tłumienia pomnożonej przez wagę fotonu. Waga absorpcji zapisywana jest zarówno w rejestrze pozycji fotonów, jak i tablicy fotonów. Następnie waga fotonu pomniejszana jest o wagę absorpcji. Metoda drop kończy swoje działanie. Po niej wywoływana jest metoda terminate. Jest to ostatni element propagacji. Metoda terminate sprawdza warunek przerwania propagacji metodą ruletki. Najpierw sprawdzana jest waga fotonu. Jeśli jest ona mniejsza niż zadany próg zdefiniowany w pliku konfiguracyjnym, przystępuje się do ruletki. Prawdopodobieństwo przetrwania fotonu określa zmienna chance. Jeśli foton przetrwał, jego waga mnożona jest przez odwrotność prawdopodobieństwa. Jeśli nie przetrwał, propagacja tego fotonu kończy się i następuje emisja następnego. Jako, że waga fotonu, który przetrwał jest mnożona przez odwrotność prawdopodobieństwa przetrwania, statystycznie suma wag wszystkich fotonów powinna utrzymać się na tym samym poziomie. Dla dokładności, przy przetrwaniu fotonu zmniejsza się wartość zmiennej przechowującej sumy wag fotonów, którym udało się wydostać poza ośrodek. Analogicznie zwiększa się ją w przypadku przerwania. Po wykonaniu wszystkich iteracji następuje zapis do pliku i zakończenie symulacji.
+Zapis do plików
+W ramach części symulacyjnej możliwe jest zapisanie trzech plików; resultEnv.json, resultRecords.json, sim_dump.json. Pierwszy z nich zawiera trójwymiarową tablicę absorpcji. Drugi to rejestr pozycji fotonów. Po każdej zmianie pozycji fotonu do rejestru dopisywany jest nowy rekord zawierający numer identyfikacyjny fotonu, jego pozycję oraz ewentualnie zaabsorbowaną przez środowisko wagę energii. W pliku sim_dump.json przechowywane są informacje na temat przebiegu symulacji oraz jej ustawienia początkowe. W pliku sim_dump.json zapisywany jest również rejestr fotonów. W przeciwieństwie do rejestru pozycji fotonów nie zawiera on wszystkich kluczowych pozycji. Zawiera jedynie informację o pozycji początkowej fotonu oraz powiązania z fotonami potomnymi i rodzicem fotonu.
+Wizualizacja wyników
+Dołączony do symulacji moduł wyświetlaniazawiera wiele przydatnych funkcji pozwalających na szczegółową analizę nie tylko superpozycji fotonów, ale także dokładnej ścieżki każdego z nich. Używane są biblioteki Matplotlib oraz Vispy. Szczególnie przydatna jest druga z nich, ponieważ umożliwia skorzystanie z mocy obliczeniowej karty graficznej poprzez bibliotekę OpenGL. Dzięki temu możliwe jest płynne oglądanie bardzo dużych zbiorów punktów w przestrzeni 3D za pomocą interaktywnej aplikacji. Biblioteka Matplotlib nie udostępnia takiej funkcjonalności, przez co wymaga podpróbkowania tablic wyjściowych.
+ 
+Rys. 3.4. Po lewej - dwie podpróbkowane tablice wyświetlane za pomocą Matplotlib, po prawej - dwie tablice wyświetlane za pomocą Vispy (1 mln punktów).
+Oprócz wyświetlania punktów dodano możliwość wyświetlania strzałek pokazujących zmianę lokalizacji fotonów w trakcie symulacji oraz wyświetlanie płaszczyzny zmiany ośrodków (rys. 3.5-6). 
+ 
+Rys. 3.5. Zarejestrowane ścieżki ruchu fotonów oznaczone strzałkami.
+ 
+Rys. 3.6. Ścieżki ruchu fotonów na tle powierzchni rozgraniczających ośrodki.
+Zaimplementowano również zapis niestandardowych, skośnych przekrojów środowiska wyjściowego do plików graficznych, podobnie jak umożliwia program Matlab [966].
+ 
+Rys. 3.7. Skośne przekroje w programie Matlab. Źródło: [966].
+
+Plik konfiguracyjny
+Plik konfiguracyjny zawiera następujące ustawienia:
+	wybór (tak/nie) tworzenia nowych plików domyślnych elementów stanu początkowego środowiska propagacji,
+	pola tekstowe do wskazania alternatywnych ścieżek do plików z elementami stanu początkowego środowiska propagacji,
+	wybór (tak/nie) wczytania plików z wykorzystaniem ścieżek alternatywnych zamiast domyślnych,
+	wybór modelu opisu ośrodka propagacji (przez tablicę lub przez funkcje),
+	wybór (tak/nie) ignorowania granic ośrodka propagacji w celu symulowania jednolitego ośrodka,
+	wybór etykietki globalnego materiału ośrodka propagacji (gdy ignorowanie granic jest włączone),
+	wybór (tak/nie) kontynuowania propagacji fotonu tylko w jednym kierunku zgodnie z funkcją prawdopodobieństwa zamiast jego podziału,
+	wybór (tak/nie) zastosowania rekurencji przy podziale wiązki,
+	wybór zapisu rejestru pozycji fotonów w liczbach całkowitych lub zmiennoprzecinkowych,
+	pola wyboru (tak/nie) zapisów do tablicy absorpcji i rejestru pozycji fotonów,
+	ziarno generatora liczb pseudolosowych (pierwszej instancji generatora),
+	precyzja obliczeń przy alternatywnej funkcji losowania (nieużywana w większości przypadków),
+	rozdzielczość przestrzenna, czyli liczba przedziałów ośrodka propagacji i tablicy absorpcji przypadająca na 1 cm,
+	globalny współczynnik anizotropii,
+	szansa na ocalenie fotonu w ruletce (podczas sprawdzania warunku przerwania propagacji),
+	parametry materiałów.
+Podczas edytowania pliku konfiguracyjnego należy zwrócić szczególną uwagę na pole probabilistycznego podziału wiązki. Domyślnym stanem tego pola jest ustawienie wymuszające kontynuowanie ruchu fotonu tylko jedną ścieżką na podstawie funkcji prawdopodobieństwa. Przy aktywowaniu podziału wiązki, propagacja kontynuowana jest zarówno dla części odbitej, jak i wnikającej. Dobrze sprawdza się to przy prostych ośrodkach propagacji. Gdy powierzchni granicznych jest zbyt wiele, znacząco wydłuża się czas symulacji. Przy dużej liczbie symulowanych fotonów  zaleca się wyłączenie tej opcji. Klasy odpowiedzialne za kolorowanie punktów i strzałek kierunku ruchu udostępniają metody pozwalające na pokolorowanie wiązek potomnych (po podziale) kolorem najstarszego rodzica. Różnice zademonstrowano na rys. 3.4.
+ 
+Rys. 3.8. Podział wiązki fotonu; po lewej kolorowanie według id fotonu, po prawej kolorowanie według najstarszego rodzica.
+Próba kontrolna
+Poprawność własnej implementacji symulacji sprawdzono porównując jej wyniki do wyników przykładowej symulacji z literatury, stosując te same nastawy. Do próby kontrolnej wybrano symulację mc321 [981]. Program musiał zostać zmodyfikowany, ponieważ domyślnie nie zapisywał wyników w postaci trójwymiarowej tablicy. W celu wykazania braku błędu systematycznego wprowadzanego przez użycie odmiennego języka programowania, kod źródłowy mc321 przetłumaczono na język Python. Tym samym porównano różnice czasu wykonywania programu. Podjęto również próbę uruchomienia wspomnianych w rozdziale 2.6 symulacji PyXOpto oraz PyTissueOptics. Złożoność projektów oraz ich zależności skutkowała konfliktami bibliotek. Nie wszystkie pakiety zostały oznaczone sugerowanymi wersjami przez autorów, a użycie identycznych wersji tych, które były, okazało się niewystarczające. Z podobnymi problemami spotkali się inni użytkownicy, o czym przekonano się czytając wątki dyskusyjne załączone do repozytorium github. Otworzono również nowy wątek w celu doprecyzowania wersji brakujących pakietów, jednak nie uzyskano odpowiedzi. Kompilacja i uruchomienie programów C nie przysporzyła tylu problemów. Uruchomiono także skrypty pomocnicze z użyciem darmowego programu Octave [986].
+Implementacja trójwymiarowych modeli skóry
+Przygotowane modele skóry oparto na dwóch metodykach. Pierwszą z nich jest opis ośrodka propagacji za pomocą trójwymiarowej tablicy. Drugą, opis przy pomocy obiektów reprezentujących trójwymiarowe bryły geometryczne. Mają one znaczenie wyłącznie, gdy ośrodek propagacji jest niejednolity. W przeciwnym wypadku, są one ignorowane. Różnice tych dwóch metod można porównać do grafiki rastrowej i wektorowej.
+Jednolity ośrodek propagacji
+Jednolity ośrodek propagacji jest najprostszym wariantem symulacji. Nie zachodzi zjawisko ugięcia i odbicia wiązki światła. Nie ma również potrzeby sprawdzania warunku przekroczenia granicy ośrodków, co stanowi najbardziej wymagającą obliczeniowo część programu. Definicje ośrodka propagacji w klasach PropEnv oraz PropEnvVec, wczytane z plików wejściowych, są w tym wypadku ignorowane. Aby ustawić jednolity ośrodek należy dokonać dwóch zmian w pliku konfiguracyjnym. Pierwszym krokiem jest ustawienie flagi flag_ignore_prop_env_labels na true. Aby określić rodzaj ośrodka obowiązujący w całym obszarze symulacji, należy ustawić wartość global_label_if_ignore_prop_env_labels zgodnie z indeksem pożądanego materiału zdefiniowanego w polu tissue_properties.
+Implementacja bazująca na trójwymiarowej tablicy
+Ośrodek propagacji modelowany trójwymiarową tablicą reprezentuje klasa PropEnv. Ze względu na podobny charakter przechowywanych danych, klasa ta jest również wykorzystywana do przechowywania wynikowej tablicy absorpcji. Tłumaczone jest to faktem, że tablica absorpcji również odzwierciedla środowisko propagacji, zatem bardziej przypomina instancję PropEnv niż Object3D. Odbywa się to jednak w odrębnych obiektach klasy PropEnv. Podstawowym polem jest odziedziczone po klasie Object3D body. Zawiera trójwymiarową tablicę NumPy z etykietkami materiałów odpowiadającymi swoją lokalizacją w układzie współrzędnych symulacji indeksom tej tablicy. W przypadku tablicy absorpcji, w komórkach zapisywana jest zaabsorbowana moc wiązki. Klasa PropEnv udostępnia funkcje potrzebne do odczytu parametrów materiału znajdującego się w zadanej pozycji. Liczby zmiennoprzecinkowe są w tym wypadku zaokrąglane wbudowaną funkcją round [999]. Do ważniejszych funkcjonalności należy identyfikacja przekroczenia granicy ośrodków z użyciem algorytmu maszerujących sześcianów. Tego samego algorytmu używa się do triangulacji powierzchni styku dwóch typów ośrodka propagacji, w celu późniejszego wyświetlenia siatki (ang. mesh) za pomocą biblioteki Vispy.
+Implementacja bazująca na opisie brył geometrycznych
+Aby uniknąć przechowywania w pamięci dużych tablic zaimplementowano alternatywny sposób opisu środowiska propagacji. Odpowiada z niego klasa PropEnvVec, która dziedziczy po klasie PropEnv i nadpisuje używane przez nią funkcje wymagające trójwymiarowej tablicy. Zamiast tablicy głównym polem klasy jest lista material_stack zawierająca obiekty klasy Material. Klasa Material jest abstrakcyjna. W symulacji nie używa się jej bezpośrednich instancji, a dopiero obiektów klas potomnych. Klasa Material zawiera tylko jedno obowiązkowe pole label, przechowujące indeks tablicy wskazujący na jej parametry optyczne w pliku konfiguracyjnym. Oprócz tego zawiera deklaracje funkcji wymaganych do przeprowadzenia symulacji. Klasy potomne zawierają definicje tych funkcji. Sposób modelowania materiału przez funkcje daje pewną swobodę w implementacji. W symulacji zamodelowane dwa rodzaje materiałów Cuboid oraz Cylinder reprezentujące bryły prostopadłościanu oraz walca. Obie używają pomocniczo biblioteki Geometry3D [100]. Biblioteka Geometry3D pozwala modelować trójwymiarowe wielościany. Jej najważniejszą  zaletą jest udostępnianie funkcji pozwalającej obliczyć intersekcję modelowanej bryły z odcinkiem. Znacząco ułatwia to zadanie lokalizacji granicy ośrodków. Niestety jest ona bardzo wymagająca obliczeniowo. Kolejną wadą jest również brak możliwości skonstruowania walca o gładkiej powierzchni bocznej. W rzeczywistości jest to graniastosłup prawidłowy. Zaimplementowanie żyły z płynącą krwią wymagało zastosowania zakładkowania warstw. Jeśli obszary zasięgu dwóch materiałów z listy pokrywają się, do tego obszaru przypisywany jest obiekt znajdujący się dalej na liście (większy indeks). Zakładkowanie warstw tworzy również pewne utrudnienie w lokalizacji granicy ośrodków przedstawione na rys. 3.9. W sytuacji zmiany pozycji fotonu zgodnie z ruchem niebieskiej strzałki (1), należy szukać intersekcji odcinka drogi fotonu z obiektem innym niż ten, w którym foton znajdował się na początku. W sytuacji opisanej zieloną strzałką (2), należy szukać intersekcji z obiektem początkowym (z którego rozpoczęto ruch). Dodatkowo, obliczone intersekcje nie są jednoznaczne. W sytuacji (1) granicę ośrodków wskazuje kraniec odcinka intersekcji znajdujący się bliżej początku ruchu. W sytuacji (2) będzie to kraniec dalszy. Takich problemów nie ma w przypadku trójwymiarowej tablicy, gdyż podczas wypełniania jej kształtami, każdorazowo nadpisują poprzednie wartości. Umożliwia to logiczne zakładkowawnie warstw bez zmieniania struktury danych i komplikowania algorytmu wykrywania przekroczenia granicy ośrodków, co jest niewątpliwie ogromną zaletą.
+ 
+Rys. 3.9. Zakładkowanie warstw przy wektorowym opisie środowiska propagacji.
+Dla każdej bryły (prostopadłościan i walec) zdefiniowano funkcje wyświetlające ich wybrane ściany. Dla prostopadłościanów są to ich górne podstawy. Wyświetlanie granic ośrodków jest dużo łatwiejsze i mniej kosztowne obliczeniowo niż w przypadku trójwymiarowej tablicy. Dla tablicy o rozmiarach 160x160x320 algorytm maszerujących sześcianów wykonywał się 1 godzinę. W przypadku obiektów opisanych wektorowo wyświetlanie odbywa się prawie natychmiastowo. Rozpatrując model skóry zawierający żyłę rys. 3.10, W przypadku zapisu wektorowego powierzchnie boczne graniastosłupa prawidłowego przybliżającego walec są mniej poszarpane niż w przypadku użycia algorytmu maszerujących sześcianów. Nachylenie płaszczyzny styku może przybierać wartości z większej puli niż wynika z 256 rozpatrywanych przypadków algorytmu maszerujących sześcianów. Nie oznacza to jednak, że metoda zawsze jest dokładniejsza. W szczególności należy zwrócić uwagę na odległość obwodu graniastosłupa od idealnego okręgu – rzeczywistej granicy ośrodków, którą ma przybliżać model. W algorytmie maszerujących sześcianów maksymalne przesunięcie granicy od idealnego okręgu wynosi 0,5 szerokości pola odpowiadającego jednemu indeksowi tablicy. W przypadku opisu wektorowego i użycia małej liczby boków (w skrajnym przypadku 3 boków) graniastosłupa do przybliżenia walca, przesunięcie zmiany ośrodka może mieć już wartości całkowite.
+ 
+Rys. 3.10. Rura cylindryczna przedstawiona za pomocą graniastosłupów prostych w wektorowym opisie środowiska propagacji.
+Modele skóry
+Poniżej przedstawiono 4 modele skóry. Ich wymiary oraz skład przedstawiono na tab. 3.5 oraz tab. 3.6. Modele wielowarstwowe składają się z kilku rodzajów materiałów umieszczonych na różnych głębokościach środowiska propagacji. Najprostsze warstwy mają kształt prostopadłościanu wypełnionego jednolitym materiałem. W przypadku naczyń krwionośnych zastosowano rurę cylindryczną, natomiast samą warstwę krwi stanowi wypełniający ją walec. Przy konstruowaniu złożonego modelu zawierającego naczynia krwionośne sugerowano się pracami [904] i [914]. W pracy [904] wskazano, że grubość naskórka ma około 100 µm, natomiast w pracy [914] było to 65 µm. Dla skóry właściwej różnice były już nieco większe. Było to 1-4 mm i 0,7 mm odpowiednio dla prac [904] i [914]. Według pracy [904] podskórna warstwa tłuszczowa ma od 1 do 6 mm. Ostateczne wymiary zaimplementowanych modeli skóry przedstawiono w tab. 3.5. W tab. 3.6 pokazano grubość każdej z warstw wzdłuż osi z. Wstępne eksperymenty pokazały, że znaczna część fotonów nie dociera głębiej niż 1 cm przy zastosowaniu parametrów skóry takich jak w tab. 2.2. Z tego powodu w trzech pierwszych modelach zdecydowano się ograniczyć wysokość środowiska propagacji (oś z) do 2 cm, zostawiając wystarczająco duży zapas. W modelu z naczyniami krwionośnymi fotony rozpraszane są dużo mocniej i wysokość 0,8 cm wydaje się wystarczająca.
+Tab. 3.5. Wymiary zaimplementowanych modeli skóry.
+	Model jednowarstwowy	Model dwuwarstwowy	Model trzywarstwowy	Model skóry z naczyniami krwionośnymi
+Rozdzielczość przestrzenna [cm-1]
+(bins_per_1_cm)	120	120	120	400
+Rozmiar środowiska
+osie (x; y; z) [cm]	(1,5; 1,5; 2)	(1,5; 1,5; 2)	(1,5; 1,5; 2)	(0,4; 0,4; 0,8)
+Rozmiar tablicy
+Osie (x; y; z)	(180; 180; 240)	(180; 180; 240)	(180; 180; 240)	(160; 160; 320)
+Liczba komórek tablicy	7,776∙106	7,776∙106	7,776∙106	8,192∙106
+
+Tab. 3.6. Wymiary zaimplementowanych modeli skóry z podziałem na warstwy.
+	Model jednowarstwowy	Model dwuwarstwowy	Model trzywarstwowy	Model skóry z naczyniami krwionośnymi
+1 warstwa	skóra właściwa	naskórek	naskórek	powietrze
+Grubość warstwy (oś z) [cm]	2	0,5	0,67	0,01
+2 warstwa		skóra właściwa	skóra właściwa	słona woda
+Grubość warstwy (oś z) [cm]		1,5	0,67	0,01
+3 warstwa			tłuszczowa tkanka podskórna	naskórek
+Grubość warstwy (oś z) [cm]			0,67	0,01
+4 warstwa				skóra właściwa
+Grubość warstwy (oś z) [cm]				0,22
+5 warstwa				żyła
+Grubość warstwy (oś z) [cm]				0,05
+6 warstwa				krew
+Grubość warstwy (oś z) [cm]				0,07
+7 warstwa				żyła
+Grubość warstwy (oś z) [cm]				0,05
+8 warstwa				skóra właściwa
+Grubość warstwy (oś z) [cm]				0,08
+9 warstwa				tłuszczowa tkanka podskórna
+Grubość warstwy (oś z) [cm]				0,30
+
+Na rys. 3.5 pokazano przekrój modelu skóry z naczyniami krwionośnymi zgodny z wartościami podanymi w tab. 3.6.
+ 
+Rys. 3.11. Przekrój modelu skóry z naczyniami krwionośnymi.
+Przy wyborze metodyki implementacji modeli skóry należy zwrócić uwagę na dwa czynniki; czas obliczeń oraz zapotrzebowanie na pamięć. Modele zaimplementowane za pomocą trójwymiarowej tablicy charakteryzują się dużą objętością w pamięci komputera. W przypadku ośrodka propagacji będącego sześcianem, zapotrzebowanie na pamięć rośnie wraz z sześcianem długości jego krawędzi. Dla sześcianu o długości 100 tablica będzie wymagała aż miliona komórek. Jest to szczególnie istotne w języku Python, gdyż pojedyncza zmienna typu int potrafi zająć w pamięci 28 bajtów. Nieco lepiej jest w przypadku używania tablic z biblioteki NumPy, gdzie pojedyncza komórka zajmuje 4 bajty. Zaletą implementacji metodą trójwymiarowej tablicy jest krótszy czas obliczeń oraz stosunkowo łatwa implementacja nieregularnych kształtów. Modele zaimplementowane za pomocą brył geometrycznych zajmują pomijalnie mało pamięci komputera. Pozwalają także na dokładniejsze odzwierciedlenie nachylenia powierzchni styku na granicy ośrodków. Niestety wadą ich użycia jest wydłużenie czasu obliczeń, który rośnie proporcjonalnie do liczby ścian użytych brył geometrycznych, reprezentujących pojedynczy materiał ośrodka propagacji. Na obronę tej metody trzeba dodać, że jest ona łatwiejsza do zrównoleglenia w języku Python, gdyż nie wymagałaby współdzielenia pojedynczego, dużego obiektu pomiędzy wątkami. Jednak tym tematem nie zajmowano się w niniejszej pracy.
+Identyfikacja przekroczenia granicy ośrodków
+Identyfikacja i lokalizacja przekroczenia granicy dla opisu trójwymiarowej tablicy odbywa się z użyciem autorskiego algorytmu. Inspiracją była praca [938]. Zadanie polega na ewentualnym wykryciu zmiany ośrodka propagacji między punktem początkowym i docelowym. Droga od pozycji początkowej do pozycji docelowej dzielona jest na równe odcinki, nie większe niż 0,5 (indeksu tablicy). Większe odległości mogłyby spowodować błędy na skutek zaokrąglenia w dalszej części algorytmu. Dla każdego z tych punktów sprawdzany jest warunek przekroczenia obszaru obserwacji (rozmiaru tablicy body w PropEnv). Jeśli punkt znajduje się w badanym obszarze, jest on zaokrąglany do wartości całkowitych. Od tej pory stanowi on centroid obszaru, który zostanie otoczony przez 8 sześcianów. Następnie wyznacza się 8 pozycji przesuniętych względem centroida na każdej z osi o wartość cmv = 0,5 (cmv to nazwa zmiennej w programie). Każda z nich stanie się centroidem pojedynczego sześcianu. Dla każdego centroida sześcianu wyznacza się jego narożniki przesunięte o wartość cmv. Jeśli narożniki któregoś z sześcianów wystają poza obszar obserwacji, sześcian jest usuwany z listy. Kolejne procedury wykonuje się dla każdego z sześcianów. W każdym z narożników sprawdzany jest materiał ośrodka propagacji. Jeśli materiał jest identyczny jak w punkcie początkowym, jego narożnik znaczony jest liczbą 1. W przeciwnym wypadku jest znaczony liczbą 0. Kolejne akcje wykonuje się jak w algorytmie maszerujących sześcianów. Oznaczenia nadane narożnikom układa się liczbę binarną w ściśle określonej kolejności. Liczbę binarną zamienia się na liczbę w systemie dziesiętnym. Może ona przyjąć wartości 0-255 (8 bitów). Stanowi ona indeks listy przechowywującej trójkąty rozpościerające płaszczyznę granicy materiałów [979]. Jeśli wszystkie punkty należą do tego samego ośrodka, lista trójkątów jest pusta, co skraca obliczenia. Przy okazji zaimplementowano rozpoznawanie błędnie przypisanej etykietki materiału do ostatniej pozycji fotonu. Jeśli żaden z maszerujących sześcianów nie zawiera punktu z etykietką taką samą, jaką przypisano poprzedniej pozycji fotonu, domniema się pominięcie granicy ośrodków. Obliczenia są wtedy przerywane i zostaje wyświetlony komunikat o błędzie. W dalszej części, dla każdej płaszczyzny sprawdza się, czy nie zachodzi intersekcja z odcinkiem liczonym od punktu początkowego do punktu docelowego. Jeśli intersekcja ma miejsce, sprawdza się, czy zachodzi ona w obszarze ograniczonym aktywnym sześcianem. Po powtórzeniu procedury dla każdego z sześcianów wybiera się trójkąt, którego punkt intersekcji z odcinkiem znajduje się najbliżej punktu początkowego. Na podstawie tego trójkąta zwracany jest wektor normalny płaszczyzny granicy ośrodków oraz dokładny punkt intersekcji. Aby wektor normalny był zawsze skierowany na zewnątrz, oblicza się kąt, jaki tworzy on z odcinkiem drogi przebytej przez foton. Jeśli kąt jest większy niż 90°, wektor się odwraca. W przypadku intersekcji występującej na krawędzi łączącej dwie ściany graniczne ośrodków propagacji wektor normalny jest uśredniany.
+Zapis do pliku
+Domyślnie model skóry zapisywany jest w pliku DefaultEnv.json w folderze envs. Format zapisu do plików jest zgodny z standardem json. Niesie to za sobą pewne negatywne konsekwencje. Obiekty muszą zostać najpierw zamienione na struktury danych zgodne z formatem. W tym celu klasy, które podlegają zapisowi mają swoje funkcje zwracające swoje w pola w formie słownika dict [101]. Analogicznie utworzono funkcje do wczytywania obiektów. Niemożliwe jest bezpośrednie zapisanie tablicy NumPy. Najpierw należy zamienić ją na typ listy. O ile przy małych tablicach nie stanowi to większego problemu, przy dużych obiektach można spodziewać się przekroczenia limitu pamięci i przerwania procesu przez system operacyjny. Dla klasy PropEnv oprócz głównej tablicy body zapisywane są również wymiary środowiska. Opcjonalnie można również zapisać analizę składu tablicy, czyli liczby powtórzeń etykietek występujących w niej materiałów. W przypadku PropEnvVec zapis ogranicza się do zmiennych wymaganych do odtworzenia figury geometrycznej. Plik jest w tym przypadku dużo mniejszy. Zaletą używania standardu json jest duża czytelność i łatwa edycja plików.
+Implementacja źródła światła
+Źródło światła jest przechowywane w klasie LightSource. Najważniejszym polem tej klasy jest lista light_source_list zawierająca punktowe źródła światła. Do każdego punktowego źródła światła może zostać przypisany oddzielny limit liczby fotonów do wyemitowania. Domyślnie limity są rozdysponowywane w miarę możliwości po równo w taki sposób, by ich suma odpowiadała polu photon_limit. Każde punktowe źródło światła jest obiektem klasy LightSourcePoint. Zawiera swoją lokalizację, wektor kierunku emisji, funkcje odchylenia oraz limit fotonów do wyemitowania otrzymane z obiektu nadrzędnego klasy LightSource. Lokalizacja punktowego źródła światła ma charakter lokalny. Docelowo każdy punkt jest później przesunięty o wartość pola offset w obiekcie klasy PropSetup. Funkcje odchylenia przydzielane są jako odnośniki do klasy FeatureSampling, gdzie znajdują się ich definicje. Domyślnie ich działanie jest wyłączone poprzez przyporządkowanie funkcji zwracających wartości stałe. Mają one wpływ na odchylenie wektora kierunku emisji fotonu oraz na jego punkt początkowy (lokalizacja punktowego źródła światła). Stosując funkcję odchylenia punktu początkowego można zasymulować cylindryczną wiązkę lasera o dowolnym promieniu. Takie podejście przedstawiono w pracy [905]. Możliwości konfiguracji są zatem bardzo szerokie. Dla uproszczenia, w tej pracy przeprowadzono eksperymenty głównie na prostym źródle światła, składającym się z jednego punktowego źródła światła skierowanego w dół i umieszczonego na środku górnej podstawy prostopadłościanu ograniczającego obszar obserwacji. Podobnie jak ośrodek symulacji, źródło światła może zostać zapisane do pliku. Domyślnie źródło światła zapisywane jest w pliku DefaultLightSource.json w folderze lightSources. Do agregacji elementów determinujących środowisko propagacji, tzn. źródła światła i modelu skóry używa się pliku DefaultPropSetup.json w folderze propSetups. Agregacja odbywa się poprzez zapis ścieżek do elementów składowych oraz przesunięcia między nimi przechowywanego w polu offset.
+Podstawowym zadaniem źródła światła jest emisja fotonów. W niniejszej aplikacji fotony to obiekty klasy Photon. Każdy z nich zawiera pole aktualnej pozycji, wektor kierunku ruchu, swoją wagę, etykietkę materiału, w którym się aktualnie znajduje oraz numer identyfikacyjny id. Funkcje rozpraszania oraz wyznaczania następnego skoku przypisywane są globalnie do klasy Photon jako odnośniki do funkcji instancji FeatureSampling. Pole wagi reprezentuje ułamek energii niesionej przez foton, która potencjalnie może zostać zaabsorbowana przez środowisko. Wartość wagi zmniejsza się po każdym incydencie absorpcji. Dodatkowo foton na granicy ośrodków może się podzielić na odbity i wnikający. Jego waga jest wówczas dzielona zgodnie z funkcją reflektancji.
+W ramach eksperymentów zbadano 5 źródeł światła:
+	skolimowana wiązka Gaussa,
+	źródło izotropowe,
+	punktowa wiązka skierowana w górę,
+	wiązka Gaussa z punktem skupienia w odległości 0,5 mm od źródła,
+	punktowa wiązka skierowana w dół.
+Wszystkie źródła zostały ustawione na środku górnej podstawy prostopadłościanu z wyjątkiem źródła izotropowego, które umieszczono na środku całej bryły.
+Przeprowadzone eksperymenty
+Procedurę pomiarową napisano w języku Python. Parametry symulacji zmieniano edytując bezpośrednio pliki tekstowe z kodem źródłowym poprzez podmianę linijek oznaczonych komentarzem z numer identyfikacyjnym. Przeprowadzono 12 serii eksperymentów, łącznie 59 przebiegów symulacji. Pierwszy eksperyment miał na celu porównanie szybkości symulacji między językami C i Python. Następnie przeprowadzono serię eksperymentów na własnej implementacji oraz implementacji z literatury w celu zbadania różnic. Obliczenia przeprowadzono na własnym, domyślnym, jednolitym ośrodku skóry (μ_a=0,37, μ_s=23,89,g=0,9) – skóra właściwa z tab. 2.2 oraz na modelu skóry z literatury (μ_a=1,673, μ_s=312,g=0,9) [937]. Kolejne dwie serie posłużyły do analizy wpływu współczynnika anizotropii. Sprawdzono także 7 różnych ośrodków propagacji (tab. 2.2) oraz 5 źródeł światła. W ostatnich seriach eksperymentów zademonstrowano wielowarstwowe modele skóry z rozdz. 3.4.4. 
+Tab. 3.7. Przeprowadzone serie eksperymentów.
+Nazwa programu	Liczba fotonów	Stałe parametry	Zmieniany parametr	Liczba eksperymentów
+mc321 (Python)	10 tys. – 10 mln	μ_a=0,37
+μ_s=23,89
+ g=0,9
+pionowa wiązka
+skierowana w dół	liczba fotonów	4
+własna implementacja (Python)	10 tys. – 100 mln	μ_a=0,37
+μ_s=23,89
+ g=0,9
+pionowa wiązka
+skierowana w dół	liczba fotonów	5
+mc321 (C)	10 tys. – 100 mln	μ_a=0,37
+μ_s=23,89
+ g=0,9
+pionowa wiązka
+skierowana w dół	liczba fotonów	5
+własna implementacja (Python)	10 tys. – 10 mln	μ_a=1,673
+μ_s=312
+ g=0,9
+pionowa wiązka
+skierowana w dół	liczba fotonów	4
+mc321 (C)	10 tys. – 100 mln	μ_a=1,673
+μ_s=312
+ g=0,9
+pionowa wiązka
+skierowana w dół	liczba fotonów	5
+mc321 (C)	100 mln	μ_a=0,37
+μ_s=23,89
+pionowa wiązka
+skierowana w dół	g	5
+własna implementacja (Python)	10 tys.	μ_a=0,37
+μ_s=23,89
+pionowa wiązka
+skierowana w dół	g	4
+mc321 (C)	100 mln	g=0,9
+pionowa wiązka
+skierowana w dół	7 modeli ośrodka propagacji	7
+mc321 (C)	100 mln	μ_a=1,673
+μ_s=312
+ g=0,9
+pionowa wiązka
+skierowana w dół	źródło światła	5
+własna implementacja (Python)	100 – 1 mln	g=0,9
+pionowa wiązka
+skierowana w dół
+model dwuwarstwowy	liczba fotonów	5
+własna implementacja (Python)	100 – 1 mln	g=0,9
+pionowa wiązka
+skierowana w dół
+model trzywarstwowy	liczba fotonów	5
+własna implementacja (Python)	100 – 100 tys.	g=0,9
+pionowa wiązka
+skierowana w dół
+model z żyłą	liczba fotonów	5
+
+Metody porównawcze
+Wyniki w formacie json wczytano i przeanalizowano w interaktywnym notatniku zał. nr 2: monte-carlo-sim-benchmark. Jako próbę kontrolną dodano tablicę wypełnioną pseudolosowymi wartościami. Dla każdego eksperymentu na podstawie tablicy transportu T [1/cm2] obliczono sumę, średnią, statystykę testu Kołmogorowa-Smirnowa dla 5 różnych przekształceń zbioru mających na celu uzyskania rozkładu normalnego, skośność, kurtozę, wartość minimalną i maksymalną, 3 kwartyle, odchylenie standardowe, sumę transportu T poza badanym obszarem (fotony ucieczki), stosunek transportu T wewnątrz badanego obszaru do całkowitego transportu, liczbę wartości zerowych oraz niezerowych. Obliczone cechy zapisano w pliku csv (zał. nr 4). Przeprowadzono również analizę wariancji pomiędzy symulacjami z użyciem różnej liczby fotonów testem Kruskala-Wallisa. Następnie każdy z eksperymentów porównano do zbioru referencyjnego, będącego najlepszym eksperymentem w serii. Obliczono korelację Spearmana, statystykę testu U Manna-Whitneya, testu Kołmogorowa-Smirnowa na pochodzenie z tego samego rozkładu oraz testu Levena na homogeniczność wariancji i RMSE. Obliczone parametry porównania również zapisano w pliku csv (zał. nr 5).
+Metody przekształcenia danych do rozkładu normalnego.:
+	Odfiltrowanie wartości poniżej 1 i powyżej 99 percentylu. Odfiltrowanie zaimplementowano poprzez losowanie nowych próbek z tego samego rozkładu, aby nie zmieniać wymiarów tablicy.
+	Odfiltrowanie wartości poniżej 1 i powyżej 99 percentylu, następnie przekształcenie przez logarytm naturalny. Wypróbowano również przekształcenie Boxa-Coxa [995], lecz najlepszy wynik otrzymano dla parametru λ=0, dla którego funkcja Boxa-Coxa jest tożsama z logarytmem naturalnym.
+	Odfiltrowanie wartości poniżej 1 i powyżej 99 percentylu, następnie nieliniowe skalowanie oraz przekształcenie przesuniętą i odwróconą funkcją tangens (3.1). Histogramy badanych rozkładów wskazują na silnie skośny rozkład z wyraźnym załamaniem krzywej dla pewnej wartości. Postanowiono wykorzystać tą wartość jako argument dla punktu zmiany odwróconej i przesuniętej funkcji tangens na wartości większe niż 1. Wartości rozkładu poniżej punktu załamania są normalizowane (min-max) do przedziału (0,π/4⟩. W ten sposób wpasują się w szybko rosnące wartości funkcji tangens. Wartości powyżej punktu załamania krzywej są normalizowanie do przedziału ⟨π/4,π/2). Wpasują się w wartości tg mniejsze od 1. W trakcie normalizacji używa się zmiennych globalnych, aby transformacja była identyczna dla każdego zbioru.
+█(f(x)=-tg(x-π/2)  # (3.1))
+	Odfiltrowanie wartości poniżej 1 i powyżej 99 percentylu, następnie przekształcenie Yeo-Johnsona [996]. Parametr λ został dobrany automatycznie przez moduł biblioteki Scipy.
+	Odfiltrowanie wartości poniżej 1 i powyżej 99 percentylu, następnie transformacja kwantylowa za pomocą wytrenowanego modelu z biblioeki Scikit-learn [997]. Liczbę obliczanych kwantyli ustawiono na 10 tys.
+Analiza i dyskusja uzyskanych wyników
+Badane wynikowe rozkłady transportu fotonów są silnie prawoskośne. Na wykresie 4.1 przedstawiono histogramy rozkładów otrzymanych z symulacji z literatury mc321 oraz własnej implementacji. Jedynym przekształceniem na rozkładach było odfiltrowanie skrajnych wartości, tak jak w (1). Histogramy implementacji z literatury umieszczono po lewej stronie, a z własnej implementacji po prawej. Wykresy umieszczone wyżej są w skali liniowej, natomiast dolne w skali logarytmicznej. Wizualnie widoczne są małe różnice między wzorcową i własną implementacją. Prawdopodobnie wynikają one z podjętej decyzji zakończenia dalszego śledzenia ścieżki ruchu fotonu po przekroczeniu granicy obserwowanego ośrodka w własnej implementacji. W przypadku wzorcowej symulacji fotony małą mają szansą powrócić do obserwowanego obszaru, zwiększając tym samym wartości transportu na obrzeżach badanego obszaru.
+
+ 
+Rys. 4.1. Histogramy rozkładów transportu fotonów T w badanym prostopadłościanie 1,5x1,5x2 cm;
+po lewej stronie: wyniki z symulacji z literatury mc321,
+po prawej stronie: wyniki z własnej implementacji symulacji,
+w pierwszym rzędzie: wykresy w skali liniowej,
+w drugim rzędzie: w skali logarytmicznej.
+Na rys. 4.2 przedstawiono wykres pudełkowy rozkładu otrzymanego z własnej implementacji oraz wykres kwantyl-kwantyl rozkładu z symulacji mc321. Wykresy były podobne dla obydwu symulacji. Wskazują na rozkład daleki od normalnego. Tym samym nie spełniają warunku większości testów parametrycznych.
+ 
+Rys. 4.2. Po lewej stronie: wykres pudełkowy rozkładu transportu fotonów,
+po prawej stronie: wykres kwantyl-kwantyl rozkładu transportu fotonów.
+W celu umożliwienia porównania rozkładów na skali ilościowej, podjęto próbę normalizacji rozkładów. Histogramy po transformacjach przedstawiono na 4.3. Wykres w lewym górnym rogu przedstawia przekształcenie logarytmem (2), w prawym górnym rogu przekształcenie zmodyfikowaną funkcją tangens (3), w prawym dolnym rogu przekształcenie Yeo-Johnsona, w lewym dolnym rogu przekształcenie transformerem kwantylowym.
+ 
+Rys. 4.3. Histogramy przekształconych rozkładów;
+w pierwszym rzędzie: po lewej przekształcenie logarytmem, po prawej przekształcenie funkcją tangens,
+w drugim rzędzie: po lewej przekształcenie Yeo-Johnsona, po prawej przekształcenie transformatorem kwantylowym.
+
+Na wykresie 4.4 przedstawiono wykresy kwantyl-kwantyl rozkładów po transformacjach identycznych jak wyżej. Żadna z transformacji nie przyniosła oczekiwanego rezultatu. Najbliżej rozkładu normalnego był rozkład przekształcony logarytmem. Z tego powodu w dalszej części do porównania wykorzystano nieparametryczne testy statystyczne, których interpretacja jest trudniejsza.
+ 
+Rys. 4.4. Wykresy kwantyl-kwantyl rozkładów po transformacjach;
+w pierwszym rzędzie: po lewej przekształcenie logarytmem, po prawej przekształcenie funkcją tangens,
+w drugim rzędzie: po lewej przekształcenie Yeo-Johnsona, po prawej przekształcenie transformatorem kwantylowym.
+W tabeli przedstawiono parametry podstawowych rozkładów z symulacji w własnym, domyślnym jednolitym modelu skóry (rozdz. 3.6). Wartości skrajne celowo nie zostały odfiltrowane. Przyjęto następujące oznaczenia; sim – implementacja symulacji, R – kontrolna próba losowa, mc321 – przykładowa symulacja z literatury, W – własna implementacja. skos – skośność, kurt – kurtoza, min – wartość minimalna, max – wartość maksymalna, std – odchylenie standardowe, n phot – liczba fotonów, bezzer – wypełnienie tablicy liczbami różnymi od 0 liczone w procentach, T in – stosunek transportu fotonów w badanym obszarze do całkowitej wagi wiązki. Wszystkie przedstawione eksperymenty mają zbliżone statystyki. Rozkłady charakteryzują się bardzo wysoką kurtozą, co świadczy, o przesunięcie środka ciężkości rozkładów w kierunku brzegów. Przy dodatniej, wysokiej skośności i wysokiej kurtozie można stwierdzić, że rozkład jest silnie prawoskośny. Poziom wypełnienia wartościami różnymi od 0 rośnie wraz z liczbą fotonów. Trudno określić istotność statystyczną wyników tablicy o niskim poziomie wypełnienia. Przykładowo, wyniki symulacji mc321 dla 100 tys. skutkują wypełnieniem 43%. Większość pól nie została odwiedzona przez foton ani razu. W tych, w których waga została odłożona tylko raz przez pojedynczy foton, wartość transportu jest obliczana na podstawie tylko jednej próbki. Patrząc jednak na zjawisko holistycznie, próba statystyczna była jednakowa dla każdej komórki tablicy i wynosiła 100 tys. W takiej interpretacji brak absorpcji (brak „odwiedzenia” lokalizacji przez foton) jest również próbką niosącą informację. Można więc uznać, że nawet przy niskim poziomie wypełnienia tablicy i jednocześnie dużej liczbie wszystkich wyemitowanych fotonów wyniki są istotne statystycznie. Wtedy, w uproszczeniu, wartości 0 niosą informację, o tym że wartość transportu w danej lokalizacji jest co najmniej tyle razy mniejsza od całkowitej sumy transportu w badanym obszarze, ile wynosiła w nim całkowita liczba zdarzeń. Dokładne ustalenie tego stosunku nie jest możliwe dla wartości 0, ponieważ należałoby również uwzględnić wagi każdego zdarzenia, a waga teoretycznego, niezarejestrowanego zdarzenia nie jest znana. Można posłużyć się analogią do cyfrowego rejestrowania dźwięków. Liczba fotonów odpowiadałaby liczbie bitów rejestru przechowującego próbki dźwiękowe. Zakładając, że środowisko badania jest różne od próżni, że w przyrodzie nie występują wartości zerowe, i że czułość mikrofonu została ustawiona w taki sposób, że najwyższe zarejestrowane wartości ciśnienia akustycznego wykorzystują w całości wszystkie bity rejestru pamięci, pojawienie się wartości 0 świadczyłoby o zbyt dużej dynamice zjawiska, większej od dynamiki aparatury pomiarowej, niemożliwej do zapisania bez użycia kompresji. W przypadku symulacji światła, wartości 0 świadczą o zbyt małej liczbie fotonów do zarejestrowania dynamiki zmian pola światła.
+Tab. 4.1. Podstawowe statystyki wynikowych rozkładów transportu fotonów.
+sim	skos	kurt	min	q 0,25	q 0,5	q 0,75	max	std	n phot	Bezzer	T in
+R	0.00	-1.20	0.00	0.07	0.13	0.20	0.27	0.08	100000000	100%	100%
+mc321	835.10	873784.25	0.00	0.00	0.00	0.00	13449.25	10.09	10000	7%	51%
+W	850.44	821462.41	0	0	0	0	14025.49	12.12	10000	4%	44%
+W	871.21	855538.04	0.00	0.00	0.00	0.23	14205.57	12.06	100000	27%	44%
+mc321	860.47	914414.50	0.00	0.00	0.00	0.32	13501.32	10.10	100000	43%	51%
+W	872.25	856708.29	0.00	0.02	0.08	0.22	14270.81	12.04	1000000	80%	44%
+mc321	860.78	913344.97	0.00	0.04	0.12	0.27	13427.99	10.07	1000000	97%	51%
+W	872.71	857904.97	0.00	0.03	0.09	0.21	14287.38	12.05	10000000	99%	44%
+mc321	860.09	911340.28	0.00	0.05	0.13	0.26	13419.31	10.07	10000000	100%	51%
+W	872.66	857804.60	0.00	0.03	0.09	0.21	14286.88	12.04	100000000	100%	44%
+mc321	860.13	911353.60	0.01	0.05	0.13	0.26	13419.07	10.07	100000000	100%	51%
+
+Oprócz statystyk wymienionych w tabeli obliczono statystykę testu Kołmogorowa-Smirnowa dla 5 różnych przekształceń zbioru (1-5). Wartości statystyki wahały się od 0,06 do 0,5. Wszystkie otrzymane z tego testu wartości p były równe lub nieznacznie większe niż 0,00. Tym samym stwierdzono, że różnice pomiędzy przekształconymi rozkładami, a rozkładem normalnym były istotne statystycznie. Odrzucono hipotezę zerową wskazującą na rozkład zbliżony do normalnego.
+Na wykresie 4.5 przedstawiono porównanie czasów obliczeń różnych implementacji symulacji w funkcji liczby fotonów. Modele złożone z więcej niż jednej warstwy były znacznie bardziej złożone obliczeniowo, stąd czas symulacji rośnie szybciej – większe nachylenie odcinków łączących punkty zarejestrowanych czasów. Różnice wydajności między językiem C, a Pythonem porównano na symulacji mc321 oraz jej translacji do języka Python. Dla 10 mln fotonów symulacja w języku C wykonywała się niecałe 7 min, a w języku Python ponad 6 h. Obliczenia w języku Python trwały 54 razy dłużej.
+ 
+Rys. 4.5. Porównanie czasu obliczeń symulacji.
+Porównano tablice transportu 10 mln fotonów dla symulacji mc321 w języku C oraz Python. Obliczenia zostały przeprowadzone po wstępnym odfiltrowaniu wartości skrajnych. Otrzymano wysoką korelację Spearmana 0,98. Wartość p 0,93 testu Manna-Whitneya wskazuje, że nie można odrzucić hipotezy zerowej o równości rozkładów. Średnia kwadratowa błędów RMSE wynosiła 0,06. Test Kołmogorowa-Smirnowa o wartości bliskiej 0,00 oraz wartości p 1 wskazuje, że oba zbiory z dużym prawdopodobieństwem pochodzą z tego samego rozkładu. Test Levena 0,01 oraz jego wartość p 0,9 wskazują, że nie można odrzucić hipotezy zerowej o homogenicznej wariancji obu zbiorów. Wszystkie te dowody uznano za wystarczające do stwierdzenia, że nie ma istotnych różnic pomiędzy implementacjami w językach C i Python.
+Na wykresie (4.6) przedstawiono mapy ciepła średnich wartości transportu fotonów wzdłuż osi x. Białym kolorem oznaczono miejsca, w których nie zarejestrowano fotonów. Na górnych wykresach przedstawiono własne parametry skóry, a na dolnych oryginalne parametry z implementacji z literatury (mc321). Po lewej stronie znajdują się wyniki mc321, po prawej wyniki własnej implementacji. Wszystkie symulacje z wyjątkiem własnej implementacji z parametrami z literatury, dla której czas obliczeń trwał zbyt długo (obliczenia ograniczono więc do 10 mln), przeprowadzono dla 100 mln fotonów. Pomiędzy własnymi, a oryginalnymi parametrami widać wyraźną różnicę. W przypadku oryginalnych parametrów światło jest tłumione znacznie silniej, przez co na głębokość większą niż 1 cm dociera jedynie nieznaczna część fotonów. Porównując grupy o największej liczbie fotonów własnej symulacji do mc321, uzyskano wysokie wartości korelacji Spearmana, przemawiające za dużym podobieństwem i dobrym odwzorowaniem symulacji – 0,95 dla własnych parametrów skóry oraz 0,88 dla parametrów jak w mc321. RMSE wyniosło 0,09 dla własnych parametrów i 0,04 dla parametrów z mc321.  Pozostałe statystyki wskazywały na różnice istotne statystycznie – odpowiednio dla własnych parametrów i parametrów z mc321: U testu Manna-Whitneya rzędu 1013 dla obu, wartość p 0,00 dla obu, test Kołmogorowa-Smirnowa 0,14 dla obu, wartość p 0,00 dla obu, test Levena 14082 i 35812, wartość p 0,00 dla obu.
+
+ 
+Rys. 4.6. Średnie wartości fluencji względnej (transportu fotonów) wzdłuż osi x;
+w pierwszym rzędzie: własne parametry skóry, w drugim rzędzie parametry takie jak w mc321,
+po lewej wyniki symulacji mc321, po prawej wyniki z własnej implementacji symulacji.
+
+Na (4.7) przedstawiono średni transport fotonów otrzymany z własnej symulacji i na własnych parametrach skóry. Wizualnie nie są widoczne duże różnice. Dla 100 tys. u dołu tablicy pojawiło się ziarno, sugerujące zbyt małą liczbę fotonów do dokładnej estymacji pola w tym obszarze dla wartości  rzędu 0,01 1/cm2.
+
+ 
+Rys. 4.7. Średnie wartości transportu fotonów (Fl) otrzymane z własnej symulacji i na własnych parametrach skóry;
+w pierwszym rzędzie: po lewej dla 100 mln fotonów, po prawej dla 10 mln fotonów,
+w drugim rzędzie: po lewej dla 1 mln fotonów, po prawej dla 100 tys. fotonów.
+Różnice są bardziej widoczny, gdy zamiast średniej przedstawimy wartości w środkowym przekroju (4.8). Różnice potwierdza test Kruskala-Wallisa liczony dla tych 4 zbiorów; wartość statystyki 3924999, wartość p 0,00. Badając 5 przebiegów z liczbą fotonów od 10 tys. do 100 mln wraz z wzrostem liczby fotonów zauważono również wzrost korelacji Spearmana i spadek RMSE.
+
+ 
+Rys. 4.8. Transport fotonów (Fl) w środowym przekroju otrzymany z własnej symulacji i na własnych parametrach skóry; w pierwszym rzędzie: po lewej dla 100 mln fotonów, po prawej dla 10 mln fotonów,
+w drugim rzędzie: po lewej dla 1 mln fotonów, po prawej dla 100 tys. fotonów.
+W kolejnym eksperymencie zbadano wpływ współczynnika anizotropii. W pierwszym rzędzie na rys. 4.9 przedstawiono wartości w środkowym przekroju dla współczynnika anizotropii (kolejno od lewej) 0, 0,5, 0,9. W drugim rzędzie przedstawiono wartości średnie. Mimo, że obrazy wyglądają podobnie, różnią się wartościami na skali, co widać po przybliżeniu. Dla małych wartości współczynnika anizotropii na obrazie dominują mniejsze wartości transportu fotonów niż w przypadku większego współczynnika anizotropii. Przy małej anizotropii światło jest silniej rozpraszane – fotony przemieszczają się w sposób bardziej chaotyczny, słabiej ukierunkowany, dlatego mniejsza ich ilość dociera do obszaru odległego na krawędzi badanego obszaru. Dla wartości współczynnika anizotropii 0,5 oraz 0,9 wyłania się tendencja fotonów do kontynuowania drogi w kierunku podobnym do poprzedniego kroku. Dzięki temu docierają one dalej. Na obrazach przekrojów widać również ziarno. Przy użyciu większej liczby fotonów, obraz stałby się gładszy – zmiany następowałyby płynnie. Dla współczynnika g równego 1 ruch jest dalej kontynuowany w tym samym kierunku. Zjawisko rozproszenia ma wtedy miejsce, lecz kierunek po rozproszeniu zostaje ten sam. Na obrazie byłaby widoczna pionowa linia, patrząc od strony czoła osi x lub y, oraz kropka na środku, patrząc od strony czoła osi z.
+ 
+Rys. 4.9. Transport fotonów (Fl) dla różnych wartości współczynnika anizotropii g;
+w pierwszym rzędzie: wartości w środkowym przekroju, w drugim średnia wartości wzdłuż osi z,
+od lewej: g = 0, g = 0,5, g = 0,9. 
+Przy współczynniku anizotropii równym 0, światło rozpraszane jest izotropowo, tzn. bezkierunkowo. Niezależnie od poprzedniego wektora ruchu, kąty odchylenia kierunku ruchu azymutalny i zenitalny będą wylosowane z jednakowym prawdopodobieństwem z zakresów <0,2π) oraz <0,π). Fotony mają wtedy tendencję do chaotycznego krążenia w pobliskim obszarze, co jest widoczne na rys. 4.10. Nie oddalają się zbyt daleko, ponieważ to wymagałoby wylosowania uporządkowanej sekwencji. Prawdopodobieństwo dotarcia fotonu do danej pozycji zmniejsza się symetrycznie wraz z odległością od środka, stąd na mapie ciepła w 4 wierzchołkach wykresu wartości transportu fotonów są najmniejsze. Izolinie układają się w okręgi. Ścieżki ruchu fotonów przypominają wtedy splątane nitki.
+
+ 
+Rys. 4.10. Ścieżki ruchu 10 fotonów przy 4 różnych współczynnikach anizotropii g; w lewym górnym rogu g = 0, w prawym górnym g = 0,5, w lewym dolnym g = 0,9, w prawym dolnym g = 1.
+Na rys. 4.11 przedstawiono zmianę średniej fluencji względnej wzdłuż osi z (w głąb ośrodka) dla 7 różnych typów ośrodka propagacji zaproponowanych i przedstawionych na tab. 2.2. Wybierając głębokość 1 cm oraz tłuszczową tkankę podskórną jako przykładowy ośrodek propagacji, wartość fluencji względnej wynosiła 1/10  1/〖cm〗^2 . W tabeli z przykładowymi urządzeniami medycznymi używanymi w światłoterapii (tab. 2.1) średnia wartość gęstości mocy wynosiła 100 mW/〖cm〗^2 , a mediana 80 mW/〖cm〗^2 . Rozdzielczość tablicy przechowującej wyniki wynosiła 2/240 cm=1/120 cm, zatem powierzchnia, na którą jest skierowane punktowe źródło światła wynosi 〖(1/120 cm)〗^2=1/14400 〖cm〗^2. Gdyby cała moc wiązki była skupiona na tak małej powierzchni, jej wartość wynosiłaby 1/14400 〖cm〗^2∙100 mW/〖cm〗^2 =1/144 mW dla przyjętej średniej lub 1/14400 〖cm〗^2∙80 mW/〖cm〗^2 =1/180 mW dla mediany. Zatem wpływ mocy wiązki wynosiłby 1/144 mW∙1/10  1/〖cm〗^2 =1/1440  mW/〖cm〗^2 =0,694 μW/〖cm〗^2  dla przyjętej średniej lub 1/180 mW∙1/10  1/〖cm〗^2 =1/1800  mW/〖cm〗^2 =0,556 μW/〖cm〗^2  dla mediany. Są to bardzo małe wartości, mimo wybrania słabo tłumiącego ośrodka oraz założenia skupienia całej mocy wiązki na bardzo małej powierzchni. W podobny sposób obliczono dostarczone ciepło. Średnia dawki standardowej wynosiła 72 J/〖cm〗^2 , a mediana 60 J/〖cm〗^2 . Dostarczone ciepło będzie wynosiło 0,5 mJ/〖cm〗^2  i 0,42 mJ/〖cm〗^2  odpowiednio dla średniej i mediany.
+ 
+Rys. 4.11. Średnia zmiana współczynnika fluencji względnej wzdłuż osi z (w głąb) dla 7 różnych typów ośrodka propagacji.
+
+Do oszacowania gęstości mocy wiązki światła odpowiadającej zastosowaniu fototerapii w leczeniu zaburzeń depresyjnych, posłużono się wzorem 4.1 załączonym do internetowego kalkulatora konwersji natężenia światła wyrażonego w luxach do watów [102]. Obliczenia te są zgrubnym oszacowaniem, ponieważ moc wiązki zależy od częstotliwości fali świetlnej. Mocy wiązki nie można zatem obliczyć za pomocą prostej proporcji. Podobnie współczynnik tłumienia ośrodka propagacji również jest zależny od częstotliwości fali. Pod uwagę nie wzięto również strat mocy na niedoskonałym źródle światła. Do obliczeń należy więc podchodzić z dużą ostrożnością i traktować je jedynie jako punkt wyjściowy do dalszych badań. Do wzoru 4.1 potrzebna jest znajomość wydajności luminancji lm/W. Aby uzyskać poszukiwaną wartość skorzystano z załączonej do kalkulatora tabeli 4.2. Jako źródło światła wybrano lampę LED, dla której wydajność luminancji wynosi 90  lm/W. Za odległość r od źródła światła – naświetlanego pacjenta od lampy LED – przyjęto 1 [m]. Zgodnie z rozdz. 2.1, natężenie światła lamp wykorzystywanych w leczeniu zaburzeń depresyjnych wahało się od 417,9 do 12 tys. luksów. Obliczone moce wiązki wynosiły odpowiednio 58,35 W oraz 1,675 kW dla 417,9 luksów i 12 tys. luksów. Przyjmując, że światło padało na 1 m2, gęstości mocy wynosiły odpowiednio 5,83 mW/〖cm〗^2  oraz 167,55  mW/〖cm〗^2 . Moc punktowego światła, będącego odpowiednikiem rozważanych lamp LED, wynosiłaby odpowiednio 0,41 μW oraz 11,64 μW, natomiast wpływ mocy wiązki 41 nW oraz 1,16 μW.
+█(P[W]=(luminancja [lx]4πr^2 [m^2 ])/(skuteczność luminancji [lm/W] )#(4.1))
+Tab. 4.2. Skuteczność luminancji dla wybranych źródeł światła. Źródło: [102].
+Źródło światła	Wydajność luminancji [lm/W]
+Lampa halogenowa	20
+Lampa fluorescencyjna	60
+Lampa LED	90
+Lampa metalohalogenkowa	87
+Wysokoprężna lampa sodowa	117
+Niskociśnieniowa lampa sodowa	150
+Lampa rtęciowa	50
+Żarówka wolframowa	15
+
+
+Na wykresie 4.12 przedstawiono średnią zmianę współczynnika fluencji względnej wzdłuż osi x.
+ 
+Rys. 4.12. Średnia zmiana współczynnika fluencji względnej wzdłuż osi x dla 7 różnych typów ośrodka propagacji.
+Na rys. 4.13 przedstawiono 3 ortogonalne przekroje zwizualizowane w trójwymiarowej przestrzeni za pomocą biblioteki Vispy. Na każdym obrazie przedstawiono inny rodzaj źródła światła. Numerem (1) oznaczono skolimowaną wiązkę światła – fotony są emitowane pionowo w dół, jednak ich lokalizacja początkowa jest uzależniona funkcją prawdopodobieństwa zgodną z krzywą dzwonową. Światło nie penetruje badanego ośrodka tak głęboko, jak w przypadku punktowego źródła światła ustawionego w dół (5), jednak w pozostałych kierunkach (oś x i y) obraz jest jaśniejszy. Na obrazie (2) pokazano izotropowe źródło światła ustawione w środku badanego obszaru. Rozkład pola jest równomierny w każdym kierunku i przypomina wyniki symulacji z zastosowaniem współczynnika anizotropii 1. Jednak w tym wypadku fotony z większym prawdopodobieństwem utrzymują stały kurs. Izotropowy jest jedynie kierunek emisji. Numerem (4) oznaczono skupioną wiązkę gaussowską. Punkt skupienia został ustawiony na 0,5 cm, stąd widoczne jest zbieganie się promieni do środka. Na obrazie (3) przedstawiono punktowe źródło światła promieniujące górę (poza badany obszar).
+ 
+Rys. 4.13. Przedstawienie wartości transportu fotonów w 3 ortogonalnych przekrojach w trójwymiarowej przestrzeni za pomocą biblioteki Vispy dla 5 różnych typów źródła światła;
+1. Skolimowana wiązka Gaussa, 2. Źródło izotropowe (jako jedyne ustawione na środku), 3. Punktowa wiązka skierowana w górę, 4. Wiązka Gaussa z punktem skupienia 0,5 cm poniżej górnej krawędzi, 5. Punktowa wiązka skierowana w dół.
+Eksperyment (3) miał zademonstrować opuszczenie środowiska przez fotony po stronie przeciwnej do kierunku emisji. W literaturze nazywa się to odbiciem rozproszonym (odbiciem dyfuzyjnym) lub reflektancją (rys. 4.14) [964].
+
+ 
+Rys. 4.14. Halo rozproszenia. Źródło [964].
+W ostatnich seriach eksperymentów wykorzystano wielowarstwowe modele skóry zaproponowane w rozdz. 3.4.4. Rys. 4.15 przedstawia dwuwarstwowy model skóry, na rys. 4.16 pokazano model trzywarstwowy, natomiast na rys. 4.17 zademonstrowano model skóry z naczyniem krwionośnym – żyłą. Z uwagi na złożony obliczeniowo algorytm wykrywania zmiany ośrodka propagacji eksperymenty przeprowadzono na bardzo małej próbie. Dla modeli dwuwarstwowego i trzywarstwowego było to 1 mln fotonów, natomiast dla modelu z żyłą już tylko 100 tys. fotonów. Próby były zbyt mało liczne, by można było uznać je za reprezentatywne. Mimo to, na wykresach uwidoczniły się pewne trendy, rokujące na interesujące wyniki. W przypadku dalszych badań należałoby je również porównać do przykładów z literatury, tak jak uczyniono w przypadku środowisk homogenicznych.
+ 
+Rys. 4.15. Średnie wartości transportu fotonów (Fl) dla ośrodka złożonego z dwóch warstw.
+
+ 
+Rys. 4.16. Średnie wartości transportu fotonów (Fl) dla ośrodka złożonego z trzech warstw.
+ 
+Rys. 4.17. Średnie wartości transportu fotonów (Fl) dla modelu skóry z naczyniami krwionośnymi.
+Podsumowanie
+Celem niniejszej pracy było opracowanie symulacji propagacji światła w skórze z wykorzystaniem metody Monte Carlo. Własna implementacja symulacji została napisana w języku Python. Przeprowadzono szereg eksperymentów na modelach trójwymiarowych. Przedstawiono wpływ współczynników tłumienia i absorpcji dla 7 różnych ośrodków przydatnych do modelowania propagacji światła w skórze. Sprawdzono również 5 modeli źródła światła oraz wypróbowano różne nastawy współczynnika anizotropii oraz liczby fotonów. Wyniki eksperymentów porównano do wyników przykładowej symulacji z literatury – mc321, co pozwoliło na weryfikację poprawności opracowanego programu. Podjęto również próbę symulacji na niejednorodnych modelach skóry. Przyjęta metoda wykrywania przekroczenia granicy zmiany typu ośrodka o nieregularnych kształtach była zbyt wymagająca obliczeniowo, aby móc przeprowadzić doświadczenia na wystarczająco dużej próbie. Mimo uwidaczniającego się trendu na obrazach, danych ilościowych nie można uznać za poprawnych ze względu na zbyt małą liczbę użytych próbek (fotonów). W pracy uwzględniono kilka istotnych kwestii związanych z organizacją kodu i wizualizacją wyników. Rekomenduje się jednak dalsze optymalizacje, zwłaszcza w obszarze zarządzania pamięcią podczas obsługi dużych tablic środowiskowych, co może skrócić czas przetwarzania symulacji. Dalszym krokiem rozwojowym powinno być także uwzględnienie możliwości skorzystania z mocy obliczeniowej jednostki GPU. Ważnym aspektem jest również oddzielenie logiki symulacyjnej od modułów wizualizacji. Mimo zastosowania oddzielnych klas dla obu tych funkcjonalności, rozgraniczenie powinno być bardziej widoczne dla użytkownika niezaznajomionego z kodem. Ten sam problem zauważono w innych symulacjach światła metodą Monte Carlo – PyXOpto i PyTissueOptics, a jego konsekwencją są trudności w instalacji. Przeprowadzone badania potwierdziły, że metoda Monte Carlo jest skutecznym narzędziem do modelowania propagacji światła w skórze, a opracowana implementacja spełnia postawione założenia. Dalsze prace mogą skupić się na udoskonaleniu algorytmów oraz integracji z systemami wykorzystującymi zaawansowane techniki wizualizacji i analizy wyników.
+ 
+
+Bibliografia
+Zwykły akapit w stylu Magisterka zwykły tekst. Xxxxxx xxxxxxx xxxxx xxxxx x xxxxx xxxxx xx xxxx xxx xxxxx xxxx xxxx xxxx xxx xx xxxxxxxxx xxxxxxxxxxx xxxxxxx xxxxx xxx x x xxxxx xxxxxxxxx xxxxxxx xxxxxx xxxxx xxxxxx xxxxxxx xxxxx xxx
+
+ 
+Wykaz rysunków
+Rys. 2.1. Rozpraszanie izotropowe oraz anizotropowe. Źródło: [964].	9
+Rys. 2.2. Zobrazowanie metody Monte Carlo – zanik szumu typu „pieprz i pieprz” wraz z wzrostem próbek (fotonów). Źródło: [965].	13
+Rys. 2.3. Obliczanie pola powierzchni metodą Monte Carlo. Źródło: [964].	14
+Rys. 2.4. Zjawiska odwzorowywane w symulacji światła Monte Carlo. Źródło: [964].	15
+Rys. 2.5. Transport fotonu w symulacji Monte Carlo. A - ścieżka propagacji pojedynczego fotonu. B – superpozycja miliona fotonów reprezentująca penetrację oka laserem. Źródło: [937].	18
+Rys. 2.6. Skwantowany rozkład prawdopodobieństwa funkcji HG.	21
+Rys. 2.7. Przybliżenia powierzchni wielokątami dla 15 kanonicznych orientacji sześcianu. Źródło: [975].	22
+Rys. 2.8. Powierzchnia głowy odtworzona algorytmem maszerujących sześcianów ze 150 obrazów z rezonansu magnetycznego (około 150 tys. trójkątów). Źródło: [975].	23
+Rys. 3.1. Diagram części symulacyjnej aplikacji.	28
+Rys. 3.2. Diagram interfejsu funkcji losowych.	29
+Rys. 3.3. Diagram części wizualizacyjnej aplikacji.	30
+Rys. 3.4. Po lewej - dwie podpróbkowane tablice wyświetlane za pomocą Matplotlib, po prawej - dwie tablice wyświetlane za pomocą Vispy (1 mln punktów).	38
+Rys. 3.5. Zarejestrowane ścieżki ruchu fotonów oznaczone strzałkami.	39
+Rys. 3.6. Ścieżki ruchu fotonów na tle powierzchni rozgraniczających ośrodki.	40
+Rys. 3.7. Skośne przekroje w programie Matlab. Źródło: [966].	41
+Rys. 3.8. Podział wiązki fotonu; po lewej kolorowanie według id fotonu, po prawej kolorowanie według najstarszego rodzica.	42
+Rys. 3.9. Zakładkowanie warstw przy wektorowym opisie środowiska propagacji.	44
+Rys. 3.10. Rura cylindryczna przedstawiona za pomocą graniastosłupów prostych w wektorowym opisie środowiska propagacji.	46
+Rys. 3.11. Przekrój modelu skóry z naczyniami krwionośnymi.	48
+Rys. 4.1. Histogramy rozkładów transportu fotonów T w badanym prostopadłościanie 1,5x1,5x2 cm; po lewej stronie: wyniki z symulacji z literatury mc321, po prawej stronie: wyniki z własnej implementacji symulacji, w pierwszym rzędzie: wykresy w skali liniowej, w drugim rzędzie: w skali logarytmicznej.	55
+Rys. 4.2. Po lewej stronie: wykres pudełkowy rozkładu transportu fotonów, po prawej stronie: wykres kwantyl-kwantyl rozkładu transportu fotonów.	56
+Rys. 4.3. Histogramy przekształconych rozkładów; w pierwszym rzędzie: po lewej przekształcenie logarytmem, po prawej przekształcenie funkcją tangens, w drugim rzędzie: po lewej przekształcenie Yeo-Johnsona, po prawej przekształcenie transformatorem kwantylowym.	56
+Rys. 4.4. Wykresy kwantyl-kwantyl rozkładów po transformacjach; w pierwszym rzędzie: po lewej przekształcenie logarytmem, po prawej przekształcenie funkcją tangens, w drugim rzędzie: po lewej przekształcenie Yeo-Johnsona, po prawej przekształcenie transformatorem kwantylowym.	57
+Rys. 4.5. Porównanie czasu obliczeń symulacji.	59
+Rys. 4.6. Średnie wartości fluencji względnej (transportu fotonów) wzdłuż osi x; w pierwszym rzędzie: własne parametry skóry, w drugim rzędzie parametry takie jak w mc321, po lewej wyniki symulacji mc321, po prawej wyniki z własnej implementacji symulacji.	61
+Rys. 4.7. Średnie wartości transportu fotonów (Fl) otrzymane z własnej symulacji i na własnych parametrach skóry; w pierwszym rzędzie: po lewej dla 100 mln fotonów, po prawej dla 10 mln fotonów, w drugim rzędzie: po lewej dla 1 mln fotonów, po prawej dla 100 tys. fotonów.	62
+Rys. 4.8. Transport fotonów (Fl) w środowym przekroju otrzymany z własnej symulacji i na własnych parametrach skóry; w pierwszym rzędzie: po lewej dla 100 mln fotonów, po prawej dla 10 mln fotonów, w drugim rzędzie: po lewej dla 1 mln fotonów, po prawej dla 100 tys. fotonów.	63
+Rys. 4.9. Transport fotonów (Fl) dla różnych wartości współczynnika anizotropii g; w pierwszym rzędzie: wartości w środkowym przekroju, w drugim średnia wartości wzdłuż osi z, od lewej: g = 0, g = 0,5, g = 0,9.	64
+Rys. 4.10. Ścieżki ruchu 10 fotonów przy 4 różnych współczynnikach anizotropii g; w lewym górnym rogu g = 0, w prawym górnym g = 0,5, w lewym dolnym g = 0,9, w prawym dolnym g = 1.	65
+Rys. 4.11. Średnia zmiana współczynnika fluencji względnej wzdłuż osi z (w głąb) dla 7 różnych typów ośrodka propagacji.	66
+Rys. 4.12. Średnia zmiana współczynnika fluencji względnej wzdłuż osi x dla 7 różnych typów ośrodka propagacji.	66
+Rys. 4.13. Przedstawienie wartości transportu fotonów w 3 ortogonalnych przekrojach w trójwymiarowej przestrzeni za pomocą biblioteki Vispy dla 5 różnych typów źródła światła; 1. Skolimowana wiązka Gaussa, 2. Źródło izotropowe (jako jedyne ustawione na środku), 3. Punktowa wiązka skierowana w górę, 4. Wiązka Gaussa z punktem skupienia 0,5 cm poniżej górnej krawędzi, 5. Punktowa wiązka skierowana w dół.	67
+Rys. 4.14. Halo rozproszenia. Źródło [964].	68
+Rys. 4.15. Średnie wartości transportu fotonów (Fl) dla ośrodka złożonego z dwóch warstw.	68
+Rys. 4.16. Średnie wartości transportu fotonów (Fl) dla ośrodka złożonego z trzech warstw.	68
+Rys. 4.17. Średnie wartości transportu fotonów (Fl) dla modelu skóry z naczyniami krwionośnymi.	69
+ 
+Wykaz tabel
+Tab. 2.1. Przykłady urządzeń LLLT wykorzystywanych w dermatologii. Źródło: [963].	10
+Tab. 2.2. Parametry optyczne materiałów użyte w symulacji.	25
+Tab. 3.1. Wykaz klas aplikacji.	30
+Tab. 3.2. Wykaz folderów aplikacji.	32
+Tab. 3.3. Wykaz plików wejściowych aplikacji.	32
+Tab. 3.4. Wykaz plików wyjściowych aplikacji.	32
+Tab. 3.5. Wymiary zaimplementowanych modeli skóry.	47
+Tab. 3.6. Wymiary zaimplementowanych modeli skóry z podziałem na warstwy.	47
+Tab. 3.7. Przeprowadzone serie eksperymentów.	52
+Tab. 4.1. Podstawowe statystyki wynikowych rozkładów transportu fotonów.	58
+ 
+Załącznik nr 1: monte-carlo-sim-python
+M. Miler, „monte-carlo-sim-python – repozytorium z własną implementacją symulacji światła metodą Monte Carlo w języku Python”, GitHub. [Online]. Dostęp: https://github.com/Mateuszq28/monte-carlo-sim-python. [Data dostępu: 30.09.2024].
+Załącznik nr 2: monte-carlo-sim-benchmark
+M. Miler, „monte-carlo-sim-benchmark – repozytorium wykorzystane do porównywania wyników symulacji” GitHub. [Online]. Dostęp: https://github.com/Mateuszq28/monte-carlo-sim-benchmark. [Data dostępu: 30.09.2024].
+Załącznik nr 3: CUBES – wyniki eksperymentów
+M. Miler, „CUBES - wyniki najważniejszych eksperymentów symulacji światła metodą Mone Carlo” Google Drive. [Online]. Dostęp: https://1drv.ms/f/c/7871da7edeb06dcc/Ei70d6guE4lBgMsf6FgGbJsBUcYmqrgZFZZxBHvQeMgqBQ. [Data dostępu: 30.09.2024].
+Załącznik nr 4: Tabela ze statystykami rozkładów
+M. Miler, „Tabela z indywidualnymi statystykami rozkładów transportu fotonów” GitHub. [Online]. Dostęp: https://github.com/Mateuszq28/monte-carlo-sim-tables/blob/main/all_print_stats.csv. [Data dostępu: 30.09.2024].
+Załącznik nr 5: Tabela porównawcza rozkładów
+M. Miler, „Tabela porównawcza rozkładów transportu fotonów do najlepszych symulacji z serii” GitHub. [Online]. Dostęp: https://github.com/Mateuszq28/monte-carlo-sim-tables/blob/main/all_compare2benchmark.csv. [Data dostępu: 30.09.2024].
