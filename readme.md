@@ -28,7 +28,7 @@ Pliki wynikowe (tylko najważniejsze) z końcówką *_cubes.json* umieszczono w 
 - W folderze [original_params](original_params) umieszczono kody źródłowe uruchomionych symulacji światła w jednolitym ośrodku z **oryginalnymi** paramerami ośrodoka symulacji. 
 - W folderze [benchmark_sims](benchmark_sims) umieszczono kody źródłowe uruchomionych symulacji światła w jednolitym ośrodku z **własnymi** paramerami ośrdoka symulacji.
 - W folderze [bibliography](bibliography) umieszczono kody ułatwiające porządkowanie bibliografii
-- W folderze [preproc_tools](preproc_tools) umieszczono kody do wstępnego przetwarzania plików, zmiany nazwy oraz skrypty do porównania czasowego
+- W folderze [compare_cubes/preproc_tools](compare_cubes/preproc_tools) umieszczono kody do wstępnego przetwarzania plików, zmiany nazwy oraz skrypty do porównania czasowego
 
 ### Zmodyfikowane wersje mc321.c
 - [mc456_mc.c](benchmark_sims/mc456_mc.c) - dodaje zapis prostopadłościanu, zmienia źródło światła na takie samo jak we własnej implementacji [0,0,-1], nie ingeruje w algorytm (np. nie wymusza zakończenia symulowania fotonu po przekroczeniu umownej granicy).
