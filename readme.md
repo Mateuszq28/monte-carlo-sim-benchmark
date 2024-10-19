@@ -14,6 +14,8 @@ Ostatecznie najważniejszy jest interaktywny notatnik [compare_cubes/compare.ipy
 \
 W drugiej wersji notatnika - [compare_cubes/compare2.ipynb](compare_cubes/compare2.ipynb) - umieszczono systematyczne porównywanie wielu eksperymentów. Tworzony jest obiekt wejściowy klasy eksperyment, w którym sprecyzowano ścieżki folederów z danymi oraz wzorce do porównywania. \
 \
+Za pomocą [compare_cubes/vispy_chart3d](compare_cubes/vispy_chart3d.py) generuje się 3 ortogonalne mapy ciepła umieszczone w przestrzeni 3D przy użyciu biblioteki Vispy \
+\
 Pliki wynikowe (tylko najważniejsze) z końcówką *_cubes.json* umieszczono w chmurze ze względu na duży rozmiar plików.
 [Link do plików json z wynikami symulacji](https://1drv.ms/f/c/7871da7edeb06dcc/Ei70d6guE4lBgMsf6FgGbJsBUcYmqrgZFZZxBHvQeMgqBQ)
 
@@ -25,6 +27,7 @@ Pliki wynikowe (tylko najważniejsze) z końcówką *_cubes.json* umieszczono w 
 - W folderze [original_all](original_all) umieszczono oryginalne kody źródłowe 3 symulacji światła w jednolitym ośrodku.
 - W folderze [original_params](original_params) umieszczono kody źródłowe uruchomionych symulacji światła w jednolitym ośrodku z **oryginalnymi** paramerami ośrodoka symulacji. 
 - W folderze [benchmark_sims](benchmark_sims) umieszczono kody źródłowe uruchomionych symulacji światła w jednolitym ośrodku z **własnymi** paramerami ośrdoka symulacji.
+- W folderze [bibliography](bibliography) umieszczono kody ułatwiające porządkowanie bibliografii
 
 ### Zmodyfikowane wersje mc321.c
 - [mc456_mc.c](benchmark_sims/mc456_mc.c) - dodaje zapis prostopadłościanu, zmienia źródło światła na takie samo jak we własnej implementacji [0,0,-1], nie ingeruje w algorytm (np. nie wymusza zakończenia symulowania fotonu po przekroczeniu umownej granicy).
