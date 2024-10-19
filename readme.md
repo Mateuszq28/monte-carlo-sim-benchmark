@@ -329,7 +329,7 @@ https://seriouscomputerist.atariverse.com/media/pdf/book/Art%20of%20Computer%20P
 
  ## Galeria / Gallery
 
-<p align="center"><img src="100k-1mln my mati mid.png" alt="Mapy ciepła przekrojów środkowych, 100 mln - 100 tys. fotonów" align="center"><br/>
+<p align="center"><img src="readme_img/100k-1mln my mati mid.png" alt="Mapy ciepła przekrojów środkowych, 100 mln - 100 tys. fotonów" align="center"><br/>
 <i>Mapy ciepła przekrojów środkowych, 100 mln - 100 tys. fotonów</i><br/>
 <i>Heat maps of mid-sections, 100 million - 100 thousand photons</i></p><br/>
 
