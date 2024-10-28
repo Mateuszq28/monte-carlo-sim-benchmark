@@ -44,9 +44,9 @@ P. Naglič, F. Pernuš, B. Likar, i M. Bürmen, „Limitations of the commonly u
 P. Naglič, F. Pernuš, B. Likar, i M. Bürmen, „Lookup table-based sampling of the phase function for Monte Carlo simulations of light propagation in turbid media”, Biomedical Optics Express, t. 8, nr 3. Optica Publishing Group, s. 1895, 2017. doi: 10.1364/boe.8.001895.
 T. Niu, Y. Tian, Q. Ren, L. Wei, X. Li, i Q. Cai, „Red Light Interferes in UVA‐Induced Photoaging of Human Skin Fibroblast Cells”, Photochemistry and Photobiology, t. 90, nr 6. Wiley, s. 1349–1358, 2014. doi: 10.1111/php.12316.
 NumFOCUS, „Dokumentacja obiektu DataFrame”, 2023. [Online]. Dostęp: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html. [Data dostępu: 30.09.2024].
+NumFOCUS, „Repozytorium biblioteki Pandas”, 2023. [Online]. Dostęp: https://github.com/pandas-dev/pandas. [Data dostępu: 30.09.2024].
 NumFOCUS, „Strona internetowa firmy NumFOCUS rozwijającej bibliotekę Pandas”, 2023. [Online]. Dostęp: https://numfocus.org/. [Data dostępu: 30.09.2024].
 NumFOCUS, „Dokumentacja biblioteki Pandas”, 2023. [Online]. Dostęp: https://pandas.pydata.org/docs/index.html. [Data dostępu: 30.09.2024].
-NumFOCUS, „Repozytorium biblioteki Pandas”, 2023. [Online]. Dostęp: https://github.com/pandas-dev/pandas. [Data dostępu: 30.09.2024].
 NumPy Developers, „Dokumentacja biblioteki NumPy”, 2022. [Online]. Dostęp: https://numpy.org/doc/stable/. [Data dostępu: 30.09.2024]
 NumPy Developers, „Dokumentacja - Permuted Congruential Generator (64-bit, PCG64)”, 2022. [Online]. Dostęp: https://numpy.org/doc/stable/reference/random/bit_generators/pcg64.html#permuted-congruential-generator-64-bit-pcg64. [Data dostępu: 30.09.2024].
 Octave. [Online]. Dostęp: https://octave.org/. [Data dostępu: 30.09.2024].
