@@ -44,9 +44,9 @@ P. Naglič, F. Pernuš, B. Likar, i M. Bürmen, „Limitations of the commonly u
 P. Naglič, F. Pernuš, B. Likar, i M. Bürmen, „Lookup table-based sampling of the phase function for Monte Carlo simulations of light propagation in turbid media”, Biomedical Optics Express, t. 8, nr 3. Optica Publishing Group, s. 1895, 2017. doi: 10.1364/boe.8.001895.
 T. Niu, Y. Tian, Q. Ren, L. Wei, X. Li, i Q. Cai, „Red Light Interferes in UVA‐Induced Photoaging of Human Skin Fibroblast Cells”, Photochemistry and Photobiology, t. 90, nr 6. Wiley, s. 1349–1358, 2014. doi: 10.1111/php.12316.
 NumFOCUS, „Dokumentacja obiektu DataFrame”, 2023. [Online]. Dostęp: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html. [Data dostępu: 30.09.2024].
+NumFOCUS, „Repozytorium biblioteki Pandas”, 2023. [Online]. Dostęp: https://github.com/pandas-dev/pandas. [Data dostępu: 30.09.2024].
 NumFOCUS, „Strona internetowa firmy NumFOCUS rozwijającej bibliotekę Pandas”, 2023. [Online]. Dostęp: https://numfocus.org/. [Data dostępu: 30.09.2024].
 NumFOCUS, „Dokumentacja biblioteki Pandas”, 2023. [Online]. Dostęp: https://pandas.pydata.org/docs/index.html. [Data dostępu: 30.09.2024].
-NumFOCUS, „Repozytorium biblioteki Pandas”, 2023. [Online]. Dostęp: https://github.com/pandas-dev/pandas. [Data dostępu: 30.09.2024].
 NumPy Developers, „Dokumentacja biblioteki NumPy”, 2022. [Online]. Dostęp: https://numpy.org/doc/stable/. [Data dostępu: 30.09.2024]
 NumPy Developers, „Dokumentacja - Permuted Congruential Generator (64-bit, PCG64)”, 2022. [Online]. Dostęp: https://numpy.org/doc/stable/reference/random/bit_generators/pcg64.html#permuted-congruential-generator-64-bit-pcg64. [Data dostępu: 30.09.2024].
 Octave. [Online]. Dostęp: https://octave.org/. [Data dostępu: 30.09.2024].
@@ -83,8 +83,8 @@ W3C, „Portable Network Graphics (PNG) Specification (Third Edition)”, 2023. 
 W3Schools, „W3Schools - JSON Introduction”. [Online]. Dostęp: https://www.w3schools.com/js/js_json_intro.asp. [Data dostępu: 30.09.2024].
 W3schools, „Python Dictionaries”. [Online]. Dostęp: https://www.w3schools.com/python/python_dictionaries.asp [Data dostępu: 30.09.2024].
 L. Wang i S. L. Jacques, „Monte Carlo Modeling of Light Transport in Multi-layered Tissues in Standard C”, Optical Imaging Laboratory, Biomedical Engineering Program, Texas A&M University, College Station, TX 77843-3120, [Online]. Dostęp: http://biomed.tamu.edu/~lw](https://omlc.org/software/mc/man_mcml.pdf. [Data dostępu: 30.09.2024].
-A. J. Welch i M. J. C. van Gemert, Eds., „Optical-Thermal Response of Laser-Irradiated Tissue”, 2011, rozdz. 5. Springer Netherlands. doi: 10.1007/978-90-481-8831-4.
 A. J. Welch i M. J. C. van Gemert, Eds., „Optical-Thermal Response of Laser-Irradiated Tissue”, 2011, roz. 5. Springer Netherlands. doi: 10.1007/978-90-481-8831-4.
+A. J. Welch i M. J. C. van Gemert, Eds., „Optical-Thermal Response of Laser-Irradiated Tissue”, 2011, rozdz. 5. Springer Netherlands. doi: 10.1007/978-90-481-8831-4.
 Wikipedia, „Marching Cubes”. [Online]. Dostęp: https://en.wikipedia.org/wiki/Marching_cubes. [Data dostępu: 30.09.2024].
 D. Williamson, „MarchingCubes.js” [Online]. Dostęp: https://gist.github.com/dwilliamson/c041e3454a713e58baf6e4f8e5fffecd. [Data dostępu: 30.09.2024]
 P. Xiao i in., „Effect of Light Therapy on Cancer-Related Fatigue: A Systematic Review and Meta-Analysis”, Journal of Pain and Symptom Management, t. 63, nr 2. Elsevier BV, s. e188–e202, 2022. doi: 10.1016/j.jpainsymman.2021.09.010.
