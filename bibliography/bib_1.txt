@@ -83,8 +83,8 @@ W3C, „Portable Network Graphics (PNG) Specification (Third Edition)”, 2023. 
 W3Schools, „W3Schools - JSON Introduction”. [Online]. Dostęp: https://www.w3schools.com/js/js_json_intro.asp. [Data dostępu: 30.09.2024].
 W3schools, „Python Dictionaries”. [Online]. Dostęp: https://www.w3schools.com/python/python_dictionaries.asp [Data dostępu: 30.09.2024].
 L. Wang i S. L. Jacques, „Monte Carlo Modeling of Light Transport in Multi-layered Tissues in Standard C”, Optical Imaging Laboratory, Biomedical Engineering Program, Texas A&M University, College Station, TX 77843-3120, [Online]. Dostęp: https://omlc.org/software/mc/man_mcml.pdf. [Data dostępu: 30.09.2024].
-A. J. Welch i M. J. C. van Gemert, Red., „Optical-Thermal Response of Laser-Irradiated Tissue”. Springer Netherlands, 2011. doi: 10.1007/978-90-481-8831-4.
 A. J. Welch i M. J. C. van Gemert, Eds., „Optical-Thermal Response of Laser-Irradiated Tissue”, 2011, rozdz. 5. Springer Netherlands. doi: 10.1007/978-90-481-8831-4.
+A. J. Welch i M. J. C. van Gemert, Red., „Optical-Thermal Response of Laser-Irradiated Tissue”. Springer Netherlands, 2011. doi: 10.1007/978-90-481-8831-4.
 Wikipedia, „Marching Cubes”. [Online]. Dostęp: https://en.wikipedia.org/wiki/Marching_cubes. [Data dostępu: 30.09.2024].
 D. Williamson, „MarchingCubes.js” [Online]. Dostęp: https://gist.github.com/dwilliamson/c041e3454a713e58baf6e4f8e5fffecd. [Data dostępu: 30.09.2024]
 P. Xiao i in., „Effect of Light Therapy on Cancer-Related Fatigue: A Systematic Review and Meta-Analysis”, Journal of Pain and Symptom Management, t. 63, nr 2. Elsevier BV, s. e188–e202, 2022. doi: 10.1016/j.jpainsymman.2021.09.010.
