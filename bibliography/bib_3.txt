@@ -1,0 +1,89 @@
+A. Stevens, „Monte-Carlo Simulation: An Introduction for Engineers and Scientists,” rozdz. 7, s. 33, Boca Raton, FL, USA: CRC Press, 2023. ISBN: 1-03-228077-8.
+D. O. Akpootu i in., „The Scattering and Absorption Coefficients of Atmospheric Soot in the Hygroscopicity of Urban Aerosols,” Dutse Journal of Pure and Applied Sciences, t. 9, nr 2b, African Journals Online (AJOL), s. 86–97, 2023, doi: 10.4314/dujopas.v9i2b.10.
+S. Akter, „Evaluation of light scattering and absorption properties of in vivo rat liver using a single-reflectance fiber probe during preischemia, ischemia–reperfusion, and postmortem,” Journal of Biomedical Optics, t. 20, nr 7, p. 076010, 2015.
+Algorithms Visualized. YouTube. Marching Cubes Animation [Online]. Dostęp: https://www.youtube.com/watch?v=B_xk71YopsA [Data dostępu: 30.09.2024].
+K. M. Aly i E. Esmail, „Refractive index of salt water: effect of temperature,” Department of Engineering Mathematics and Physics, Faculty of Engineering, Alexandria University, Alexandria, Egypt, 1993.
+Anaconda, Menadżer środowiska wirtualnego oraz pakietów dla języka Python [Online]. Dostęp: https://www.anaconda.com/ [Data dostępu: 30.09.2024].
+R. R. Anderson i B. S. J. A. Parrish, „The Optics of Human Skin,” Department of Dermatology, Harvard Medical School, Massachusetts General Hospital, Boston, Massachusetts, U.S.A., 1981. doi:10.1111/1523-1747.ep12479191.
+P. Avci, A. Gupta, M. Sadasivam, D. Vecchio, Z. Pam, N. Pam, and M. R. Hamblin, „Low-level laser (light) therapy (LLLT) in skin: stimulating, healing, restoring,” Seminars in Cutaneous Medicine and Surgery, t. 32, nr 1, s. 41–52, 2013.
+J. Baro, J. Sempau, J. M. Fernandez-Varea, and F. Salvat, „PENELOPE: an algorithm for Monte Carlo simulation of the penetration and energy loss of electrons and positrons in matter,” Nuclear Instruments and Methods in Physics Research Section B, t. 100, nr 1, s. 31–46, 1995.
+A. N. Bashkatov, E. A. Genina, V. I. Kochubey, i V. V. Tuchin, „Optical properties of human skin, subcutaneous and mucous tissues in the wavelength range from 400 to 2000 nm,” Journal of Physics D: Applied Physics, t. 38, nr 15. IOP Publishing, s. 2543–2555, 2005, doi: 10.1088/0022-3727/38/15/004.
+Broszura dla nauczycieli o tematyce optyki [Online]. Dostęp: https://zpe.gov.pl/pdf/Pmx9E7pqe [Data dostępu: 30.09.2024].
+A. Brouwer i in., „Light therapy: is it safe for the eyes?,” Acta Psychiatrica Scandinavica, t. 136, nr 6, Wiley, s. 534–548, 2017, doi: 10.1111/acps.12785.
+M. Bürmen, F. Pernuš, i P. Naglič, „MCDataset: a public reference dataset of Monte Carlo simulated quantities for multilayered and voxelated tissues computed by massively parallel PyXOpto Python package,” Journal of Biomedical Optics, t. 27, nr 08, SPIE-Intl Soc Optical Eng, 2022, doi: 10.1117/1.jbo.27.8.083012.
+ISO/IEC 9899:2018, Programming Languages — C, 2018.
+C. Andersson Naesseth, „Machine learning using approximate inference : Variational and sequential Monte Carlo methods,” rozdz. 3, s. 25, Linköping: Linköping University Electronic Press, 2018. ISBN : 9789176851616.
+P. Comninos, „Mathematical and Computer Programming Techniques for Computer Graphics,” London: Springer London, rozdz. 10, s. 361, 2010. ISBN-13: 978-1-8233-902-9.
+cpp0x. Funkcja rand z biblioteki standardowej języka C [Online]. Dostęp: https://cpp0x.pl/dokumentacja/standard-C/rand/580 [Data dostępu: 30.09.2024].
+S. Dallaspezia i F. Benedetti, „Antidepressant light therapy for bipolar patients: A meta-analyses,” Journal of Affective Disorders, t. 274, Elsevier BV, s. 943–948, 2020, doi: 10.1016/j.jad.2020.05.104.
+DCC-Lab. GitHub. PyTissueOptics [Online]. Dostęp: https://github.com/DCC-Lab/PyTissueOptics [Data dostępu: 30.09.2024].
+DV Gen. YouTube. Why I'm Using Wave Function Collapse for Procedural Terrain | Unity Devlog [Online]. Dostęp: https://www.youtube.com/watch?v=20KHNA9jTsE&list=PLWviGNkmY14wquTDA46Ycjq_p-B2Cew8S&index=3&t=4s [Data dostępu: 30.09.2024].
+R. Eckhardt, „Stan Ulam, John von Neumann, and the Monte Carlo method,” 1987.
+ECMA-404. The JSON Data Interchange Syntax [Online]. Dostęp: https://ecma-international.org/publications-and-standards/standards/ecma-404/ [Data dostępu: 30.09.2024].
+F.-B. Yang and J.-P. Huang, „Diffusionics: Diffusion Process Controlled by Diffusion Metamaterials,” rozdz. 1, s. 18, Springer Singapore, 2024. ISBN: 981-9704-86-3.
+G. Hart-Davis and T. Hart-Davis, „Python,” rozdz. 1, s. 18, Hoboken, NJ, USA: John Wiley & Sons Inc., 2022. ISBN : 1-119-86026-1.
+M. Goun. Biblioteka Geometry3D dla języka Python [Online]. Dostęp: https://geometry3d.readthedocs.io/en/latest/about.html [Data dostępu: 30.09.2024].
+E. Hecht, „Optics,” Boston: Pearson, rozdz. 4, s. 97, 2017. ISBN-13: 978-0133977226.
+T.-W. Hou, C.-C. Yang, T.-H. Lai, Y.-H. Wu, i C.-P. Yang, „Light Therapy in Chronic Migraine,” Current Pain and Headache Reports, t. 28, nr 7, Springer Science and Business Media LLC, s. 621–626, 2024, doi: 10.1007/s11916-024-01258-y.
+J. D. Hunter, „Matplotlib: A 2D Graphics Environment,” Computing in Science &amp; Engineering, t. 9, nr 3, Institute of Electrical and Electronics Engineers (IEEE), s. 90–95, 2007, doi: 10.1109/mcse.2007.55.
+M. Keijzer, S. L. Jacques, S. A. Prahl, i A. J. Welch, „Light distributions in artery tissue: Monte Carlo simulations for finite‐diameter laser beams,” Lasers in Surgery and Medicine, t. 9, nr 2. Wiley, s. 148–154, 1989, doi: 10.1002/lsm.1900090210.
+T. Kono i J. Yamada, „In Vivo Measurement of Optical Properties of Human Skin for 450–800 nm and 950–1600 nm Wavelengths,” International Journal of Thermophysics, t. 40, nr 5, Springer Science and Business Media LLC, 2019. doi: 10.1007/s10765-019-2515-3.
+H. H. Kwon i in., „The clinical and histological effect of home-use, combination blue-red LED phototherapy for mild-to-moderate acne vulgaris in Korean patients: a double-blind, randomized controlled trial,” British Journal of Dermatology, t. 168, nr 5, Oxford University Press (OUP), s. 1088–1094, 2013, doi: 10.1111/bjd.12186.
+H. Li, L. Lin, i S. Xie, „Refractive index of human whole blood with different types in the visible and near-infrared ranges,” Biomedical Optics Laboratory, Department of Physics, Fujian Teachers University, China.
+J. D. Lindberg, „The composition and optical absorption coefficient of atmospheric particulate matter,” Optical and Quantum Electronics, t. 7, nr 3, Springer Science and Business Media LLC, s. 131–139, 1975, doi: 10.1007/bf00619587.
+W. E. Lorensen i H. E. Cline, „Marching cubes: A high resolution 3D surface construction algorithm,” Proceedings of the 14th annual conference on Computer graphics and interactive techniques, ACM, 1987, doi: 10.1145/37401.37422.
+C. Lu i in., „Effects of low-level laser therapy on burning pain and quality of life in patients with burning mouth syndrome: a systematic review and meta-analysis,” BMC Oral Health, t. 23, nr 1, Springer Science and Business Media LLC, 2023, doi: 10.1186/s12903-023-03441-w.
+M. R. Hamblin, T. Agrawal, and M. de Sousa, Eds., „Handbook of low-level laser therapy. Singapore, Singapore: Pan Stanford Publishing,” rozdz. 1, s. 7, 2021. ISBN : 9786612930713.
+MarbleScience. YouTube. (grafika z filmu). Monte Carlo Simulation [Online]. Dostęp: https://www.youtube.com/watch?v=7ESK5SaP-bc [Data dostępu: 30.09.2024].
+A. Marrs, P. Shirley, and I. Wald, Eds., „Ray tracing gems II: Next generation real-time rendering with DXR, vulkan, and OptiX,” Berlin, Germany: APress, rozdz. 8, s. 104. 2021. ISBN: 978-1-4842-7184-1.
+N. Metropolis, „The beginning of the Monte Carlo method,” Los Alamos Science, t. 15, nr Special issue, s. 125–130, 1987.
+N. Metropolis i S. Ulam, „The Monte Carlo Method,” Journal of the American Statistical Association, t. 44, nr 247. Informa UK Limited, s. 335–341, 1949, doi: 10.1080/01621459.1949.10483310.
+P. Naglič, F. Pernuš, B. Likar, i M. Bürmen, „Limitations of the commonly used simplified laterally uniform optical fiber probe-tissue interface in Monte Carlo simulations of diffuse reflectance,” Biomedical Optics Express, t. 6, nr 10, Optica Publishing Group, s. 3973, 2015, doi: 10.1364/boe.6.003973.
+P. Naglič, F. Pernuš, B. Likar, i M. Bürmen, „Lookup table-based sampling of the phase function for Monte Carlo simulations of light propagation in turbid media,” Biomedical Optics Express, t. 8, nr 3. Optica Publishing Group, s. 1895, 2017, doi: 10.1364/boe.8.001895.
+T. Niu, Y. Tian, Q. Ren, L. Wei, X. Li, i Q. Cai, „Red Light Interferes in UVA‐Induced Photoaging of Human Skin Fibroblast Cells,” Photochemistry and Photobiology, t. 90, nr 6. Wiley, s. 1349–1358, 2014, doi: 10.1111/php.12316.
+NumFOCUS (2023). Dokumentacja obiektu DataFrame [Online]. Dostęp: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html [Data dostępu: 30.09.2024].
+NumFOCUS. (2023). Dokumentacja biblioteki Pandas [Online]. Dostęp: https://pandas.pydata.org/docs/index.html [Data dostępu: 30.09.2024].
+NumPy Developers. (2022). Dokumentacja biblioteki NumPy [Online]. Dostęp: https://numpy.org/doc/stable/ [Data dostępu: 30.09.2024]
+NumPy Developers. (2022). Dokumentacja - Permuted Congruential Generator (64-bit, PCG64) [Online]. Dostęp: https://numpy.org/doc/stable/reference/random/bit_generators/pcg64.html#permuted-congruential-generator-64-bit-pcg64 [Data dostępu: 30.09.2024].
+Octave [Online]. Dostęp: https://octave.org/ [Data dostępu: 30.09.2024].
+OMLC [Online]. Dostęp: https://omlc.org/software/mc/ [Data dostępu: 30.09.2024]
+OMLC. Symulacja MC321 [Online]. Dostęp: https://omlc.org/classroom/ece532/class4/ssmc/index.html [Data dostępu: 30.09.2024].
+OMLC. Symulacja MCML [Online]. Dostęp: https://omlc.org/software/mc/mcml-src/index.html [Data dostępu: 30.09.2024].
+OMLC. Symulacja MCXYZ [Online]. Dostęp: https://omlc.org/software/mc/mcxyz/index.html [Data dostępu: 30.09.2024].
+OMLC. Kod źródłowy symulacji Tiny [Online]. Dostęp: https://omlc.org/software/mc/tiny_mc.c [Data dostępu: 30.09.2024].
+P. Cirrone and G. Petringa, Eds., „Monte Carlo in heavy charged particle therapy: New challenges in ion therapy,” rozdz. 16, s. 240, London, England: CRC Press, 2024. ISBN : 1-000-98761-2.
+P. D. Lin, „New Computation Methods for Geometrical Optics,” rozdz. 3, s. 17, Springer Singapore, 2014. ISBN : 981-4451-79-7.
+Photonics. Internetowy kalkulator Lux-Wat [Online]. Dostęp: https://www.gophotonics.com/calculators/lux-to-watts-conversion-calculator [Data dostępu: 30.09.2024].
+E. Pjrek i in., „The Efficacy of Light Therapy in the Treatment of Seasonal Affective Disorder: A Meta-Analysis of Randomized Controlled Trials,” Psychotherapy and Psychosomatics, t. 89, nr 1. S. Karger AG, s. 17–24, 2019, doi: 10.1159/000502891.
+R. D. Richtmyer i J. von Neumann, „Statistical methods in neutron diffusion,” Los Alamos Scientific Laboratory Report LAMS-551, Los Alamos, 1947.
+A. Roggan, M. Friebel, K. Dörschel, A. Hahn, i G. Müller, „Optical Properties of Circulating Human Blood in the Wavelength Range 400–2500 nm,” Journal of Biomedical Optics, t. 4, nr 1. SPIE-Intl Soc Optical Eng, s. 36, 1999. doi: 10.1117/1.429919.
+S. Dash, S. K. Pani, J. Rodrigues, and B. Majhi, „Deep learning, Machine Learning and IoT in biomedical and Health Informatics: Techniques and applications,” rozdz. 2, s. 21, Boca Raton, FL: CRC Press, 2022. ISBN 9780367548469.
+S. E. Umbaugh, „Digital image processing and analysis: Digital image enhancement, restoration and compression,” rozdz. 6.4, s. 272-279, London, England: CRC Press, 2022. ISBN: 1-000-78991-8.
+S. L. Jacques, „Light distributions from point, line and plane sources for photochemical reactions and fluorescence in turbid biological tissues,” Photochem. Photobiol., t. 67, s. 23-32, 1998.
+S. V. Shinde, V. Bendre, D. Jude Hemanth, and M.-A. Balafar, „Applied artificial intelligence: A biomedical Perspective,” rozdz. 2 s. 19. 2023. ISBN : 1-003-32443-6.
+Scikit-learn. QuantileTransformer [Online]. Dostęp: https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.QuantileTransformer.html [Data dostępu: 30.09.2024].
+SciPy. Funkcja z transformacją Box-Cox [Online]. Dostęp: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.boxcox.html [Data dostępu: 30.09.2024].
+SciPy. Funkcja z transformacją Yeo-Johnson [Online]. Dostęp: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.yeojohnson.html [Data dostępu: 30.09.2024].
+Scratchapixel. Monte Carlo Methods in Practice [Online]. Dostęp: https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/monte-carlo-simulation.html [Data dostępu: 30.09.2024].
+V. V. Semak, A. Gerakis, i M. N. Shneider, „Measurement of temperature dependent absorption coefficient of water at 1064nm wavelength,” AIP Advances, t. 9, nr 8, AIP Publishing, 2019. doi: 10.1063/1.5085746.
+E. Sergè, „From X-Rays to Quarks: Modern Physicists and Their Discoveries,” Dover, Mineola, NY, rozdz. 10, s. 200, 2007. ISBN-13: 978-0486457833.
+C. R. Simpson, M. Kohl, M. Essenpreis, i M. Cope, „Near-infrared optical properties ofex vivohuman skin and subcutaneous tissues measured using the Monte Carlo inversion technique,” Physics in Medicine and Biology, t. 43, nr 9. IOP Publishing, s. 2465–2478, 1998, doi: 10.1088/0031-9155/43/9/003.
+L. Sipelgas, H. Arst, U. Raudsepp, T. Kõuts, and A. Lindfors, „Optical properties of coastal waters of northwestern Estonia: in situ measurements,” 2004.
+V. Sontea, I. Pocaznoi, D. Furtuna, A. Seryakov, V. Barun, i S. Dick, „Effects of the Low Level Light therapy on skin wound using LED,” 2013 E-Health and Bioengineering Conference (EHB), t. 100, IEEE, 2013, doi: 10.1109/ehb.2013.6707243.
+L. Tao i in., „Light therapy in non-seasonal depression: An update meta-analysis,” Psychiatry Research, t. 291, Elsevier BV, s. 113247, 2020, doi: 10.1016/j.psychres.2020.113247.
+The Free Dictionary. Medical Dictionary [Online]. Dostęp: https://medical-dictionary.thefreedictionary.com/ [Data dostępu: 30.09.2024].
+A. P. Tran i S. L. Jacques, „Modeling voxel-based Monte Carlo light transport with curved and oblique boundary surfaces,” Journal of Biomedical Optics, t. 25, nr 02, SPIE-Intl Soc Optical Eng, s. 1, 2020, doi: 10.1117/1.jbo.25.2.025001.
+K. Tökési, L. H. Yang, D. Bo, i Z. J. Ding, „Revision of optical properties of solids based on the reverse Monte Carlo analysis of reflection electron energy loss spectroscopy spectra,” Journal of Surface Analysis, t. 26, nr 2, Surface Analysis Society of Japan, s. 128–129, 2019, doi: 10.1384/jsa.26.128.
+U. Kose, O. Deperlioglu, and D. J. Hemanth, „Deep Learning for Biomedical Applications,” rozdz. 13, s. 283. Boca Raton: CRC Press, 2021. ISBN : 0-367-85561-5.
+A. van der Gijp i in., „Increasing Authenticity of Simulation-Based Assessment in Diagnostic Radiology,” Simulation in Healthcare: The Journal of the Society for Simulation in Healthcare,” t. 12, nr 6, Ovid Technologies (Wolters Kluwer Health), s. 377–384, 2017, doi: 10.1097/sih.0000000000000278.
+M. J. C. Van Gemert, S. L. Jacques, H. J. C. M. Sterenborg, i W. M. Star, „Skin optics,” IEEE Transactions on Biomedical Engineering, t. 36, nr 12. Institute of Electrical and Electronics Engineers (IEEE), s. 1146–1154, 1989. doi: 10.1109/10.42108.
+A. van Maanen, A. M. Meijer, K. B. van der Heijden, i F. J. Oort, „The effects of light therapy on sleep problems: A systematic review and meta-analysis,” Sleep Medicine Reviews, t. 29, Elsevier BV, s. 52–62, 2016, doi: 10.1016/j.smrv.2015.08.009.
+O. N. Vassiliev, „Monte Carlo Methods for Radiation Transport,” Springer International Publishing, 2017, doi: 10.1007/978-3-319-44141-2.
+VisPy developers. (2023). Dokumentacja biblioteki VisPy [Online]. Dostęp: https://vispy.org/ [Data dostępu: 30.09.2024].
+L. Wang i S. L. Jacques. Optical Imaging Laboratory. Biomedical Engineering Program. Texas A&M University. College Station. TX 77843-3120. Monte Carlo Modeling of Light Transport in Multi-layered Tissues in Standard C [Online]. Dostęp: https://omlc.org/software/mc/man_mcml.pdf [Data dostępu: 30.09.2024].
+A. J. Welch i M. J. C. van Gemert, Red, „Optical-Thermal Response of Laser-Irradiated Tissue,” Springer Netherlands, 2011, doi: 10.1007/978-90-481-8831-4.
+Wikipedia. Marching Cubes [Online]. Dostęp: https://en.wikipedia.org/wiki/Marching_cubes [Data dostępu: 30.09.2024].
+D. Williamson. MarchingCubes.js [Online]. Dostęp: https://gist.github.com/dwilliamson/c041e3454a713e58baf6e4f8e5fffecd [Data dostępu: 30.09.2024]
+P. Xiao i in., „Effect of Light Therapy on Cancer-Related Fatigue: A Systematic Review and Meta-Analysis,” Journal of Pain and Symptom Management, t. 63, nr 2, Elsevier BV, s. e188–e202, 2022, doi: 10.1016/j.jpainsymman.2021.09.010.
+xopto. GitHub. PyXOpto [Online]. Dostęp: https://github.com/xopto/pyxopto [Data dostępu: 30.09.2024].
+P. Zhang i M. X. Wu, „A clinical review of phototherapy for psoriasis,” Lasers in Medical Science, t. 33, nr 1. Springer Science and Business Media LLC, s. 173–180, 2017, doi: 10.1007/s10103-017-2360-1.
