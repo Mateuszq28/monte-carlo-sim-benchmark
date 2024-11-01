@@ -14,8 +14,8 @@ obsidian | word | future
 109 [99] 7        C. Andersson Naesseth, „Machine learning using approximate inference : Variational and sequential Monte Carlo methods,” rozdz. 3, s. 25, Linköping: Linköping University Electronic Press, 2018. ISBN : 9789176851616.
 obsidian | word | future
 [963] [7] 8        P. Avci, A. Gupta, M. Sadasivam, D. Vecchio, Z. Pam, N. Pam, and M. R. Hamblin, „Low-level laser (light) therapy (LLLT) in skin: stimulating, healing, restoring,” Seminars in Cutaneous Medicine and Surgery, t. 32, nr 1, s. 41–52, 2013.
-[971] [8] 9        J. Baro, J. Sempau, J. M. Fernandez-Varea, and F. Salvat, „PENELOPE: an algorithm for Monte Carlo simulation of the penetration and energy loss of electrons and positrons in matter,” Nuclear Instruments and Methods in Physics Research Section B, t. 100, nr 1, s. 31–46, 1995.
 obsidian | word | future
+[971] [8] 9        J. Baro, J. Sempau, J. M. Fernandez-Varea, and F. Salvat, „PENELOPE: an algorithm for Monte Carlo simulation of the penetration and energy loss of electrons and positrons in matter,” Nuclear Instruments and Methods in Physics Research Section B, t. 100, nr 1, s. 31–46, 1995.
 obsidian | word | future
 [904] [9] 10        A. N. Bashkatov, E. A. Genina, V. I. Kochubey, i V. V. Tuchin, „Optical properties of human skin, subcutaneous and mucous tissues in the wavelength range from 400 to 2000 nm,” Journal of Physics D: Applied Physics, t. 38, nr 15. IOP Publishing, s. 2543–2555, 2005, doi: 10.1088/0022-3727/38/15/004.
 obsidian | word | future
@@ -60,7 +60,7 @@ obsidian | word | future
 103 [93] 30        S. L. Jacques, „Light distributions from point, line and plane sources for photochemical reactions and fluorescence in turbid biological tissues,” Photochem. Photobiol., t. 67, s. 23-32, 1998.
 obsidian | word | future
 [985] [29] 31        M. Keijzer, S. L. Jacques, S. A. Prahl, i A. J. Welch, „Light distributions in artery tissue: Monte Carlo simulations for finite‐diameter laser beams,” Lasers in Surgery and Medicine, t. 9, nr 2. Wiley, s. 148–154, 1989, doi: 10.1002/lsm.1900090210.
-obsidian | word | future cywowany dodatkowo
+obsidian | word | future
 [910] [30] 32        T. Kono i J. Yamada, „In Vivo Measurement of Optical Properties of Human Skin for 450–800 nm and 950–1600 nm Wavelengths,” International Journal of Thermophysics, t. 40, nr 5, Springer Science and Business Media LLC, 2019. doi: 10.1007/s10765-019-2515-3.
 obsidian | word | future
 105 [95] 33        U. Kose, O. Deperlioglu, and D. J. Hemanth, „Deep Learning for Biomedical Applications,” rozdz. 13, s. 283. Boca Raton: CRC Press, 2021. ISBN : 0-367-85561-5.
@@ -92,6 +92,8 @@ obsidian | word | future
 [992] [44] 46        P. Naglič, F. Pernuš, B. Likar, i M. Bürmen, „Lookup table-based sampling of the phase function for Monte Carlo simulations of light propagation in turbid media,” Biomedical Optics Express, t. 8, nr 3. Optica Publishing Group, s. 1895, 2017, doi: 10.1364/boe.8.001895.
 obsidian | word | future
 [953] [45] 47        T. Niu, Y. Tian, Q. Ren, L. Wei, X. Li, i Q. Cai, „Red Light Interferes in UVA‐Induced Photoaging of Human Skin Fibroblast Cells,” Photochemistry and Photobiology, t. 90, nr 6. Wiley, s. 1349–1358, 2014, doi: 10.1111/php.12316.
+obsidian | word | future
+[921] [46] 48        NumFOCUS (2023). Dokumentacja obiektu DataFrame [Online]. Dostęp: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html [Data dostępu: 30.09.2024].
 obsidian | word | future
 [924] [49] 49        NumFOCUS. (2023). Dokumentacja biblioteki Pandas [Online]. Dostęp: https://pandas.pydata.org/docs/index.html [Data dostępu: 30.09.2024].
 obsidian | word | future
@@ -180,9 +182,3 @@ obsidian | word | future
 117 [107] 91        F.-B. Yang and J.-P. Huang, „Diffusionics: Diffusion Process Controlled by Diffusion Metamaterials,” rozdz. 1, s. 18, Springer Singapore, 2024. ISBN: 981-9704-86-3.
 obsidian | word | future
 [952] [92] 92        P. Zhang i M. X. Wu, „A clinical review of phototherapy for psoriasis,” Lasers in Medical Science, t. 33, nr 1. Springer Science and Business Media LLC, s. 173–180, 2017, doi: 10.1007/s10103-017-2360-1.
-
-
-
-
-
-
