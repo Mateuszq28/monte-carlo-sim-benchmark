@@ -58,7 +58,7 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |   0 |                    | .gitignore                                |        |
 |   1 |                    | benchmark_sims                            | folder, w którym znajdują się zmodyfikowane kody źródłowe porównywanych symulacji mc456 (czyli zmodyfikowane wersje mc321), symulacje przeprowadzono na parametrach I |
 |   2 |                    | bibliography                              | bibliografia |
-|   3 |                    | compare_cubes                             | folder, w którym porównywano wyniki symulacji w postaci plików CUBE.json, $${\color{tutaj umieszczemy folder CUBES (tablice absorpcji, czyli nieznormalizowane oddziaływanie strumienia fotonów), aby móc wczytywać i porównywać wyniki symulacji w umieszczonych w tym folderze notatników .ipynb}Red}$$ |
+|   3 |                    | compare_cubes                             | folder, w którym porównywano wyniki symulacji w postaci plików CUBE.json, $${\color{Red}tutaj umieszczemy folder CUBES (tablice absorpcji, czyli nieznormalizowane oddziaływanie strumienia fotonów), aby móc wczytywać i porównywać wyniki symulacji w umieszczonych w tym folderze notatników .ipynb}$$ |
 |   4 |                    | experiment_sketch.png                     |        |
 |   5 |                    | list_all.ipynb                            | nieistotne, brudnopis do wypisania wszystkich plików |
 |   6 |                    | loc.py                                    | nieistotne, brudnopis do wypisania wszystkich plików |
@@ -110,12 +110,12 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |  52 | compare_cubes      | preproc_tools                             | przygotowanie CUBES |
 |  53 | compare_cubes      | preproc_tools / correct_weights.ipynb     | koryguje wagi niejednolitych ośrodków (tablic CUBES) tak, aby później mogły być normalizowane z użyciem tego samego współczynnika absorpcji mua_old = 0.37, dane = dane * (mua_old/mua_new), podczas normalizacji będzie: *1/mua_old |
 |  54 | compare_cubes      | preproc_tools / cp_jsons_as_cubes.py      | kopiowanie wyników z innego formatu do CUBES |
-|  55 | compare_cubes      | preproc_tools / time_comparison.ipynb     | *porónanie czasowe (później nie ma tych danych w CUBES)* |
+|  55 | compare_cubes      | preproc_tools / time_comparison.ipynb     | **porónanie czasowe (później nie ma tych danych w CUBES)** |
 |  56 | compare_cubes      | preproc_tools / time_comparison_old.ipynb |        |
 |  57 | compare_cubes      | preproc_tools / time_csv.csv              |        |
 |  58 | compare_cubes      | preproc_tools / trim_cube_names.ipynb     | zmiana nazwy CUBES |
 |  59 | compare_cubes      | stat_table.xlsx                           | tabele all_print_stats.csv oraz all_compare2benchmark.csv filtrowane w programie Excel |
-|  60 | compare_cubes      | vispy_chart3d.py                          | wizualizacja 3D CUBES (uwaga, są to inne wizualizacje niż w projekcie ![monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python)) |
+|  60 | compare_cubes      | vispy_chart3d.py                          | wizualizacja 3D CUBES (uwaga, są to inne wizualizacje niż w projekcie [monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python)) |
 |  61 | compare_cubes      | x_high_slices.png                         |        |
 |  62 | compare_cubes      | x_high_sum.png                            |        |
 |  63 | compare_cubes      | z_high_slices.png                         |        |
@@ -133,7 +133,7 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |  75 | mati_sim_transform | mati_cube.json                            |        |
 |  76 | mati_sim_transform | resultEnv.json                            |        |
 |  77 | mati_sim_transform | sim_dump.json                             |        |
-|  78 | mati_sim_transform | transform2template.ipynb                  | służy do zamiany wyników z symulacji ![monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python) do postaci CUBE |
+|  78 | mati_sim_transform | transform2template.ipynb                  | służy do zamiany wyników z symulacji [monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python) do postaci CUBE |
 |  79 | original_all       | mc321.c                                   | oryginalny kod symulacji mc321 z literatury |
 |  80 | original_all       | small_mc.c                                | oryginalny kod symulacji small_mc z literatury |
 |  81 | original_all       | tiny_mc.c                                 | oryginalny kod symulacji tiny_mc z literatury |
