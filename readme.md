@@ -474,7 +474,7 @@ https://seriouscomputerist.atariverse.com/media/pdf/book/Art%20of%20Computer%20P
 <i>Zmiana współczynnika fluencji względnej w poprzek ośrodka</i><br/>
 <i>Change in relative fluence coefficient across the medium</i></p><br/>
 
-<p align="center"><img src="readme_img/zrodla swiatla.jpg" alt="5 źródeł światła" align="center"><br/>
+<p align="center"><img src="readme_img/zrodla swiatla.png" alt="5 źródeł światła" align="center"><br/>
 <i>5 źródeł światła</i><br/>
 <i>5 light sources</i></p><br/>
 
