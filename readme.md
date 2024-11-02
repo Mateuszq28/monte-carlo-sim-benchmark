@@ -4,7 +4,7 @@
 - [monte-carlo-sim-tables](https://github.com/Mateuszq28/monte-carlo-sim-tables) - tabele ze statystykami rozkładów transportu fotonów dla przeprowadzonych eksperymentów
 - [CUBES](https://1drv.ms/f/c/7871da7edeb06dcc/Ei70d6guE4lBgMsf6FgGbJsBUcYmqrgZFZZxBHvQeMgqBQ) - wyniki najważniejszych eksperymentów zapisane w ujednoliconym formacie `CUBE.json`
 
-## Podsumowanie
+### Podsumowanie
 
 Repozytorium służy do porównania wyników własnej implementacji symulacji światła [monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python) z przykładami z literatury. W folderach umieszczono kilka odmian symulacji. Najważniejszą stanowi **mc456_mc.c**. Jest to zmodyfikowana do własnych potrzeb wersja *mc321.c*. Modyfikacja zmienia parametry ośrodka symulacji i dodaje zapis wyników do identycznej struktury, jak w przypadku własnej implementacji - prostopadłościanu w pliku w formacie json.\
 \
@@ -51,7 +51,7 @@ cl mc456_mc.c
 
 Powyższa komenda utworzy plik wykonywalny *exe*.
 
-## Tabela wszystkich plików i folderów
+### Tabela wszystkich plików i folderów
 
 |     | folder             | plik                                      | opis   |
 |----:|:-------------------|:------------------------------------------|:-------|
@@ -163,7 +163,7 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 | 105 | readme_img         | vein all avg.png                          |        |
 | 106 | readme_img         | zrodla swiatla.jpg                        |        |
 
-## Porównanie czasu symulacji
+### Porównanie czasu symulacji
 
 <ins>monte-carlo-python</ins>\
 [repozytorium github](https://github.com/Mateuszq28/monte-carlo-sim-python)\
@@ -256,7 +256,7 @@ my parameters on mc456 10^7 = 10 mln photons: 1356.2483 seconds (23 min)
 my parameters on mc456 10^8 = 100 mln photons: 13290.7210 seconds (3h 42 min)
 -->
 
-## Okres generatora
+### Okres generatora
 
 Okres (lub długość cyklu) generatora bazowego jest definiowany jako maksymalna liczba wartości, które można wygenerować, zanim sekwencja zacznie się powtarzać. [[1]](#1)
 
@@ -287,7 +287,7 @@ okres generatora = 2^128 = 3,4E38
 
 
 
-## Bibliografia
+### Bibliografia
 
 <a name="1"></a> [1] https://support.nag.com/numeric/mb/nagdoc_mb/manual_25_1/html/g05/g05intro.html#:~:text=The%20period%20(or%20cycle%20length,the%20sequence%20starts%20to%20repeat.
 
@@ -444,15 +444,15 @@ https://seriouscomputerist.atariverse.com/media/pdf/book/Art%20of%20Computer%20P
 
 
 
- ## Galeria
+ ### Galeria
 
 <p align="center"><img src="readme_img/100k-1mln my mati mid.png" alt="Mapy ciepła przekrojów środkowych, 100 mln - 100 tys. fotonów" align="center"><br/>
-<i>Mapy ciepła przekrojów środkowych, 100 mln - 100 tys. fotonów</i><br/>
-<i>Heat maps of mid-sections, 100 million - 100 thousand photons</i></p><br/>
+<i>Oddziaływanie strumienia fotonów w środkowym przekroju dla liczby fotonów od 100 tys. do 100 mln</i><br/>
+<i>The effect of the photon flow in the central cross-section for the number of photons from 100 thousand to 100 million</i></p><br/>
 
 <p align="center"><img src="readme_img/100k-1mln my mati średnie.png" alt="Mapy ciepła średnich wartości, 100 mln - 100 tys. fotonów" align="center"><br/>
-<i>Mapy ciepła średnich wartości, 100 mln - 100 tys. fotonów</i><br/>
-<i>Heatmaps of average values, 100 million - 100 thousand photons</i></p><br/>
+<i>Średnia współczynnika oddziaływania strumienia fotonów w prostopadłościanie 1,5x1,5x2 cm dla liczby fotonów od 100 tys. do 100 mln</i><br/>
+<i>Average coefficient of interaction of the photon flux in a 1.5x1.5x2 cm cuboid for the number of photons from 100 thousand to 100 million</i></p><br/>
 
 <p align="center"><img src="readme_img/my vs mc456 org my.png" alt="Mapy ciepła, na górze własne parametry, na dole z mc321" align="center"><br/>
 <i>Mapy ciepła, na górze własne parametry, na dole z mc321</i><br/>
