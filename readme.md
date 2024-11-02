@@ -455,37 +455,37 @@ https://seriouscomputerist.atariverse.com/media/pdf/book/Art%20of%20Computer%20P
 <i>Average coefficient of interaction of the photon flux in a 1.5x1.5x2 cm cuboid for the number of photons from 100 thousand to 100 million</i></p><br/>
 
 <p align="center"><img src="readme_img/my vs mc456 org my.png" alt="Mapy ciepła, na górze własne parametry, na dole z mc321" align="center"><br/>
-<i>Mapy ciepła, na górze własne parametry, na dole z mc321</i><br/>
-<i>Heatmaps, own parameters on top, from mc321 on bottom</i></p><br/>
+<i>Oddziaływanie fotonów dla 2 różnych parametrów oraz dwóch różnych implementacji</i><br/>
+<i>Photon interaction for 2 different parameters and two different implementations</i></p><br/>
 
 <p align="center"><img src="readme_img/hists_rozklady.png" alt="Histogramy rozkładu wartości fluencji względnej fotonów" align="center"><br/>
-<i>Histogramy rozkładu wartości fluencji względnej fotonów</i><br/>
-<i>Histograms of the distribution of relative photon fluence values</i></p><br/>
+<i>Rozkład oddziaływania fotonów</i><br/>
+<i>Distribution of photon interactions</i></p><br/>
 
 <p align="center"><img src="readme_img/g 0 05 09.png" alt="Współczynnik anizotropii 0, 0,5, 0,9" align="center"><br/>
-<i>Współczynnik anizotropii 0, 0,5, 0,9</i><br/>
-<i>Anisotropy coefficient 0, 0.5, 0.9</i></p><br/>
+<i>Oddziaływanie strumienia fotonów dla współczynnika anizotropii g∈{0, 0,5, 0,9}</i><br/>
+<i>Photon flux interaction for anisotropy coefficient g∈{0, 0.5, 0.9}</i></p><br/>
 
 <p align="center"><img src="readme_img/oz rozne skory legend.png" alt="Zmiana współczynnika fluencji względnej w głąb ośrodka" align="center"><br/>
-<i>Zmiana współczynnika fluencji względnej w głąb ośrodka</i><br/>
-<i>Change of relative fluence coefficient in depth of the medium</i></p><br/>
+<i>Zmiana oddziaływania strumienia fotonów w głąb ośrodka</i><br/>
+<i>Change in the impact of the photon stream into the depth of the medium</i></p><br/>
 
 <p align="center"><img src="readme_img/ox rozne skory legend.png" alt="Zmiana współczynnika fluencji względnej w poprzek ośrodka" align="center"><br/>
-<i>Zmiana współczynnika fluencji względnej w poprzek ośrodka</i><br/>
-<i>Change in relative fluence coefficient across the medium</i></p><br/>
+<i>Zmiana oddziaływania strumienia fotonów w poprzek ośrodka</i><br/>
+<i>Change in the interaction of a photon stream across the medium</i></p><br/>
 
 <p align="center"><img src="readme_img/zrodla swiatla.png" alt="5 źródeł światła" align="center"><br/>
-<i>5 źródeł światła</i><br/>
-<i>5 light sources</i></p><br/>
+<i>Oddziaływanie strumienia fotonów 5 różnych źródeł</i><br/>
+<i>Interaction of the photon stream for 5 different sources</i></p><br/>
 
 <p align="center"><img src="readme_img/l2 all avg.png" alt="Model dwuwarstwowy skóry" align="center"><br/>
-<i>Model dwuwarstwowy skóry</i><br/>
-<i>Two-layer skin model</i></p><br/>
+<i>Oddziaływanie strumienia fotonów w ośrodku dwuwarstwowym</i><br/>
+<i>Interaction of a photon stream in a two-layer medium</i></p><br/>
 
 <p align="center"><img src="readme_img/l3 all avg.png" alt="Model trzywarstwowy skóry" align="center"><br/>
-<i>Model trzywarstwowy skóry</i><br/>
-<i>Three-layer skin model</i></p><br/>
+<i>Oddziaływanie strumienia fotonów w ośrodku trzywarstwowym</i><br/>
+<i>Interaction of a photon stream in a three-layer medium</i></p><br/>
 
 <p align="center"><img src="readme_img/vein all avg.png" alt="Model skóry z żyłą" align="center"><br/>
-<i>Model skóry z żyłą</i><br/>
-<i>Skin model with vein</i></p><br/>
+<i>Oddziaływanie strumienia fotonów w ośrodku z naczyniem krwionośnym</i><br/>
+<i>Interaction of a photon stream in a medium with a blood vessel</i></p><br/>
