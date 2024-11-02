@@ -2,7 +2,7 @@
 - [monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python) - symulacja światła, moduł wizualizacji ścieżki fotonów w 3D (za pomocą Vispy)
 - [monte-carlo-sim-benchmark](https://github.com/Mateuszq28/monte-carlo-sim-benchmark) - dostosowane symulacje przykładowe z literatury (tiny, small, mc321), zapis do jednolitego formatu "CUBES.json", przetwarzanie końcowe i normalizacja, generowanie tabel porównawczych, wykresy, mapy ciepła, wizualizacje 3D ortogonalnych map ciepła
 - [monte-carlo-sim-tables](https://github.com/Mateuszq28/monte-carlo-sim-tables) - tabele ze statystykami rozkładów transportu fotonów dla przeprowadzonych eksperymentów
-- [CUBES](https://1drv.ms/f/c/7871da7edeb06dcc/Ei70d6guE4lBgMsf6FgGbJsBUcYmqrgZFZZxBHvQeMgqBQ) - wyniki najważniejszych eksperymentów zapisane w ujednoliconym formacie CUBE.json
+- [CUBES](https://1drv.ms/f/c/7871da7edeb06dcc/Ei70d6guE4lBgMsf6FgGbJsBUcYmqrgZFZZxBHvQeMgqBQ) - wyniki najważniejszych eksperymentów zapisane w ujednoliconym formacie `CUBE.json`
 
 ## Podsumowanie
 
@@ -56,16 +56,16 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |     | folder             | plik                                      | opis   |
 |----:|:-------------------|:------------------------------------------|:-------|
 |   0 |                    | .gitignore                                |        |
-|   1 |                    | benchmark_sims                            | folder, w którym znajdują się zmodyfikowane kody źródłowe porównywanych symulacji mc456 (czyli zmodyfikowane wersje mc321), symulacje przeprowadzono na parametrach I |
+|   1 |                    | benchmark_sims                            | folder, w którym znajdują się zmodyfikowane kody źródłowe porównywanych symulacji `mc456` (czyli zmodyfikowane wersje `mc321`), symulacje przeprowadzono na parametrach I |
 |   2 |                    | bibliography                              | bibliografia |
-|   3 |                    | compare_cubes                             | folder, w którym porównywano wyniki symulacji w postaci plików CUBE.json, <span style="color:red">tutaj umieszczemy folder CUBES (tablice absorpcji, czyli nieznormalizowane oddziaływanie strumienia fotonów), aby móc wczytywać i porównywać wyniki symulacji w umieszczonych w tym folderze notatników .ipynb</span>. |
+|   3 |                    | compare_cubes                             | folder, w którym porównywano wyniki symulacji w postaci plików `CUBE.json`, <span style="color:red">tutaj umieszczemy folder `CUBES` (tablice absorpcji, czyli nieznormalizowane oddziaływanie strumienia fotonów), aby móc wczytywać i porównywać wyniki symulacji w umieszczonych w tym folderze notatników .ipynb</span>. |
 |   4 |                    | experiment_sketch.png                     |        |
 |   5 |                    | list_all.ipynb                            | nieistotne, brudnopis do wypisania wszystkich plików |
 |   6 |                    | loc.py                                    | nieistotne, brudnopis do wypisania wszystkich plików |
 |   7 |                    | mati_benchmark_methods.png                |        |
 |   8 |                    | mati_benchmark_methods2.png               |        |
 |   9 |                    | mati_sim                                  | wybrane pliki wyjściowe z własnej symulacji, wszystkie pliki dotyczą tej samej symulacji |
-|  10 |                    | mati_sim_transform                        | transformacja wybranych wyników do CUBES.json |
+|  10 |                    | mati_sim_transform                        | transformacja wybranych wyników do `CUBE.json` |
 |  11 |                    | original_all                              | oryginalne kody `tiny.c`, `small.c`, `mc321.c` |
 |  12 |                    | original_params                           | to samo, co w pkt 1, tylko na parametrach II |
 |  13 |                    | readme.md                                 | informacja |
@@ -76,18 +76,18 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |  18 |                    | test_wrapper_p_log.txt                    | przykładowy komunikat log po wykonaniu testu |
 |  19 |                    | time_wrapper.py                           | uruchamia pojedyncze testy na kodach c |
 |  20 |                    | time_wrapper_p.py                         | uruchamia pojedyncze testy na kodach python|
-|  21 | benchmark_sims     | mc321_mc.c                                | 3 pliki symulacji mc321 .c, .exe, .obj - bez zapisu do CUBE, *parametry I* |
+|  21 | benchmark_sims     | mc321_mc.c                                | 3 pliki symulacji `mc321 .c, .exe, .obj` - bez zapisu do CUBE, *parametry I* |
 |  22 | benchmark_sims     | mc321_mc.exe                              |        |
 |  23 | benchmark_sims     | mc321_mc.obj                              |        |
 |  24 | benchmark_sims     | mc321_p.py                                | symulacja 321, ale przetłumaczona na język python, *parametry I* |
-|  25 | benchmark_sims     | mc456_mc.c                                | 3 pliki symulacji mc456 .c, .exe, .obj - zapis do CUBE, *parametry I* |
+|  25 | benchmark_sims     | mc456_mc.c                                | 3 pliki symulacji `mc456 .c, .exe, .obj` - zapis do CUBE, *parametry I* |
 |  26 | benchmark_sims     | mc456_mc.exe                              |        |
 |  27 | benchmark_sims     | mc456_mc.obj                              |        |
 |  28 | benchmark_sims     | mc456_p.py                                | symulacja 456, ale przetłumaczona na język python, *parametry I* |
-|  29 | benchmark_sims     | small_mc.c                                | 3 pliki symulacji small .c, .exe, .obj - bez zapisu do CUBE, *parametry I* |
+|  29 | benchmark_sims     | small_mc.c                                | 3 pliki symulacji `small .c, .exe, .obj` - bez zapisu do CUBE, *parametry I* |
 |  30 | benchmark_sims     | small_mc.exe                              |        |
 |  31 | benchmark_sims     | small_mc.obj                              |        |
-|  32 | benchmark_sims     | tiny_mc.c                                 | 3 pliki symulacji tiny .c, .exe, .obj - bez zapisu do CUBE, *parametry I* |
+|  32 | benchmark_sims     | tiny_mc.c                                 | 3 pliki symulacji `tiny .c, .exe, .obj` - bez zapisu do CUBE, *parametry I* |
 |  33 | benchmark_sims     | tiny_mc.exe                               |        |
 |  34 | benchmark_sims     | tiny_mc.obj                               |        |
 |  35 | bibliography       | bib.xlsx                                  | bibliografia z tabelą przestawną w excelu |
@@ -98,24 +98,24 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |  40 | compare_cubes      | chart4_img                                |        |
 |  41 | compare_cubes      | chart4_img / chart4.png                   |        |
 |  42 | compare_cubes      | compare.ipynb                             | porównywanie małej próby - wybierz, jeśli interesuje cię porównanie tylko kilku najważniejszych przykładów |
-|  43 | compare_cubes      | compare2.ipynb                            | porównywanie dużej próby - wykonuje wszystkie testy i rysuje wykresy na wszystkich plikach z folderu CUBES |
+|  43 | compare_cubes      | compare2.ipynb                            | porównywanie dużej próby - wykonuje wszystkie testy i rysuje wykresy na wszystkich plikach z folderu `CUBES` |
 |  44 | compare_cubes      | func4chart3d.py                           | funkcje pomocnicze przeniesione z compare.inpynb, używane później do wizualizacji 3D |
 |  45 | compare_cubes      | models                                    | wytrenowane modele do normalizacji transformatora kwantylowego |
 |  46 | compare_cubes      | old                                       |        |
 |  47 | compare_cubes      | old / compare_work_in_progress-ENG.ipynb  | przestarzała wersja compare.ipynb w języku angielskim, nie została usunięta na wypadek przyszłego tłumaczenia na język angielski |
 |  48 | compare_cubes      | out_csv                                   | pliki wyjściowe csv oraz obrazy utworzone podczas działania compare2.ipynb |
-|  49 | compare_cubes      | out_csv / all_compare2benchmark.csv       | tabela - porównanie każdej tablicy CUBE do swojego benchamrku (najlepszej symulacji o takich samych nastawach) |
-|  50 | compare_cubes      | out_csv / all_print_stats.csv             | tablica zawierające statystyki tablic CUBES |
+|  49 | compare_cubes      | out_csv / all_compare2benchmark.csv       | tabela - porównanie każdej tablicy `CUBE` do swojego benchamrku (najlepszej symulacji o takich samych nastawach) |
+|  50 | compare_cubes      | out_csv / all_print_stats.csv             | tablica zawierające statystyki tablic `CUBES` |
 |  51 | compare_cubes      | out_csv / merge_csv.ipynb                 | compare2.ipynb tworzy wiele plików csv, w tym notatniku są one łączone  w jedną tabelę |
-|  52 | compare_cubes      | preproc_tools                             | przygotowanie CUBES |
-|  53 | compare_cubes      | preproc_tools / correct_weights.ipynb     | koryguje wagi niejednolitych ośrodków (tablic CUBES) tak, aby później mogły być normalizowane z użyciem tego samego współczynnika absorpcji mua_old = 0.37, dane = dane * (mua_old/mua_new), podczas normalizacji będzie: *1/mua_old |
-|  54 | compare_cubes      | preproc_tools / cp_jsons_as_cubes.py      | kopiowanie wyników z innego formatu do CUBES |
+|  52 | compare_cubes      | preproc_tools                             | przygotowanie `CUBES` |
+|  53 | compare_cubes      | preproc_tools / correct_weights.ipynb     | koryguje wagi niejednolitych ośrodków (tablic `CUBES`) tak, aby później mogły być normalizowane z użyciem tego samego współczynnika absorpcji `mua_old = 0.37`, `dane = dane * (mua_old/mua_new)`, podczas normalizacji będzie: `*1/mua_old` |
+|  54 | compare_cubes      | preproc_tools / cp_jsons_as_cubes.py      | kopiowanie wyników z innego formatu do `CUBES` |
 |  55 | compare_cubes      | preproc_tools / time_comparison.ipynb     | **porónanie czasowe (później nie ma tych danych w CUBES)** |
 |  56 | compare_cubes      | preproc_tools / time_comparison_old.ipynb |        |
 |  57 | compare_cubes      | preproc_tools / time_csv.csv              |        |
-|  58 | compare_cubes      | preproc_tools / trim_cube_names.ipynb     | zmiana nazwy CUBES |
+|  58 | compare_cubes      | preproc_tools / trim_cube_names.ipynb     | zmiana nazwy `CUBES` |
 |  59 | compare_cubes      | stat_table.xlsx                           | tabele all_print_stats.csv oraz all_compare2benchmark.csv filtrowane w programie Excel |
-|  60 | compare_cubes      | vispy_chart3d.py                          | wizualizacja 3D CUBES (uwaga, są to inne wizualizacje niż w projekcie [monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python)) |
+|  60 | compare_cubes      | vispy_chart3d.py                          | wizualizacja 3D `CUBES` (uwaga, są to inne wizualizacje niż w projekcie [monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python)) |
 |  61 | compare_cubes      | x_high_slices.png                         |        |
 |  62 | compare_cubes      | x_high_sum.png                            |        |
 |  63 | compare_cubes      | z_high_slices.png                         |        |
@@ -133,22 +133,22 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |  75 | mati_sim_transform | mati_cube.json                            |        |
 |  76 | mati_sim_transform | resultEnv.json                            |        |
 |  77 | mati_sim_transform | sim_dump.json                             |        |
-|  78 | mati_sim_transform | transform2template.ipynb                  | służy do zamiany wyników z symulacji [monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python) do postaci CUBE |
+|  78 | mati_sim_transform | transform2template.ipynb                  | służy do zamiany wyników z symulacji [monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python) do postaci `CUBE` |
 |  79 | original_all       | mc321.c                                   | oryginalny kod symulacji mc321 z literatury |
 |  80 | original_all       | small_mc.c                                | oryginalny kod symulacji small_mc z literatury |
 |  81 | original_all       | tiny_mc.c                                 | oryginalny kod symulacji tiny_mc z literatury |
-|  82 | original_params    | mc321_mc.c                                | 3 pliki symulacji mc321 .c, .exe, .obj - bez zapisu do CUBE, *parametry II* |
+|  82 | original_params    | mc321_mc.c                                | 3 pliki symulacji `mc321 .c, .exe, .obj` - bez zapisu do CUBE, *parametry II* |
 |  83 | original_params    | mc321_mc.exe                              |        |
 |  84 | original_params    | mc321_mc.obj                              |        |
 |  85 | original_params    | mc321_p.py                                | symulacja 321, ale przetłumaczona na język python, *parametry II* |
-|  86 | original_params    | mc456_mc.c                                | 3 pliki symulacji mc456_mc .c, .exe, .obj - bez zapisu do CUBE, *parametry II* |
+|  86 | original_params    | mc456_mc.c                                | 3 pliki symulacji `mc456_mc .c, .exe, .obj` - bez zapisu do CUBE, *parametry II* |
 |  87 | original_params    | mc456_mc.exe                              |        |
 |  88 | original_params    | mc456_mc.obj                              |        |
 |  89 | original_params    | mc456_p.py                                | symulacja 321, ale przetłumaczona na język python, *parametry II* |
-|  90 | original_params    | small_mc.c                                | 3 pliki symulacji small_mc .c, .exe, .obj - bez zapisu do CUBE, *parametry II* |
+|  90 | original_params    | small_mc.c                                | 3 pliki symulacji `small_mc .c, .exe, .obj` - bez zapisu do CUBE, *parametry II* |
 |  91 | original_params    | small_mc.exe                              |        |
 |  92 | original_params    | small_mc.obj                              |        |
-|  93 | original_params    | tiny_mc.c                                 | 3 pliki symulacji tiny_mc .c, .exe, .obj - bez zapisu do CUBE, *parametry II* |
+|  93 | original_params    | tiny_mc.c                                 | 3 pliki symulacji `tiny_mc .c, .exe, .obj` - bez zapisu do CUBE, *parametry II* |
 |  94 | original_params    | tiny_mc.exe                               |        |
 |  95 | original_params    | tiny_mc.obj                               |        |
 |  96 | readme_img         | 100k-1mln my mati mid.png                 |        |
