@@ -58,7 +58,7 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |   0 |                    | .gitignore                                |        |
 |   1 |                    | benchmark_sims                            | folder, w którym znajdują się zmodyfikowane kody źródłowe porównywanych symulacji mc456 (czyli zmodyfikowane wersje mc321), symulacje przeprowadzono na parametrach I |
 |   2 |                    | bibliography                              | bibliografia |
-|   3 |                    | compare_cubes                             | folder, w którym porównywano wyniki symulacji w postaci plików CUBE.json, $${\color{Red}tutaj umieszczemy folder CUBES (tablice absorpcji, czyli nieznormalizowane oddziaływanie strumienia fotonów), aby móc wczytywać i porównywać wyniki symulacji w umieszczonych w tym folderze notatników .ipynb}$$ |
+|   3 |                    | compare_cubes                             | folder, w którym porównywano wyniki symulacji w postaci plików CUBE.json, $${\color{Red}tutaj\ umieszczemy\ folder\ CUBES\ (tablice\ absorpcji,\ czyli\ nieznormalizowane\ oddziaływanie\ strumienia\ fotonów),\ aby\ móc\ wczytywać\ i\ porównywać\ wyniki\ symulacji\ w\ umieszczonych\ w\ tym\ folderze\ notatników\ .ipynb}$$ |
 |   4 |                    | experiment_sketch.png                     |        |
 |   5 |                    | list_all.ipynb                            | nieistotne, brudnopis do wypisania wszystkich plików |
 |   6 |                    | loc.py                                    | nieistotne, brudnopis do wypisania wszystkich plików |
