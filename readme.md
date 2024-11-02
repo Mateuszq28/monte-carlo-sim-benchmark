@@ -56,7 +56,7 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |     | folder             | plik                                      | opis   |
 |----:|:-------------------|:------------------------------------------|:-------|
 |   0 |                    | .gitignore                                |        |
-|   1 |                    | benchmark_sims                            | folder, w którym znajdują się zmodyfikowane kody źródłowe porównywanych symulacji `mc456` (czyli zmodyfikowane wersje `mc321`), symulacje przeprowadzono na parametrach I |
+|   1 |                    | benchmark_sims                            | folder, w którym znajdują się zmodyfikowane kody źródłowe porównywanych symulacji `mc456` (czyli zmodyfikowane wersje `mc321`), symulacje przeprowadzono na *parametrach I* |
 |   2 |                    | bibliography                              | bibliografia |
 |   3 |                    | compare_cubes                             | folder, w którym porównywano wyniki symulacji w postaci plików `CUBE.json`, <br> :warning: **UWAGA** :warning: <br> aby móc wczytywać i porównywać wyniki symulacji w umieszczonych w tym folderze notatników `.ipynb`, w tym folderze należy umieścić folder `CUBES` zawierający tablice absorpcji, czyli nieznormalizowane oddziaływanie strumienia fotonów |
 |   4 |                    | experiment_sketch.png                     |        |
@@ -67,7 +67,7 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |   9 |                    | mati_sim                                  | wybrane pliki wyjściowe z własnej symulacji, wszystkie pliki dotyczą tej samej symulacji |
 |  10 |                    | mati_sim_transform                        | transformacja wybranych wyników do `CUBE.json` |
 |  11 |                    | original_all                              | oryginalne kody `tiny.c`, `small.c`, `mc321.c` |
-|  12 |                    | original_params                           | to samo, co w pkt 1, tylko na parametrach II |
+|  12 |                    | original_params                           | to samo, co w pkt 1, tylko na *parametrach II* |
 |  13 |                    | readme.md                                 | informacja |
 |  14 |                    | readme_img                                | ilustracje do informacji readme.md |
 |  15 |                    | test_wrapper.py                           | uruhamia całą serię testów na kodzie C |
