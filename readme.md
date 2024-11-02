@@ -51,6 +51,118 @@ cl mc456_mc.c
 
 Powyższa komenda utworzy plik wykonywalny *exe*.
 
+## Tabela wszystkich plików i folderów
+
+|     | folder             | plik                                      | opis   |
+|----:|:-------------------|:------------------------------------------|:-------|
+|   0 |                    | .gitignore                                |        |
+|   1 |                    | benchmark_sims                            | folder, w którym znajdują się zmodyfikowane kody źródłowe porównywanych symulacji mc456 (czyli zmodyfikowane wersje mc321), symulacje przeprowadzono na parametrach I |
+|   2 |                    | bibliography                              | bibliografia |
+|   3 |                    | compare_cubes                             | folder, w którym porównywano wyniki symulacji w postaci plików CUBE.json, $${\color{tutaj umieszczemy folder CUBES (tablice absorpcji, czyli nieznormalizowane oddziaływanie strumienia fotonów), aby móc wczytywać i porównywać wyniki symulacji w umieszczonych w tym folderze notatników .ipynb}Red}$$ |
+|   4 |                    | experiment_sketch.png                     |        |
+|   5 |                    | list_all.ipynb                            | nieistotne, brudnopis do wypisania wszystkich plików |
+|   6 |                    | loc.py                                    | nieistotne, brudnopis do wypisania wszystkich plików |
+|   7 |                    | mati_benchmark_methods.png                |        |
+|   8 |                    | mati_benchmark_methods2.png               |        |
+|   9 |                    | mati_sim                                  | wybrane pliki wyjściowe z własnej symulacji, wszystkie pliki dotyczą tej samej symulacji |
+|  10 |                    | mati_sim_transform                        | transformacja wybranych wyników do CUBES.json |
+|  11 |                    | original_all                              | oryginalne kody `tiny.c`, `small.c`, `mc321.c` |
+|  12 |                    | original_params                           | to samo, co w pkt 1, tylko na parametrach II |
+|  13 |                    | readme.md                                 | informacja |
+|  14 |                    | readme_img                                | ilustracje do informacji readme.md |
+|  15 |                    | test_wrapper.py                           | uruhamia całą serię testów na kodzie C |
+|  16 |                    | test_wrapper_log.txt                      | przykładowy komunikat log po wykonaniu testu |
+|  17 |                    | test_wrapper_p.py                         | uruchamia całą serię testó na kodzie python |
+|  18 |                    | test_wrapper_p_log.txt                    | przykładowy komunikat log po wykonaniu testu |
+|  19 |                    | time_wrapper.py                           | uruchamia pojedyncze testy na kodach c |
+|  20 |                    | time_wrapper_p.py                         | uruchamia pojedyncze testy na kodach python|
+|  21 | benchmark_sims     | mc321_mc.c                                | 3 pliki symulacji mc321 .c, .exe, .obj - bez zapisu do CUBE, *parametry I* |
+|  22 | benchmark_sims     | mc321_mc.exe                              |        |
+|  23 | benchmark_sims     | mc321_mc.obj                              |        |
+|  24 | benchmark_sims     | mc321_p.py                                | symulacja 321, ale przetłumaczona na język python, *parametry I* |
+|  25 | benchmark_sims     | mc456_mc.c                                | 3 pliki symulacji mc456 .c, .exe, .obj - zapis do CUBE, *parametry I* |
+|  26 | benchmark_sims     | mc456_mc.exe                              |        |
+|  27 | benchmark_sims     | mc456_mc.obj                              |        |
+|  28 | benchmark_sims     | mc456_p.py                                | symulacja 456, ale przetłumaczona na język python, *parametry I* |
+|  29 | benchmark_sims     | small_mc.c                                | 3 pliki symulacji small .c, .exe, .obj - bez zapisu do CUBE, *parametry I* |
+|  30 | benchmark_sims     | small_mc.exe                              |        |
+|  31 | benchmark_sims     | small_mc.obj                              |        |
+|  32 | benchmark_sims     | tiny_mc.c                                 | 3 pliki symulacji tiny .c, .exe, .obj - bez zapisu do CUBE, *parametry I* |
+|  33 | benchmark_sims     | tiny_mc.exe                               |        |
+|  34 | benchmark_sims     | tiny_mc.obj                               |        |
+|  35 | bibliography       | bib.xlsx                                  | bibliografia z tabelą przestawną w excelu |
+|  36 | bibliography       | bib_kolejnosc_z_worda.txt                 |        |
+|  37 | bibliography       | bib_pogrupowana.txt                       |        |
+|  38 | bibliography       | bib_stara_i_nowa_numeracja.txt            |        |
+|  39 | bibliography       | biblio.ipynb                              | do zarządzania bibliografią |
+|  40 | compare_cubes      | chart4_img                                |        |
+|  41 | compare_cubes      | chart4_img / chart4.png                   |        |
+|  42 | compare_cubes      | compare.ipynb                             | porównywanie małej próby - wybierz, jeśli interesuje cię porównanie tylko kilku najważniejszych przykładów |
+|  43 | compare_cubes      | compare2.ipynb                            | porównywanie dużej próby - wykonuje wszystkie testy i rysuje wykresy na wszystkich plikach z folderu CUBES |
+|  44 | compare_cubes      | func4chart3d.py                           | funkcje pomocnicze przeniesione z compare.inpynb, używane później do wizualizacji 3D |
+|  45 | compare_cubes      | models                                    | wytrenowane modele do normalizacji transformatora kwantylowego |
+|  46 | compare_cubes      | old                                       |        |
+|  47 | compare_cubes      | old / compare_work_in_progress-ENG.ipynb  | przestarzała wersja compare.ipynb w języku angielskim, nie została usunięta na wypadek przyszłego tłumaczenia na język angielski |
+|  48 | compare_cubes      | out_csv                                   | pliki wyjściowe csv oraz obrazy utworzone podczas działania compare2.ipynb |
+|  49 | compare_cubes      | out_csv / all_compare2benchmark.csv       | tabela - porównanie każdej tablicy CUBE do swojego benchamrku (najlepszej symulacji o takich samych nastawach) |
+|  50 | compare_cubes      | out_csv / all_print_stats.csv             | tablica zawierające statystyki tablic CUBES |
+|  51 | compare_cubes      | out_csv / merge_csv.ipynb                 | compare2.ipynb tworzy wiele plików csv, w tym notatniku są one łączone  w jedną tabelę |
+|  52 | compare_cubes      | preproc_tools                             | przygotowanie CUBES |
+|  53 | compare_cubes      | preproc_tools / correct_weights.ipynb     | koryguje wagi niejednolitych ośrodków (tablic CUBES) tak, aby później mogły być normalizowane z użyciem tego samego współczynnika absorpcji mua_old = 0.37, dane = dane * (mua_old/mua_new), podczas normalizacji będzie: *1/mua_old |
+|  54 | compare_cubes      | preproc_tools / cp_jsons_as_cubes.py      | kopiowanie wyników z innego formatu do CUBES |
+|  55 | compare_cubes      | preproc_tools / time_comparison.ipynb     | *porónanie czasowe (później nie ma tych danych w CUBES)* |
+|  56 | compare_cubes      | preproc_tools / time_comparison_old.ipynb |        |
+|  57 | compare_cubes      | preproc_tools / time_csv.csv              |        |
+|  58 | compare_cubes      | preproc_tools / trim_cube_names.ipynb     | zmiana nazwy CUBES |
+|  59 | compare_cubes      | stat_table.xlsx                           | tabele all_print_stats.csv oraz all_compare2benchmark.csv filtrowane w programie Excel |
+|  60 | compare_cubes      | vispy_chart3d.py                          | wizualizacja 3D CUBES (uwaga, są to inne wizualizacje niż w projekcie ![monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python)) |
+|  61 | compare_cubes      | x_high_slices.png                         |        |
+|  62 | compare_cubes      | x_high_sum.png                            |        |
+|  63 | compare_cubes      | z_high_slices.png                         |        |
+|  64 | compare_cubes      | z_high_sum.png                            |        |
+|  65 | mati_sim           | DefaultEnv.json                           | tablica zawierająca etykietki labels środowiska propagacji |
+|  66 | mati_sim           | DefaultLightSource.json                   | źródło światła użyte w symulacji |
+|  67 | mati_sim           | DefaultPropSetup.json                     | środowisko propagacji + źródło światła |
+|  68 | mati_sim           | mati_1_layer_config.json                  | plik konfiguracyjny config nastaw symulacji, któej wyniki są w folderze mati_sim |
+|  69 | mati_sim           | mati_1mln_log10_x_high.png                |        |
+|  70 | mati_sim           | mati_1mln_log10_z_high.png                |        |
+|  71 | mati_sim           | mati_propEnv.png                          | rysunek przedstawia punktowe źródło światła w środowisku symulacji |
+|  72 | mati_sim           | resultEnv.json                            | wyjściowa tablica absorpcji |
+|  73 | mati_sim           | sim_dump.json                             | metadane przebeigu symulacji, zawiera zapis zmiany lokalizacji fotonów - ścieżki ruchu |
+|  74 | mati_sim_transform | DefaultLightSource.json                   |        |
+|  75 | mati_sim_transform | mati_cube.json                            |        |
+|  76 | mati_sim_transform | resultEnv.json                            |        |
+|  77 | mati_sim_transform | sim_dump.json                             |        |
+|  78 | mati_sim_transform | transform2template.ipynb                  | służy do zamiany wyników z symulacji ![monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python) do postaci CUBE |
+|  79 | original_all       | mc321.c                                   | oryginalny kod symulacji mc321 z literatury |
+|  80 | original_all       | small_mc.c                                | oryginalny kod symulacji small_mc z literatury |
+|  81 | original_all       | tiny_mc.c                                 | oryginalny kod symulacji tiny_mc z literatury |
+|  82 | original_params    | mc321_mc.c                                | 3 pliki symulacji mc321 .c, .exe, .obj - bez zapisu do CUBE, *parametry II* |
+|  83 | original_params    | mc321_mc.exe                              |        |
+|  84 | original_params    | mc321_mc.obj                              |        |
+|  85 | original_params    | mc321_p.py                                | symulacja 321, ale przetłumaczona na język python, *parametry II* |
+|  86 | original_params    | mc456_mc.c                                | 3 pliki symulacji mc456_mc .c, .exe, .obj - bez zapisu do CUBE, *parametry II* |
+|  87 | original_params    | mc456_mc.exe                              |        |
+|  88 | original_params    | mc456_mc.obj                              |        |
+|  89 | original_params    | mc456_p.py                                | symulacja 321, ale przetłumaczona na język python, *parametry II* |
+|  90 | original_params    | small_mc.c                                | 3 pliki symulacji small_mc .c, .exe, .obj - bez zapisu do CUBE, *parametry II* |
+|  91 | original_params    | small_mc.exe                              |        |
+|  92 | original_params    | small_mc.obj                              |        |
+|  93 | original_params    | tiny_mc.c                                 | 3 pliki symulacji tiny_mc .c, .exe, .obj - bez zapisu do CUBE, *parametry II* |
+|  94 | original_params    | tiny_mc.exe                               |        |
+|  95 | original_params    | tiny_mc.obj                               |        |
+|  96 | readme_img         | 100k-1mln my mati mid.png                 |        |
+|  97 | readme_img         | 100k-1mln my mati średnie.png             |        |
+|  98 | readme_img         | g 0 05 09.png                             |        |
+|  99 | readme_img         | hists_rozklady.png                        |        |
+| 100 | readme_img         | l2 all avg.png                            |        |
+| 101 | readme_img         | l3 all avg.png                            |        |
+| 102 | readme_img         | my vs mc456 org my.png                    |        |
+| 103 | readme_img         | ox rozne skory legend.png                 |        |
+| 104 | readme_img         | oz rozne skory legend.png                 |        |
+| 105 | readme_img         | vein all avg.png                          |        |
+| 106 | readme_img         | zrodla swiatla.jpg                        |        |
+
 ## Porównanie czasu symulacji
 
 <ins>monte-carlo-python</ins>\
