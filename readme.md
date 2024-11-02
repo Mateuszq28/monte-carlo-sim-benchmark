@@ -58,7 +58,7 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |   0 |                    | .gitignore                                |        |
 |   1 |                    | benchmark_sims                            | folder, w którym znajdują się zmodyfikowane kody źródłowe porównywanych symulacji `mc456` (czyli zmodyfikowane wersje `mc321`), symulacje przeprowadzono na parametrach I |
 |   2 |                    | bibliography                              | bibliografia |
-|   3 |                    | compare_cubes                             | folder, w którym porównywano wyniki symulacji w postaci plików `CUBE.json`, <span style="color:red">tutaj umieszczemy folder `CUBES` (tablice absorpcji, czyli nieznormalizowane oddziaływanie strumienia fotonów), aby móc wczytywać i porównywać wyniki symulacji w umieszczonych w tym folderze notatników .ipynb</span>. |
+|   3 |                    | compare_cubes                             | folder, w którym porównywano wyniki symulacji w postaci plików `CUBE.json`, <p style="color:red">tutaj umieszczemy folder `CUBES` (tablice absorpcji, czyli nieznormalizowane oddziaływanie strumienia fotonów), aby móc wczytywać i porównywać wyniki symulacji w umieszczonych w tym folderze notatników `.ipynb`</p>. |
 |   4 |                    | experiment_sketch.png                     |        |
 |   5 |                    | list_all.ipynb                            | nieistotne, brudnopis do wypisania wszystkich plików |
 |   6 |                    | loc.py                                    | nieistotne, brudnopis do wypisania wszystkich plików |
@@ -102,8 +102,8 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |  44 | compare_cubes      | func4chart3d.py                           | funkcje pomocnicze przeniesione z compare.inpynb, używane później do wizualizacji 3D |
 |  45 | compare_cubes      | models                                    | wytrenowane modele do normalizacji transformatora kwantylowego |
 |  46 | compare_cubes      | old                                       |        |
-|  47 | compare_cubes      | old / compare_work_in_progress-ENG.ipynb  | przestarzała wersja compare.ipynb w języku angielskim, nie została usunięta na wypadek przyszłego tłumaczenia na język angielski |
-|  48 | compare_cubes      | out_csv                                   | pliki wyjściowe csv oraz obrazy utworzone podczas działania compare2.ipynb |
+|  47 | compare_cubes      | old / compare_work_in_progress-ENG.ipynb  | przestarzała wersja `compare.ipynb` w języku angielskim, nie została usunięta na wypadek przyszłego tłumaczenia na język angielski |
+|  48 | compare_cubes      | out_csv                                   | pliki wyjściowe csv oraz obrazy utworzone podczas działania `compare2.ipynb` |
 |  49 | compare_cubes      | out_csv / all_compare2benchmark.csv       | tabela - porównanie każdej tablicy `CUBE` do swojego benchamrku (najlepszej symulacji o takich samych nastawach) |
 |  50 | compare_cubes      | out_csv / all_print_stats.csv             | tablica zawierające statystyki tablic `CUBES` |
 |  51 | compare_cubes      | out_csv / merge_csv.ipynb                 | compare2.ipynb tworzy wiele plików csv, w tym notatniku są one łączone  w jedną tabelę |
@@ -114,7 +114,7 @@ Powyższa komenda utworzy plik wykonywalny *exe*.
 |  56 | compare_cubes      | preproc_tools / time_comparison_old.ipynb |        |
 |  57 | compare_cubes      | preproc_tools / time_csv.csv              |        |
 |  58 | compare_cubes      | preproc_tools / trim_cube_names.ipynb     | zmiana nazwy `CUBES` |
-|  59 | compare_cubes      | stat_table.xlsx                           | tabele all_print_stats.csv oraz all_compare2benchmark.csv filtrowane w programie Excel |
+|  59 | compare_cubes      | stat_table.xlsx                           | tabele `all_print_stats.csv` oraz `all_compare2benchmark.csv` filtrowane w programie Excel |
 |  60 | compare_cubes      | vispy_chart3d.py                          | wizualizacja 3D `CUBES` (uwaga, są to inne wizualizacje niż w projekcie [monte-carlo-sim-python](https://github.com/Mateuszq28/monte-carlo-sim-python)) |
 |  61 | compare_cubes      | x_high_slices.png                         |        |
 |  62 | compare_cubes      | x_high_sum.png                            |        |
